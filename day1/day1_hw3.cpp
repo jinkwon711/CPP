@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <sstream>
 using namespace std;
 
 
@@ -27,31 +28,27 @@ string *ptr_movie = &movie;
     vector<vector<string> > database;
     string input;
 
-    while(getline(cin,input)){
+    while(true){
         // cin>> command >> genre >> movie;
-        int cnt =0;
-        for(auto it :input){
-            if (isspace(it)==true){
-                cnt++;
-            }
-            else{
-                if(cnt==0){
-                    command+= it;
-                }
-                else if(cnt==1){
-                    genre += it;
-                }
-                else{
-                    movie += it;
-                }
-            }
-        }
+        getline(cin,input);
+
+        stringstream a;
+
+        a.str(input);
+
+        a >> command;
+        a >> genre;
+        a >> movie;
+
+        genre = "--"+genre+"--";
+
 
         if(command =="exit")
             break;
 
         if(command == "add_genre"){
             database.push_back(vector<string> (1,genre));
+
         }
 
         if(command == "add_movie"){
@@ -68,12 +65,7 @@ string *ptr_movie = &movie;
             for(auto &it : database){
                 if(it[0]==genre){
                     for(auto list :it){
-                        if (list==genre){
-                            cout<<"--"<<list<<"--"<<endl;
-                        }
-                        else{
-                            cout<<list<<endl;
-                        }
+                        cout<<list<<endl;
                     }
                 }
             }
@@ -82,13 +74,8 @@ string *ptr_movie = &movie;
         if(command == "print_all"){
             for(auto &it : database){
                 for(unsigned int j=0; j!= it.size();j++){
-                    if (j==0){
-                        cout<<"--"<<it[j]<<"--"<<endl;
-                    }
-                    else{
-                        if(it[j] != ""){
-                            cout<<it[j]<<endl;
-                        }
+                    if(it[j] != ""){
+                        cout<<it[j]<<endl;
                     }
                 }
             }
@@ -98,8 +85,7 @@ string *ptr_movie = &movie;
             for(auto &it : database){
                 if(it[0]==genre){
                     it.clear();
-                    database.shrink_to_fit();
-                    break;
+                    // database.shrink_to_fit();
                 }
             }
         }
@@ -107,21 +93,19 @@ string *ptr_movie = &movie;
         if(command == "remove_movie"){
             for(auto &it : database){
                 if(it[0]==genre){
-                    for(auto &list: it){
-                        if(list == movie){
-                            list.clear();
-                            // vector<string>().swap(it);
-                            it.shrink_to_fit();
-                            break;
+                    for(unsigned int j = 0 ; j != it.size();j++){
+                        if(it[j] == movie){
+                            it.erase(it.begin()+j);
+                            j--;
                         }
                     }
                 }
             }
         }
 
-    *ptr_command = "";
-    *ptr_genre= "";
-    *ptr_movie= "";
+    // *ptr_command = "";
+    // *ptr_genre= "";
+    // *ptr_movie= "";
     }
 
     return 0;
