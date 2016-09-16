@@ -18,11 +18,10 @@ int main()
 string command = "";
 string genre= "";
 string movie= "";
-int i = 0;
+
 string *ptr_command = &command ;
 string *ptr_genre = &genre ;
 string *ptr_movie = &movie;
-int *ptr_i = &i;
 
 
     vector<vector<string> > database;
@@ -52,17 +51,15 @@ int *ptr_i = &i;
             break;
 
         if(command == "add_genre"){
-
-            database.push_back(vector<string>());
-            database[i].push_back(genre);
-            *ptr_i = *ptr_i+1;
-
+            database.push_back(vector<string> (1,genre));
         }
 
         if(command == "add_movie"){
             for(auto &it : database){
-                if(it[0]==genre){
-                    it.push_back(movie);
+                if(it.empty() == false){
+                    if(it[0]==genre){
+                        it.push_back(movie);
+                    }
                 }
             }
         }
@@ -101,6 +98,7 @@ int *ptr_i = &i;
             for(auto &it : database){
                 if(it[0]==genre){
                     it.clear();
+                    database.shrink_to_fit();
                     break;
                 }
             }
@@ -113,7 +111,7 @@ int *ptr_i = &i;
                         if(list == movie){
                             list.clear();
                             // vector<string>().swap(it);
-                            list.shrink_to_fit();
+                            it.shrink_to_fit();
                             break;
                         }
                     }
@@ -121,12 +119,10 @@ int *ptr_i = &i;
             }
         }
 
-
     *ptr_command = "";
     *ptr_genre= "";
     *ptr_movie= "";
     }
-
 
     return 0;
 }
