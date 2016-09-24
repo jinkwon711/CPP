@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector> 
+#include <iomanip>
 
 
 using namespace std;
@@ -9,66 +10,142 @@ int order(int op){  // ascii  40 (, 41 ) ,42 * , 43 +, 45 - , 47 /
 	if(op==40)return 0;
 	if(op==42 || op==47) return 2;
 	if(op==43 || op==45) return 1;
-	if(op==41) return -1;
+
+	return 0;
 } 
 
 int main(void){
 
-	vector<char> cal;
-	vector<int> result;
-
+	vector<char> postfix;
+	vector<double> cal;
+	int wildcard;
 	string temp = "";
+	string rawData="";
 	string inputData ="";
-	cin>>inputData;
+	string val = "";
+	string process = "";
+	double result;
+	cin>>wildcard;
+	cin>>rawData;
 
+	for(auto &it:rawData){
+		if(it == '-' && !isdigit(inputData.back())){
+			inputData +='0';
+		}
+		inputData += it;
+	}
+	// cout<<inputData<<endl;
 
+// postfix change
 	for(auto &it: inputData){
-		if (isdigit(it)){
-			temp += it;
+		if(isdigit(it)){
+			val += it;
 		}
 		else{
+			temp += (val);
+			if(!val.empty()){
+				temp+=" ";
+			}
+			val="";	
 			switch(it){
 				case '(' :
-					cal.push_back(it);
+					postfix.push_back(it);
 					break;
 				case ')' :
-					while(cal.back() != '('){
-						temp += cal.back();
-						cal.pop_back();				
+					while(postfix.back() != '('){
+						temp += postfix.back();
+						postfix.pop_back();				
 					}
-					cal.pop_back(); //discard '('
+					postfix.pop_back(); //discard '('
 					break;
-				case '+': case '-': 
-					if(!cal.empty() && cal.back()!='('){
-						while(order(cal.back())>=order(it)){
-							
-							temp+=cal.back();
-							cal.pop_back();
+				case '+': case '-': case '*': case '/' :
+					if(!postfix.empty() && postfix.back()!='('){
+						while(order(postfix.back())>=order(it)){
+							if(postfix.empty()){
+								break;
+							}
+							temp+=postfix.back();
+
+							postfix.pop_back();
+							break;
 						}
 					}
-					cal.push_back(it);
+					postfix.push_back(it);
 					break;
 			}
-		
 		}
-	} 
-	for(auto &it : cal){
-		temp +=it;
+	}
+	temp+= val+" ";
+
+
+	for(unsigned int i =0; i!=postfix.size() ; i++){
+		temp += postfix.back();
+		postfix.pop_back();
+		i--;
 	}
 
+	//print test
+	// cout<<temp<<endl;
+	// for(int i=0; i!=postfix.size();i++){
+	// 	cout<<postfix[i]<<endl;	
+	// }
 
 
+// postfixculator starts
 
-	cout<<temp<<endl;
+	for(auto &it: temp){
+		if(isdigit(it)){
+			process += it;
+		}
+		else if(isspace(it)){
+			if(!process.empty()){
+				double push;
+				push = stoi(process);
+				cal.push_back(push);
+				process ="";
+				}
+			}
+		else{
+			double number1;
+			double number2;
+			double answer;
+			number2= cal.back();
+			// cout<<"number2 :"<< number2<<endl;
+			cal.pop_back();	
+			number1 = cal.back();
+			// cout<<number1<<endl;
+			cal.pop_back();
 
+			
+			// cout<<"number1 :"<< number1<<endl;
+			
+			switch(it){
+				case '+':
+					answer = (number1)+(number2);
+					break;
+				case '-':
+					answer = (number1)-(number2);
+					break;
+				case '*':
+					answer = (number1)*(number2);
+					break;
+				case '/':
+					answer = (number1)/(number2);
+					break;
+			}
+			// cout<<"answer :"<< answer<<endl;
 
-	for(int i=0; i!=cal.size();i++){
-		cout<<cal[i]<<endl;	
+			cal.push_back(answer);
+			// cout<<cal[0]<<endl;
+		}
+
 	}
+	// cout<<cal[0]<<endl;
+	result = cal[0];
+	cout<< fixed;
+	cout<< setprecision(3)<<result<<endl;
 
-
-
-
+	return 0;
 
 
 }
