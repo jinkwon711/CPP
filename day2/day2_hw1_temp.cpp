@@ -19,42 +19,22 @@ int main(void){
 	vector<char> postfix;
 	vector<double> cal;
 	int wildcard;
-	bool addClose = false;
 	string temp = "";
 	string rawData="";
 	string inputData ="";
 	string val = "";
 	string process = "";
-
 	double result;
 	cin>>wildcard;
 	cin>>rawData;
 
 	for(auto &it:rawData){
-		if((it == '-') && (!inputData.empty()) && (inputData.back() =='(') ){
-			inputData +="(0";
-			inputData += it;
-			addClose = true;
-		}		
-		else if((it == '-') && (inputData.empty())){
-			inputData +="(0";
-			inputData += it;
-			addClose = true;
+		if(it == '-' && !isdigit(inputData.back())){
+			inputData +='0';
 		}
-		else{
-			if((!isdigit(it)) && (addClose==true)){
-				inputData += ')';
-
-				addClose = false;
-			}
-				inputData += it;		
-		}
-		
+		inputData += it;
 	}
-
-
-
-	cout<<inputData<<endl;
+	// cout<<inputData<<endl;
 
 // postfix change
 	for(auto &it: inputData){
@@ -162,8 +142,8 @@ int main(void){
 	}
 	// cout<<cal[0]<<endl;
 	result = cal[0];
-	cout.precision(3);
-	cout<<fixed<<result<<endl;
+	cout<< fixed;
+	cout<< setprecision(3)<<result<<endl;
 
 	return 0;
 
