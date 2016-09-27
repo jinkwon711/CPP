@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
-#include <vector> 
-#include <iomanip>
+#include <vector>
 
 
 using namespace std;
@@ -12,7 +11,7 @@ int order(int op){  // ascii  40 (, 41 ) ,42 * , 43 +, 45 - , 47 /
 	if(op==43 || op==45) return 1;
 
 	return 0;
-} 
+}
 
 int main(void){
 
@@ -35,7 +34,7 @@ int main(void){
 			inputData +="(0";
 			inputData += it;
 			addClose = true;
-		}		
+		}
 		else if((it == '-') && (inputData.empty())){
 			inputData +="(0";
 			inputData += it;
@@ -47,14 +46,14 @@ int main(void){
 
 				addClose = false;
 			}
-				inputData += it;		
+				inputData += it;
 		}
-		
+
 	}
 
 
 
-	cout<<inputData<<endl;
+	// cout<<inputData<<endl;
 
 // postfix change
 	for(auto &it: inputData){
@@ -62,11 +61,9 @@ int main(void){
 			val += it;
 		}
 		else{
-			temp += (val);
-			if(!val.empty()){
-				temp+=" ";
-			}
-			val="";	
+			temp += (val)+ " ";
+			// temp+=" ";
+			val="";
 			switch(it){
 				case '(' :
 					postfix.push_back(it);
@@ -74,7 +71,7 @@ int main(void){
 				case ')' :
 					while(postfix.back() != '('){
 						temp += postfix.back();
-						postfix.pop_back();				
+						postfix.pop_back();
 					}
 					postfix.pop_back(); //discard '('
 					break;
@@ -87,7 +84,6 @@ int main(void){
 							temp+=postfix.back();
 
 							postfix.pop_back();
-							break;
 						}
 					}
 					postfix.push_back(it);
@@ -107,7 +103,7 @@ int main(void){
 	//print test
 	// cout<<temp<<endl;
 	// for(int i=0; i!=postfix.size();i++){
-	// 	cout<<postfix[i]<<endl;	
+	// 	cout<<postfix[i]<<endl;
 	// }
 
 
@@ -131,14 +127,14 @@ int main(void){
 			double answer;
 			number2= cal.back();
 			// cout<<"number2 :"<< number2<<endl;
-			cal.pop_back();	
+			cal.pop_back();
 			number1 = cal.back();
 			// cout<<number1<<endl;
 			cal.pop_back();
 
-			
+
 			// cout<<"number1 :"<< number1<<endl;
-			
+
 			switch(it){
 				case '+':
 					answer = (number1)+(number2);

@@ -29,7 +29,7 @@ string *ptr_movie = &movie;
     string input;
 
     while(true){
-        // cin>> command >> genre >> movie;
+        cin>> command >> genre >> movie;
         getline(cin,input);
 
         stringstream a;
