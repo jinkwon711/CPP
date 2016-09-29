@@ -41,6 +41,13 @@ int main(void){
 			inputData += it;
 			addClose = true;
 		}
+		else if((it == '-') && (!inputData.empty()) && (inputData.back()=='*')){
+			inputData +="(0-1)*";
+		}
+		else if((it == '-') && (!inputData.empty()) && (inputData.back() =='/')){
+			inputData +="(0-1)/";
+
+		}
 		else if((it == '-') && (inputData.empty())){
 			inputData +="(0";
 			inputData += it;
@@ -85,7 +92,10 @@ int main(void){
 					}
 					postfix.pop_back(); //discard '('
 					break;
-				case '+': case '-': case '*': case '/' :
+				case '+':
+				case '-':
+				case '*':
+				case '/' :
 					if(!postfix.empty() && postfix.back()!='('){
 						while(ord(postfix.back())>=ord(it)){
 							if(postfix.empty()){
