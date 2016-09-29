@@ -1,39 +1,68 @@
 #include <iostream>
 #include <string>
-#include <vector> 
-#include <iomanip>
-
+#include <vector>
+#include <cassert>
 
 using namespace std;
 
-int order(int op){  // ascii  40 (, 41 ) ,42 * , 43 +, 45 - , 47 /
+int ord(int op){  // ascii  40 (, 41 ) ,42 * , 43 +, 45 - , 47 /
 	if(op==40)return 0;
 	if(op==42 || op==47) return 2;
 	if(op==43 || op==45) return 1;
 
-	return 0;
-} 
+	return 3;
+}
 
 int main(void){
 
 	vector<char> postfix;
 	vector<double> cal;
-	int wildcard;
+	int howMany =0;
+	string wildcard;
+	string wildcardOperator;
+	bool addClose = false;
 	string temp = "";
+	string temp2 = "";
 	string rawData="";
 	string inputData ="";
 	string val = "";
 	string process = "";
+
 	double result;
-	cin>>wildcard;
+	cin>>howMany;
+
+
 	cin>>rawData;
 
+
 	for(auto &it:rawData){
-		if(it == '-' && !isdigit(inputData.back())){
-			inputData +='0';
+		if((it == '-') && (!inputData.empty()) && (inputData.back() =='(') ){
+			inputData +="(0";
+			inputData += it;
+			addClose = true;
 		}
-		inputData += it;
+		else if((it == '-') && (inputData.empty())){
+			inputData +="(0";
+			inputData += it;
+			addClose = true;
+		}
+		else{
+			if((!isdigit(it)) &&(it != '(') && (addClose==true)){
+				inputData += ')';
+
+				addClose = false;
+			}
+			else if((it=='(') && (addClose==true)){
+				inputData += "1)*";
+				addClose = false;
+			}
+				inputData += it;
+		}
+
 	}
+
+
+
 	// cout<<inputData<<endl;
 
 // postfix change
@@ -42,11 +71,9 @@ int main(void){
 			val += it;
 		}
 		else{
-			temp += (val);
-			if(!val.empty()){
-				temp+=" ";
-			}
-			val="";	
+			temp += (val)+ " ";
+			// temp+=" ";
+			val="";
 			switch(it){
 				case '(' :
 					postfix.push_back(it);
@@ -54,20 +81,19 @@ int main(void){
 				case ')' :
 					while(postfix.back() != '('){
 						temp += postfix.back();
-						postfix.pop_back();				
+						postfix.pop_back();
 					}
 					postfix.pop_back(); //discard '('
 					break;
 				case '+': case '-': case '*': case '/' :
 					if(!postfix.empty() && postfix.back()!='('){
-						while(order(postfix.back())>=order(it)){
+						while(ord(postfix.back())>=ord(it)){
 							if(postfix.empty()){
 								break;
 							}
 							temp+=postfix.back();
 
 							postfix.pop_back();
-							break;
 						}
 					}
 					postfix.push_back(it);
@@ -87,7 +113,7 @@ int main(void){
 	//print test
 	// cout<<temp<<endl;
 	// for(int i=0; i!=postfix.size();i++){
-	// 	cout<<postfix[i]<<endl;	
+	// 	cout<<postfix[i]<<endl;
 	// }
 
 
@@ -111,14 +137,14 @@ int main(void){
 			double answer;
 			number2= cal.back();
 			// cout<<"number2 :"<< number2<<endl;
-			cal.pop_back();	
+			cal.pop_back();
 			number1 = cal.back();
 			// cout<<number1<<endl;
 			cal.pop_back();
 
-			
+
 			// cout<<"number1 :"<< number1<<endl;
-			
+
 			switch(it){
 				case '+':
 					answer = (number1)+(number2);
@@ -142,8 +168,8 @@ int main(void){
 	}
 	// cout<<cal[0]<<endl;
 	result = cal[0];
-	cout<< fixed;
-	cout<< setprecision(3)<<result<<endl;
+	cout.precision(3);
+	cout<<fixed<<result<<endl;
 
 	return 0;
 

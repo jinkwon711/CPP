@@ -1,33 +1,39 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include <cassert>
 
 using namespace std;
 
-int order(int op){  // ascii  40 (, 41 ) ,42 * , 43 +, 45 - , 47 /
+int ord(int op){  // ascii  40 (, 41 ) ,42 * , 43 +, 45 - , 47 /
 	if(op==40)return 0;
 	if(op==42 || op==47) return 2;
 	if(op==43 || op==45) return 1;
 
-	return 0;
+	return 3;
 }
 
 int main(void){
 
 	vector<char> postfix;
 	vector<double> cal;
-	int wildcard;
+	int howMany =0;
+	string wildcard;
+	string wildcardOperator;
 	bool addClose = false;
 	string temp = "";
+	string temp2 = "";
 	string rawData="";
 	string inputData ="";
 	string val = "";
 	string process = "";
 
 	double result;
-	cin>>wildcard;
+	cin>>howMany;
+
+
 	cin>>rawData;
+
 
 	for(auto &it:rawData){
 		if((it == '-') && (!inputData.empty()) && (inputData.back() =='(') ){
@@ -41,9 +47,13 @@ int main(void){
 			addClose = true;
 		}
 		else{
-			if((!isdigit(it)) && (addClose==true)){
+			if((!isdigit(it)) &&(it != '(') && (addClose==true)){
 				inputData += ')';
 
+				addClose = false;
+			}
+			else if((it=='(') && (addClose==true)){
+				inputData += "1)*";
 				addClose = false;
 			}
 				inputData += it;
@@ -77,7 +87,7 @@ int main(void){
 					break;
 				case '+': case '-': case '*': case '/' :
 					if(!postfix.empty() && postfix.back()!='('){
-						while(order(postfix.back())>=order(it)){
+						while(ord(postfix.back())>=ord(it)){
 							if(postfix.empty()){
 								break;
 							}
