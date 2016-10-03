@@ -37,27 +37,27 @@ public:
         return result;
     }
 
-    // BigInteger operator * (BigInteger bi) {
-    //     BigInteger result;
-    //     result.setNum( multiply(getNum(), bi.getNum() ) );
-    //     return result;
-    // }
+    BigInteger operator * (BigInteger bi) {
+        BigInteger result;
+        result.setNum( multiplication(getNum(), bi.getNum() ) );
+        return result;
+    }
 
     string addition(string num1, string num2){
         int overTen = 0;
         int lengthDiff = abs((int)(num1.length()-num2.length()));
         string addition = (num1.length()> num2.length())? num1:num2;
         //override with the longer string;
+ 
         if(num1.length()>num2.length()){
             num2.insert(0, lengthDiff, '0');
         }
         else{
             num1.insert(0, lengthDiff, '0');
         }//num1, num2 lengths are equal
-
         for(int i=num1.length()-1; i>=0; i--){
             int temp = (overTen)+(num1[i]-'0')+(num2[i]-'0');
-            if(temp>10){
+            if(temp>=10){
                 overTen=1;
                 temp -=10;
             }
@@ -65,19 +65,51 @@ public:
                 overTen=0;
             }
             addition[i] = temp+'0';//result +'0' to char.
+            if(addition[0]=='0'){
+                addition.insert(0,1,'1');
+            }
         }
         return addition;
     }
 
     string multiplication(string num1, string num2){
-
+        // cout<<"inside multiply"<<endl;
+        string multiplication;
+        if(num1.length()> num2.length()){
+            num1.swap(num2);
+        }
+        //num2를 곱해지는 대상, num1을 하나씩 쪼개서 다 곱한다.
+        for(int i=num1.length()-1; i>=0; i--){
+            string result = num2;
+            int overTen = 0;
+            // cout<<"inside first for"<<endl;
+            for(int j =result.length()-1;j>=0;j--){
+                            // cout<<"inside second for"<<endl;
+                int temp = ((result[j]-'0') * (num1[i]-'0'))+overTen;
+                if (temp >=10){
+                    overTen = (temp/10);
+                    temp = temp - overTen*10;
+                    // cout<<overTen<<endl;
+                }
+                else{
+                    overTen = 0;
+                }
+                result[j] = temp+'0';
+            }
+            if(overTen>0){
+                result.insert(0,1,(overTen+'0'));
+            }
+            result.append((num1.length()-i-1), '0');
+            multiplication = addition(multiplication, result );
+        }
+        while(multiplication[0] =='0' && multiplication.length()!=1){
+            multiplication.erase(0,1);
+            cout<<"hello"<<endl;
+        }
+        return multiplication;
     }
 
-
-
-
-
-
+   
 };
 
 
@@ -89,7 +121,6 @@ int main(void){
 
     getline(cin,line);
 
-    cout<<line<<endl;
     for(auto &it:line){
         if(it=='*' || it=='+'){
             newline += ' ';
@@ -165,6 +196,8 @@ int main(void){
         i--;
     }
 
+    // cout<<temp<<endl;
+
 
 
     for(auto &it: temp){
@@ -192,13 +225,14 @@ int main(void){
             switch(it){
                 case '+':
                 cal.push_back(number1+number2);
-                cout<<(number1+number2).getNum()<<endl;
+                // cout<<(number1+number2).getNum()<<endl;
                     break;
                 // case '-':
                 //     answer = (number1)-(number2);
                 //     break;
-                // case '*':
-                //     answer = (number1)*(number2);
+                case '*':
+                cal.push_back(number1*number2);
+                // cout<<(number1*number2).getNum()<<endl;
                 //     break;
                 // case '/':
                 //     answer = (number1)/(number2);
