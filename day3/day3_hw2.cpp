@@ -20,26 +20,20 @@ private:
 
 public:
     //constructor
-    BigInteger()=default;
 
     BigInteger(string s):number(s){}
-    //member function
-    void setNum(string s){
-        number = s;
-    }
-    string &getNum(){
+
+    string getNum(){
         return number;
     }
 
     BigInteger operator + (BigInteger bi) {
-        BigInteger result;
-        result.setNum( addition(getNum(), bi.getNum() ) );
+        BigInteger result(addition(getNum(), bi.getNum()));
         return result;
     }
 
     BigInteger operator * (BigInteger bi) {
-        BigInteger result;
-        result.setNum( multiplication(getNum(), bi.getNum() ) );
+        BigInteger result(multiplication(getNum(), bi.getNum() ) );
         return result;
     }
 
@@ -48,7 +42,7 @@ public:
         int lengthDiff = abs((int)(num1.length()-num2.length()));
         string addition = (num1.length()> num2.length())? num1:num2;
         //override with the longer string;
- 
+
         if(num1.length()>num2.length()){
             num2.insert(0, lengthDiff, '0');
         }
@@ -65,9 +59,9 @@ public:
                 overTen=0;
             }
             addition[i] = temp+'0';//result +'0' to char.
-            if(addition[0]=='0'){
+        }
+        if(overTen ==1){ // 마지막으로 넘어간값이 저장되지 않았을떄.
                 addition.insert(0,1,'1');
-            }
         }
         return addition;
     }
@@ -104,14 +98,11 @@ public:
         }
         while(multiplication[0] =='0' && multiplication.length()!=1){
             multiplication.erase(0,1);
-            cout<<"hello"<<endl;
+            // cout<<"hello"<<endl;
         }
         return multiplication;
     }
-
-   
 };
-
 
 int main(void){
     string line,oper;
@@ -138,12 +129,6 @@ int main(void){
 
     }
 
-    // istringstream ss(newline);
-    // while(ss>>oper){calList.push_back(oper);}
-
-    // for(int i= 0; i!=calList.size();i++){
-    //     cout<<calList[i]<<"  "<<endl;
-    // }
     string temp="";
     string val ="";
     vector<char> postfix;
@@ -155,7 +140,6 @@ int main(void){
         }
         else{
             temp += (val)+ " ";
-            // temp+=" ";
             val="";
             switch(it){
                 case '(' :
@@ -196,10 +180,6 @@ int main(void){
         i--;
     }
 
-    // cout<<temp<<endl;
-
-
-
     for(auto &it: temp){
         if(isdigit(it)){
             process += it;
@@ -213,14 +193,9 @@ int main(void){
             }
         else{
             BigInteger number2= cal.back();
-            // cout<<"number2 :"<< number2<<endl;
             cal.pop_back();
             BigInteger number1 = cal.back();
-            // cout<<number1<<endl;
             cal.pop_back();
-
-
-            // cout<<"number1 :"<< number1<<endl;
 
             switch(it){
                 case '+':
@@ -238,8 +213,6 @@ int main(void){
                 //     answer = (number1)/(number2);
                 //     break;
             }
-            // cout<<"answer :"<< answer<<endl;
-            // cout<<cal[0]<<endl;
         }
 
     }
