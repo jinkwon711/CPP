@@ -24,43 +24,55 @@ public:
             }
         }
     }
-    int up(string word, int row, int col, unsigned int i =0){
-        if(i==word.length()){
-            vector<int> temp;
-            // cout<<"real result point"<<endl;
-            // cout<<row+i<<" "<<col<<endl;
-            temp.push_back(row+i);
-            temp.push_back(col);
-            resultPoint.push_back(temp);
-            return 0;
+    void up(string word, int row, int col, unsigned int i =0){
+        while(row>=1 && (dataArr[row-1][col-1]==word[i])){
+            if(i+1==word.length()){
+               vector<int> temp;
+               temp.push_back(row+i);
+               temp.push_back(col);
+               resultPoint.push_back(temp);
+               cout<<row<<"/"<<col<<endl;
+               cout<<"hi"<<endl;
+               break;
+            }
+            i++; 
+            row--;
         }
-
-        if(row<1){
-            return 0;
-        }
-        else if(row>=1&&(word[i]==dataArr[row-1][col-1])){
-            up(word,row-1,col, ++i);
-        }
-        return 0;
     }
-    int down(string word, int row, int col, unsigned int i =0){
-
-        if(row<M && (dataArr[row-1][col-1]==word[i])){
-            cout<<"hi"<<endl;
-            if(i+2==word.length()){
-                cout<<"hi"<<endl;
+    void down(string word, int row, int col, unsigned int i =0){
+        while(row<=M && (dataArr[row-1][col-1]==word[i])){
+            if(i+1==word.length()){
                vector<int> temp;
                temp.push_back(row-i);
                temp.push_back(col);
                resultPoint.push_back(temp);
-               return 0;
+                cout<<"hi"<<endl;
+               break;
             }
-            else{
-                down(word,row+1,col, ++i);
-            }
+            i++; 
+            row++;
         }
-        return 0;
     }
+
+
+
+    //     if(row<=M && (dataArr[row-1][col-1]==word[i])){
+    //         if(i+1==word.length()){
+    //            vector<int> temp;
+    //            temp.push_back(row-i);
+    //            temp.push_back(col);
+    //            resultPoint.push_back(temp);
+    //            return 0;
+    //         }
+    //         else if(row==M){
+    //             return 0;
+    //         }
+    //         else{
+    //             down(word,row+1,col, ++i);
+    //         }
+    //     }
+    //     return 0;
+    // }
 
     int left(string word, int row, int col, unsigned int i =0){
         if(i==word.length()){
@@ -190,7 +202,6 @@ public:
         for(auto &it: startPoint){
             int row = it[0];
             int col = it[1];
-            // cout<<row<<"/이건 스타팅포인트/"<<col<<endl;
             up(word,row,col);
             down(word,row,col);
             left(word,row,col);
@@ -209,6 +220,7 @@ public:
             int x = resultPoint.back()[0];
             int y = resultPoint.back()[1];
             resultPoint.pop_back();
+            cout<<resultPoint[0][1]<<endl;
 
             while(!resultPoint.empty()){
 
@@ -216,11 +228,16 @@ public:
                     x = resultPoint.back()[0];
                     y = resultPoint.back()[1];
                     resultPoint.pop_back();
+                                cout<<x<<y<<endl;
+
+
                 }
                 else if(x == resultPoint.back()[0]){
                     if(y>resultPoint.back()[1]){
                         x = resultPoint.back()[0];
                         y = resultPoint.back()[1];
+                        resultPoint.pop_back();
+                    }else{
                         resultPoint.pop_back();
                     }
                 }
@@ -229,6 +246,7 @@ public:
                     resultPoint.pop_back();
                 }
             }
+                                cout<<"연산끝"<<endl;
 
         vector<int> temp;
         temp.push_back(x);
