@@ -31,11 +31,9 @@ public:
                temp.push_back(row+i);
                temp.push_back(col);
                resultPoint.push_back(temp);
-               cout<<row<<"/"<<col<<endl;
-               cout<<"hi"<<endl;
                break;
             }
-            i++; 
+            i++;
             row--;
         }
     }
@@ -49,7 +47,7 @@ public:
                 cout<<"hi"<<endl;
                break;
             }
-            i++; 
+            i++;
             row++;
         }
     }
