@@ -52,7 +52,7 @@ int main(){
         tie(answer,temp) = fib(number,mod);
         N2.push_back(answer);
     }
-
+// I initialized N2 but it is better to not save , just find in N1 in iteration.
     for(int i=0; i!=N2.size(); i++){
         if(find(N1.begin(), N1.end(),N2[i])!=N1.end()){
             cout<<N2[i]<<" : 1"<<endl;
