@@ -266,7 +266,7 @@ int main(void){
         if(i==data.size()-1){
             break;
         }
-        if(data[i].getGamePoint()==data[i+1].getGamePoint() 
+        if(data[i].getGamePoint()==data[i+1].getGamePoint()
             && data[i].getWin()==data[i+1].getWin()
             && data[i].getGoalDiff()==data[i+1].getGoalDiff()
             && data[i].getGoalByMe()==data[i+1].getGoalByMe()){
