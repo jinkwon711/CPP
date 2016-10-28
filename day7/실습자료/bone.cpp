@@ -103,12 +103,16 @@ istream &operator >> (istream &is, player &p) {
 
 	cout << "input name : ";
 	cin >> p.name;
+	cin.ignore(256, '\n');
+
 	cout << "input position : ";
 	cin >> p.position;
+	cin.ignore(256, '\n');
 
 	while(temp<0 || temp>100){
 		cout << "input winning rate : ";
 		cin >> temp;
+		cin.ignore(256, '\n');
 			if(temp<0 || temp>100){
 	    cout << "winning rate should be between 0 and 100" << '\n';
 			}
@@ -131,63 +135,147 @@ void print_line() { //DO NOT MODIFY!
 }
 
 void search_position(string position) {
-	/*write code below*/
-	cout << "No position exists!" << '\n';
+	auto it = find_if(player_list.begin(),player_list.end(),[position](player p)->bool{return(p.position==position);});
+	if(it!=player_list.end()){
+			cout<<*it;
+		print_line();
+	}
+	else cout << "No player exists!" << '\n';
 }
 
 void search_player_name(string name) {
-	/*write code below*/
-	cout << "No player exists!" << '\n';
+	auto it = find_if(player_list.begin(),player_list.end(),[name](player p)->bool{return(p.name==name);});
+	if(it!=player_list.end()){
+			cout<<*it;
+		print_line();
+	}
+	else cout << "No player exists!" << '\n';
 }
+
 
 void search_player_code(string code) {
 	/*write code below*/
-	cout << "No player exists!" << '\n';
+	auto it = find_if(player_list.begin(),player_list.end(),[code](player p)->bool{return(p.code==code);});
+	if(it!=player_list.end()){
+			cout<<*it;
+		print_line();
+	}
+	else cout << "No player exists!" << '\n';
+
 }
 
 void modify_player(string code) {
 	/* write code below */
-	cout << "input name : ";
 
-	cout << "input position : ";
+	auto it = find_if(player_list.begin(),player_list.end(),[code](player p)->bool{return(p.code==code);});
+	if(it!=player_list.end()){
+		cout << "input name : ";
+		cin>> it->name;
+		cin.ignore(256, '\n');
 
-	cout << "input winning rate : ";
-
-	cout << "No player exists!" << '\n';
+		cout << "input position : ";
+		cin>> it->position;
+		cin.ignore(256, '\n');
+		do{
+			if(it->winning_rate>100 || it->winning_rate<0){
+				cout << "winning rate should be between 0 and 100" << '\n';
+			}
+			cout << "input winning rate : ";
+			cin>> it->winning_rate;
+			cin.ignore(256, '\n');
+		}while(it->winning_rate>100 || it->winning_rate<0);
+	}
+	else cout << "No player exists!" << '\n';
 }
 
 void print_player() {
-	/* write code here */
+	for(auto &it:player_list){
+		cout<<it;
+		print_line();
+	}
 }
 
 void delete_player(string code) {
-	/* write code below */
-	cout << "No such player exists in player list" << '\n';
+	auto it = find_if(player_list.begin(),player_list.end(),[code](player p)->bool{return(p.code==code);});
+	if(it!=player_list.end()){
+		player_list.erase(it);
+	}
+	else {
+		cout << "No such player exists in player list" << '\n';
+	}
 }
 
 bool check_team_condition() { //DO NOT MODIFY!
 	if (player_list.size() > 5) return true;
 	else return false;
 }
+void select_member(team &t, int n){
+	string tempCode;
+	do{
+		cin>>tempCode;
+		cin.ignore(256, '\n');
+		for(auto &it:player_list){
+			if(it.code==tempCode){
+				t.p1 =&it;
+				tempCode="done";
+			}
+		}
+		if(tempCode!="done"){
+				cout<<"No player exist!"<< '\n';
+				switch ( n )
+      {
+        case 1:
+				 		cout << "Input first team member's code : ";
+            break;
+				case 2:
+				 		cout << "Input second team member's code : ";
+		          break;
+				case 3:
+				 		cout << "Input third team member's code : ";
+	          break;
+				case 4:
+				 		cout << "Input fourth team member's code : ";
+	          break;
+				case 5:
+				 		cout << "Input fifth team member's code : ";
+	          break;
+	         default:
+			 	 case 6:
+				 		cout << "Input sixth team member's code : ";
+	          break;
+      }
+		}
+	}while(tempCode!="done");
+}
 
 void build_team(team &t) {
 	/* write code below */
-
+	string tempCode;
 	cout << "Input team code : ";
+	cin>>t.code;
+	cin.ignore(256, '\n');
 
 	cout << "Input team name : ";
+	cin>>t.name;
+	cin.ignore(256, '\n');
 
 	cout << "Input first team member's code : ";
-
+	select_member(t,1);
 	cout << "Input second team member's code : ";
+	select_member(t,2);
 
 	cout << "Input third team member's code : ";
+	select_member(t,3);
 
 	cout << "Input fourth team member's code : ";
+	select_member(t,4);
 
 	cout << "Input fifth team member's code : ";
+	select_member(t,5);
 
 	cout << "Input sixth team member's code : ";
+	select_member(t,6);
+
 }
 
 void build_best_team() {
@@ -221,7 +309,7 @@ void show_help() { //DO NOT MODIFY!
 }
 
 int check_command(string command) { //DO NOT MODIFY!
-	if (!command.compare("new player")) {
+	if (!command.compare("-")) {
 		player p;
 		cin >> p;
 		player_list.emplace_back(p);

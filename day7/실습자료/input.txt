@@ -1,0 +1,30 @@
+new player
+001
+jin1
+pos1
+1
+new player
+002
+jin2
+pos2
+2
+new player
+003
+jin3
+pos3
+3
+new player
+004
+jin4
+pos4
+4
+new player
+005
+jin5
+pos5
+5
+new player
+006
+jin6
+pos6
+6
