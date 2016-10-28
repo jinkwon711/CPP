@@ -216,6 +216,29 @@ void select_member(team &t, int n){
 		cin.ignore(256, '\n');
 		for(auto &it:player_list){
 			if(it.code==tempCode){
+
+				switch ( n )
+      {
+        case 1:
+						t.p1 =&it;
+            break;
+				case 2:
+						t.p2 =&it;
+		          break;
+				case 3:
+						t.p3 =&it;
+	          break;
+				case 4:
+				 		t.p4 =&it;
+	          break;
+				case 5:
+						t.p5 =&it;
+	          break;
+	       default:
+			 	 case 6:
+					 	t.p6 =&it;
+	        	break;
+      }
 				t.p1 =&it;
 				tempCode="done";
 			}
