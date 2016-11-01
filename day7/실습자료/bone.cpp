@@ -14,6 +14,11 @@ public:
 	player():name(""),code(""){}
 	player(string n, string c, string p, double wr):name(n), code(c), position(p),winning_rate(wr){}
 	/*write player class initizlier here*/
+
+	bool operator > (const player& p) const
+     {
+         return (winning_rate > p.winning_rate);
+     }
 };
 
 class team {
@@ -35,12 +40,15 @@ public:
 	friend player;
 	friend ostream &operator<<(ostream&,const team&);
 	friend void calc_teamwork(team &);
+	friend void build_best_team();
+	friend team operator*(team, team);
 
 	/*write team class initializer here*/
 	/*define friend function herer*/
 };
 
 vector<player> player_list;
+vector<player> matches;
 team t1, t2;
 
 bool check_duplicate(player p) { //DO NOT MODIFY!
@@ -100,14 +108,11 @@ istream &operator >> (istream &is, player &p) {
 			tempCode="0";
 		}
 	}
-
 	cout << "input name : ";
-	cin >> p.name;
-	cin.ignore(256, '\n');
+	getline(cin,p.name);
 
 	cout << "input position : ";
-	cin >> p.position;
-	cin.ignore(256, '\n');
+	getline(cin,p.position);
 
 	while(temp<0 || temp>100){
 		cout << "input winning rate : ";
@@ -121,9 +126,12 @@ istream &operator >> (istream &is, player &p) {
 }
 team operator*(team t1, team t2) {
 	/*write code below*/
-	cout << t1.name << " win!" << '\n';
-	cout << t2.name << " win!" << '\n';
-	cout << "Unpredictable!" << '\n';
+
+
+	if(t1.teamwork>t2.teamwork) cout << t1.name << " win!" << '\n';
+	else if(t1.teamwork<t2.teamwork)cout << t2.name << " win!" << '\n';
+	else cout << "Unpredictable!" << '\n';
+	return t1;
 }
 
 void calc_teamwork(team &t) { //DO NOT MODIFY!
@@ -135,20 +143,31 @@ void print_line() { //DO NOT MODIFY!
 }
 
 void search_position(string position) {
-	auto it = find_if(player_list.begin(),player_list.end(),[position](player p)->bool{return(p.position==position);});
-	if(it!=player_list.end()){
-			cout<<*it;
+	// auto it = find_if(player_list.begin(),player_list.end(),[position](player p)->bool{return(p.position==position);});
+	for(auto &player:player_list){
+		if(player.position == position) matches.push_back(player);
+	}
+	if(!matches.empty()){
+	for(auto &player:matches){
+		cout<<player;
 		print_line();
 	}
-	else cout << "No player exists!" << '\n';
+	matches.clear();
+}
+	else cout << "No position exists!" << '\n';
 }
 
 void search_player_name(string name) {
-	auto it = find_if(player_list.begin(),player_list.end(),[name](player p)->bool{return(p.name==name);});
-	if(it!=player_list.end()){
-			cout<<*it;
+	for(auto &player:player_list){
+		if(player.name == name) matches.push_back(player);
+	}
+	if(!matches.empty()){
+	for(auto &player:matches){
+		cout<<player;
 		print_line();
 	}
+	matches.clear();
+}
 	else cout << "No player exists!" << '\n';
 }
 
@@ -170,12 +189,11 @@ void modify_player(string code) {
 	auto it = find_if(player_list.begin(),player_list.end(),[code](player p)->bool{return(p.code==code);});
 	if(it!=player_list.end()){
 		cout << "input name : ";
-		cin>> it->name;
-		cin.ignore(256, '\n');
+		getline(cin,it->name);
 
 		cout << "input position : ";
-		cin>> it->position;
-		cin.ignore(256, '\n');
+		getline(cin,it->position);
+
 		do{
 			if(it->winning_rate>100 || it->winning_rate<0){
 				cout << "winning rate should be between 0 and 100" << '\n';
@@ -236,7 +254,7 @@ void select_member(team &t, int n){
 	          break;
 	       default:
 			 	 case 6:
-					 	t.p6 =&it;
+					 t.p6 =&it;
 	        	break;
       }
 				t.p1 =&it;
@@ -275,12 +293,11 @@ void build_team(team &t) {
 	/* write code below */
 	string tempCode;
 	cout << "Input team code : ";
-	cin>>t.code;
-	cin.ignore(256, '\n');
+	getline(cin,t.code);
+
 
 	cout << "Input team name : ";
-	cin>>t.name;
-	cin.ignore(256, '\n');
+	getline(cin,t.name);
 
 	cout << "Input first team member's code : ";
 	select_member(t,1);
@@ -302,6 +319,19 @@ void build_team(team &t) {
 }
 
 void build_best_team() {
+	stable_sort(player_list.begin(),player_list.end(),greater<player>());
+
+	t1.name = "best team";
+	t1.code = "001";
+	t1.p1 = &player_list[0];
+	t1.p2 = &player_list[1];
+	t1.p3 = &player_list[2];
+	t1.p4 = &player_list[3];
+	t1.p5 = &player_list[4];
+	t1.p6 = &player_list[5];
+	calc_teamwork(t1);
+
+
 	/* write code here */
 }
 
@@ -332,7 +362,7 @@ void show_help() { //DO NOT MODIFY!
 }
 
 int check_command(string command) { //DO NOT MODIFY!
-	if (!command.compare("-")) {
+	if (!command.compare("new player")) {
 		player p;
 		cin >> p;
 		player_list.emplace_back(p);
@@ -371,15 +401,13 @@ int check_command(string command) { //DO NOT MODIFY!
 					break;
 				case 1:
 					cout << "Input player name : ";
-					cin >> keyword;
-					cin.ignore(256, '\n');
+					getline(cin,keyword);
 					print_line();
 					search_player_name(keyword);
 					break;
 				case 2:
 					cout << "Input position : ";
-					cin >> keyword;
-					cin.ignore(256, '\n');
+					getline(cin,keyword);
 					print_line();
 					search_position(keyword);
 					break;
