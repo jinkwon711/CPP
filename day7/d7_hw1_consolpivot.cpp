@@ -25,10 +25,10 @@ public:
      {
         // return (Priority[0]>=m.Priority[0]);
         if(cat==0) {
-            return (Priority[0]>=m.Priority[0]);
+            return (Priority[0]==m.Priority[0]?Priority[1]>=m.Priority[1]:Priority[0]>m.Priority[0]);
         }
         else if(cat==1) {
-            return (Priority[1]>=m.Priority[1]);
+            return (Priority[1]==m.Priority[1]?Priority[0]>=m.Priority[0]:Priority[1]>m.Priority[1]);
         }
         return 0;
      }
@@ -93,11 +93,16 @@ void print_pivoted_whole(int n, int c_info,int i_info,string func){
 }
 
 void print_pivottable(int n, int c_info,int i_info,string func){
+        cout.precision(2);
+        cout<<fixed;
 
     switch(c_info){
         case 0: cout<<"Genre\t";break;
         case 1: cout<<"Source\t";break;
-        case 3:cout<<"Genre\t"<<"Source\t";break;
+        case 3:
+            if(cat==0)cout<<"Genre\t"<<"Source\t";
+            else cout<<"Source\t"<<"Genre\t";
+            break;
     }
     switch(i_info){
         case 0: cout<<"Production\t"; break;
@@ -111,14 +116,20 @@ void print_pivottable(int n, int c_info,int i_info,string func){
         case 0: cout<<pivot_table2[i].Sval[0]<<"\t"; break;
         case 1: cout<<pivot_table2[i].Sval[1]<<"\t"; break;
         case 3:
+            if(cat==0){
             cout<<pivot_table2[i].Sval[0]<<"\t"<<pivot_table2[i].Sval[1]<<"\t";break;
+            }
+            else{
+                cout<<pivot_table2[i].Sval[1]<<"\t"<<pivot_table2[i].Sval[0]<<"\t";
+                break;
+            }
         }
 
         if(func!="cnt"){
             switch(i_info){
-            case 0: cout<<pivot_table2[i].production<<"\t"; break;
-            case 1: cout<<pivot_table2[i].gross<<"\t"; break;
-            case 2: cout<<pivot_table2[i].rating<<"\t"; break;
+            case 0: cout<<pivot_table2[i].Dval[0]<<"\t"; break;
+            case 1: cout<<pivot_table2[i].Dval[1]<<"\t"; break;
+            case 2: cout<<pivot_table2[i].Dval[2]<<"\t"; break;
             }
             cout<<endl;
         }
@@ -138,11 +149,11 @@ void print_pivottable(int n, int c_info,int i_info,string func){
     pivot_table2.clear();
     cat=cat_index;
     if(command=="pivot2"){
-        cout<<command<<endl;
         if(cat_index==1) cat_index--;
         else cat_index++;
     }
     stable_sort(pivot_table1.begin(),pivot_table1.end(),greater<Movie>());
+
 
     reverse(pivot_table1.begin(),pivot_table1.end());
     if(func=="max"){
@@ -176,10 +187,11 @@ void print_pivottable(int n, int c_info,int i_info,string func){
         }
     }
     else if(func=="ave"){
-        int cnt;
+        int cnt=0;
         pivot_table2.push_back(pivot_table1[0]);
         for(int i=1; i!=pivot_table1.size();i++){
             if(pivot_table2.back().Priority[cat_index]==pivot_table1[i].Priority[cat_index]&&pivot_table2.back().Priority[cat]==pivot_table1[i].Priority[cat]){
+
                 pivot_table2.back().Dval[info_index]+=pivot_table1[i].Dval[info_index];
                 cnt++;
             }
@@ -194,6 +206,17 @@ void print_pivottable(int n, int c_info,int i_info,string func){
 
     }
     else if(func=="tot"){
+         int cnt=0;
+        pivot_table2.push_back(pivot_table1[0]);
+        for(int i=1; i!=pivot_table1.size();i++){
+            if(pivot_table2.back().Priority[cat_index]==pivot_table1[i].Priority[cat_index]&&pivot_table2.back().Priority[cat]==pivot_table1[i].Priority[cat]){
+
+                pivot_table2.back().Dval[info_index]+=pivot_table1[i].Dval[info_index];
+            }
+            else{
+                pivot_table2.push_back(pivot_table1[i]);
+            }
+        }
 
     }
     else if(func=="cnt"){
@@ -214,43 +237,20 @@ void print_pivottable(int n, int c_info,int i_info,string func){
     }
 }
 
-
-
-
-
-
- //    }
- //    pivot_table1.clear();
-
- //    int inputPriority2=0;
-
- // }
-
- // void min(string info,int prior){
- //    int inputPriority=0;
- //    if(prior==1){
- //        for(auto &it:pivot_table1){
- //            pivot_table1[0].priority==inputPriority;
- //        }
- //        for(int i=0; i!=pivot_table1.size();i++){
- //            pivot_table1[i]
- //        }
- //    }
- // }
-
-
-
 int main(){
 
     int numOfMovie;
     string temp;
     string commandline;
     string command;
+    string lastCommand;
     string category;
     string category2;//didn't use it;;
     string info;
     string op;
     cin>>numOfMovie;//number of movies
+    int c_info;
+    int i_info;
 
     for(int i=0; i<numOfMovie; i++){//iterating over movies
         Movie m;
@@ -276,7 +276,6 @@ int main(){
         cin>>m.source;
         auto it2 =find(source_list.begin(),source_list.end(),m.source);
         if(it2==source_list.end()){
-            cout<<i<<endl;
             source_list.push_back(m.source);
             m.Priority.push_back(currPriority2++);
         }else{
@@ -310,8 +309,6 @@ int main(){
             cin>>category;
             cin>>info;
             cin>>op;
-            int c_info;
-            int i_info;
             vector<string> cat_list;
             if(category=="Genre") c_info=0;
             else c_info=1;
@@ -324,15 +321,14 @@ int main(){
             // print_sortedtable(pivot_table1.size());
             // print_pivoted_whole(pivot_table2.size(),c_info,i_info,op);
 
-            print_pivottable(pivot_table2.size(),c_info,i_info,op);
+            // print_pivottable(pivot_table2.size(),c_info,i_info,op);
         }
         else if(command=="pivot2"){
             cin>>category;
             cin>>category2;
             cin>>info;
             cin>>op;
-            int c_info;
-            int i_info;
+
             vector<string> cat_list;
             if(category=="Genre") c_info=0;
             else c_info=1;
@@ -342,11 +338,14 @@ int main(){
             else i_info=2;
             make_pivot1(c_info,i_info,op,command);
 
-            print_sortedtable(pivot_table1.size());
-            print_pivoted_whole(pivot_table2.size(),c_info,i_info,op);
-            c_info=3;
+            lastCommand =command;
+        }else if(command=="pivottable"){
+            if(lastCommand=="pivot2"){
+                c_info=3;
+            }
             print_pivottable(pivot_table2.size(),c_info,i_info,op);
         }
+
     }
 
 

@@ -1,0 +1,22 @@
+16
+Batman Action Comics 350 4113 7.6
+Ed_Wood Comedy Books 180 58 8.1
+JFK Drama Books 400 2054 8
+Mary_Reilly Drama Books 470 63 5.5
+Trainspotting Drama Books 31 240 8.2
+Beloved Drama Books 530 228 5.3
+Contact Drama Books 900 1659 7.3
+Daredevil Action Comics 800 1791 5.5
+Fight_Club Drama Books 650 1008 8.8
+Holes Drama Books 200 723 7.1
+Iron_Man Action Comics 1860 5826 7.9
+K-PAX Drama Books 480 503 7.3
+Possession Drama Books 250 148 6.4
+Practical_Magic Comedy Books 600 683 5.5
+The_Reader Drama Books 330 1061 7.7
+The_Town Drama Books 370 331 8.7
+pivot1 Genre Rating max
+pivottable
+pivot2 Genre Source Production min
+pivottable
+close
