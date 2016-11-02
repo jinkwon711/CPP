@@ -11,9 +11,9 @@ originaltable
 pivot1 Genre Rating ave
 pivottable
 pivotchart
-pivot2 Genre Source Rating ave
+pivot2 Genre Source Rating cnt
 pivottable
 pivotchart
-pivot2 Source Genre Rating ave
+pivot2 Source Genre Rating cnt
 pivottable
 pivotchart
