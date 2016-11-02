@@ -11,8 +11,8 @@ public:
 	string code;
 	string position;
 	double winning_rate;
-	player():name(""),code(""){}
-	player(string n, string c, string p, double wr):name(n), code(c), position(p),winning_rate(wr){}
+	player():name(""),code(""),winning_rate(-1),position(""){}
+	// player(string n, string c, string p, double wr):name(n), code(c), position(p),winning_rate(wr){}
 	/*write player class initizlier here*/
 
 	bool operator > (const player& p) const
@@ -123,7 +123,9 @@ istream &operator >> (istream &is, player &p) {
 			}
 			else p.winning_rate = temp;
 	}
+	return is;
 }
+
 team operator*(team t1, team t2) {
 	/*write code below*/
 
@@ -143,7 +145,6 @@ void print_line() { //DO NOT MODIFY!
 }
 
 void search_position(string position) {
-	// auto it = find_if(player_list.begin(),player_list.end(),[position](player p)->bool{return(p.position==position);});
 	for(auto &player:player_list){
 		if(player.position == position) matches.push_back(player);
 	}
@@ -235,30 +236,27 @@ void select_member(team &t, int n){
 		for(auto &it:player_list){
 			if(it.code==tempCode){
 
-				switch ( n )
-      {
-        case 1:
+				switch (n){
+       		 	case 1:
 						t.p1 =&it;
-            break;
+            			break;
 				case 2:
 						t.p2 =&it;
-		          break;
+		          		break;
 				case 3:
 						t.p3 =&it;
-	          break;
+	         			break;
 				case 4:
 				 		t.p4 =&it;
-	          break;
+	          			break;
 				case 5:
 						t.p5 =&it;
-	          break;
-	       default:
-			 	 case 6:
-					 t.p6 =&it;
-	        	break;
-      }
-				t.p1 =&it;
-				tempCode="done";
+	          			break;
+			 	case 6:
+						t.p6 =&it;
+		        		break;
+      			}
+      			tempCode="done";
 			}
 		}
 		if(tempCode!="done"){
@@ -315,6 +313,7 @@ void build_team(team &t) {
 
 	cout << "Input sixth team member's code : ";
 	select_member(t,6);
+	calc_teamwork(t);
 
 }
 
