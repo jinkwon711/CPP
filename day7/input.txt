@@ -8,4 +8,6 @@ Casino_Royale Action Books 1020 5963 8
 Shrek Adventure Books 500 4843 8 
 Shrek_2 Adventure Books 700 9198 7.5
 originaltable
-pivot1 Genre Rating cnt
+pivot1 Genre gross max
+pivot1 Genre Production min
+pivot2 Genre Source Rating ave
