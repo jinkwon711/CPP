@@ -7,7 +7,7 @@ using namespace std;
 
 int currPriority1=0;
 int currPriority2=0;
-int cat;
+int cat=0;
 class Movie{
 public:
     vector<string> Sval;
@@ -18,15 +18,23 @@ public:
     double production;
     double gross;
     double rating;
+    int cnt;
     vector<int> Priority;
 
     bool operator > (const Movie& m) const
      {
-        if(cat==0) return (Priority[0] > m.Priority[0]);
-        else return (Priority[1]>m.Priority[1]);
+        // return (Priority[0]>=m.Priority[0]);
+        if(cat==0) {
+            return (Priority[0]>=m.Priority[0]);
+        }
+        else if(cat==1) {
+            return (Priority[1]>=m.Priority[1]);
+        }
+        return 0;
      }
 
-    // Movie()=defualt;
+    Movie()=default;
+    Movie(int n):cnt(n){}
 
 
 };
@@ -49,7 +57,7 @@ vector<int> cnt_list;
 
 // }
 void print_originaltable(int n){
-    cout<<"Name\t"<<"Genre\t"<<"Source\t"<<"Production\t"<<"Gross\t"<<"Rating\t"<<"Priority\t"<<endl;
+    cout<<"Name\t"<<"Genre\t"<<"Source\t"<<"Production\t"<<"Gross\t"<<"Rating\t"<<"Priority1\t"<<"Priority2"<<endl;
     for(int i=0; i!=n;i++){
         cout<<movie_list[i].name<<"\t";
         cout<<movie_list[i].genre<<"\t";
@@ -57,58 +65,117 @@ void print_originaltable(int n){
         cout<<movie_list[i].production<<"\t";
         cout<<movie_list[i].gross<<"\t";
         cout<<movie_list[i].rating<<"\t";
-        cout<<movie_list[i].Priority[0]<<endl;
+        cout<<movie_list[i].Priority[0]<<"\t";
+        cout<<movie_list[i].Priority[1]<<endl;
     }
 
 }
-
-void print_pivottable(int n){
-    cout<<"Name\t"<<"Genre\t"<<"Source\t"<<"Production\t"<<"Gross\t"<<"Rating\t"<<"Priority\t"<<endl;
+void print_sortedtable(int n){
+    cout<<"Name\t"<<"Genre\t"<<"Source\t"<<"Production\t"<<"Gross\t"<<"Rating\t"<<"Priority1\t"<<"Priority2"<<endl;
     for(int i=0; i!=n;i++){
-        cout<<pivot_table1[i].Sval[0]<<"\t";
-        cout<<pivot_table1[i].Sval[1]<<"\t";
+        cout<<pivot_table1[i].name<<"\t";
+        cout<<pivot_table1[i].genre<<"\t";
         cout<<pivot_table1[i].source<<"\t";
         cout<<pivot_table1[i].production<<"\t";
         cout<<pivot_table1[i].gross<<"\t";
         cout<<pivot_table1[i].rating<<"\t";
-        cout<<pivot_table1[i].Priority[0]<<endl;
+        cout<<pivot_table1[i].Priority[0]<<"\t";
+        cout<<pivot_table1[i].Priority[1]<<endl;
     }
 
 }
 
-// void make_genre_pivot(string info, string func){
-//         pivot_table1.clear();
-//     int inputPriority=0;
-//     while(inputPriority<currPriority){
-//         for(int i=0;i!=movie_list.size();i++){
-//             if(movie_list[i].priority==inputPriority){
-//                 pivot_table1.push_back(movie_list[i]);
-//             }
-//         }
-//         inputPriority++;
-//     }
+void print_pivottable(int n, int c_info,int i_info){
 
-//     if(info=="Production"){
+    switch(c_info){
+        case 0:
+            cout<<"Genre\t";
+            break;
+        case 1:
+            cout<<"Source\t";
+            break;
+    }
+    switch(i_info){
+        case 0:
+            cout<<"Production\t";
+            break;
+        case 1:
+            cout<<"Gross\t";
+            break;
+        case 2:
+            cout<<"Ratring\t";
+    }
+    cout<<endl;
 
-//     }
-//  }
+    for(int i=0; i!=n;i++){
+        switch(c_info){
+        case 0:
+            cout<<pivot_table2[i].Sval[0]<<"\t";
+            break;
+        case 1:
+            cout<<pivot_table2[i].Sval[1]<<"\t";
+            break;
+    }
+    switch(i_info){
+        case 0:
+            cout<<pivot_table2[i].production<<"\t";
+            break;
+        case 1:
+            cout<<pivot_table2[i].gross<<"\t";
+            break;
+        case 2:
+            cout<<pivot_table2[i].rating<<"\t";
+            break;
+    }
+        cout<<endl;
+
+
+}
+}
+
 
 
  void make_pivot1(int cat_index, int info_index,string func){
     int inputPriority=0;
+    pivot_table1.clear();
     pivot_table1 = movie_list;
+    pivot_table2.clear();
+    cat=cat_index;
     stable_sort(pivot_table1.begin(),pivot_table1.end(),greater<Movie>());
+
     reverse(pivot_table1.begin(),pivot_table1.end());
     if(func=="max"){
-        pivot_table2.push_back(pivot_table1[0])
+        pivot_table2.push_back(pivot_table1[0]);
         for(int i=1; i!=pivot_table1.size();i++){
-            if(pivot_table1.Priority[cat_index]==pivot_table2[cat_index]){
-                if(pivot_table2.Sval[0]>pivot_table1.Sval[cat_index])
+            if(pivot_table2.back().Priority[cat_index]==pivot_table1[i].Priority[cat_index]){
+
+                if(pivot_table2.back().Dval[info_index]<pivot_table1[i].Dval[info_index]){
+                    pivot_table2.pop_back();
+                    pivot_table2.push_back(pivot_table1[i]);
+                }
+            }
+            else{
+                pivot_table2.push_back(pivot_table1[i]);
+            }
 
         }
 
     }
     else if(func=="min"){
+        pivot_table2.push_back(pivot_table1[0]);
+        for(int i=1; i!=pivot_table1.size();i++){
+            if(pivot_table2.back().Priority[cat_index]==pivot_table1[i].Priority[cat_index]){
+
+                if(pivot_table2.back().Dval[info_index]>pivot_table1[i].Dval[info_index]){
+                    pivot_table2.pop_back();
+                    pivot_table2.push_back(pivot_table1[i]);
+                }
+            }
+            else{
+                pivot_table2.push_back(pivot_table1[i]);
+            }
+
+        }
 
     }
     else if(func=="ave"){
@@ -118,6 +185,14 @@ void print_pivottable(int n){
 
     }
     else if(func=="cnt"){
+        int k;
+        if(cat_index==0) k=currPriority1;
+        else k=currPriority2;
+        for(int i=0; i!=k; k++){
+            cnt_list.push_back(count_if(pivot_table1.begin(),pivot_table1.end(),[i,cat_index](const Movie& m){ return m.Priority[cat_index]==i;}));
+        }
+        Movie m = new m()
+        pivot_table2.push_back(m);
 
     }
 }
@@ -155,8 +230,8 @@ int main(){
     string commandline;
     string command;
     string category;
-    string numericInfo;
-    string functionName;
+    string info;
+    string op;
     cin>>numOfMovie;//number of movies
 
     for(int i=0; i<numOfMovie; i++){//iterating over movies
@@ -183,9 +258,8 @@ int main(){
         cin>>m.source;
         auto it2 =find(source_list.begin(),source_list.end(),m.source);
         if(it2==source_list.end()){
+            cout<<i<<endl;
             source_list.push_back(m.source);
-
-
             m.Priority.push_back(currPriority2++);
         }else{
             for(auto &it:movie_list){
@@ -196,7 +270,6 @@ int main(){
             }
         }
 
-        m.Sval.push_back(m.name);
         m.Sval.push_back(m.genre);
         m.Sval.push_back(m.source);
         cin>>m.production;
@@ -211,34 +284,25 @@ int main(){
 
     while(cin>>command){
         if(command=="originaltable"){
-            // print_originaltable(numOfMovie);;
-            cat=1;
-            make_pivot1(1,2,"hi");
-            print_pivottable(7);
+            print_originaltable(numOfMovie);
+
+            cout<<"\n\n"<<endl;
         }
         else if(command=="pivot1"){
             cin>>category;
-            cin>>numericInfo;
-            cin>>functionName;
-            int g_info;
+            cin>>info;
+            cin>>op;
+            int c_info;
             int i_info;
-            int f_info;
             vector<string> cat_list;
-            if(category=="Genre") g_info=1;
-            else g_info=2;
+            if(category=="Genre") c_info=0;
+            else c_info=1;
 
-            if(numericInfo=="Production") i_info=0;
-            else if(numericInfo=="Gross") i_info=1;
+            if(info=="Production") i_info=0;
+            else if(info=="Gross") i_info=1;
             else i_info=2;
-
-            if(functionName=="tot"||functionName=="ave"){
-                // make_pivot1(g_info,i_info);
-            }else{
-            //else if(functionName="max"||functionName="min"){
-                // make_pivot2(g_info,i_info);
-            }
-
-
+            make_pivot1(c_info,i_info,op);
+            print_pivottable(pivot_table2.size(),c_info,i_info);
         }
     }
 
