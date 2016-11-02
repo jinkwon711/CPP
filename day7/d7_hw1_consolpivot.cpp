@@ -50,16 +50,16 @@ vector<int> cnt_list;
 
 
 void print_originaltable(int n){
-    cout<<"Name\t"<<"Genre\t"<<"Source\t"<<"Production\t"<<"Gross\t"<<"Rating\t"<<"Priority1\t"<<"Priority2"<<endl;
+    cout<<"Name\t"<<"Genre\t"<<"Source\t"<<"Production\t"<<"Gross\t"<<"Rating"<<endl;
     for(int i=0; i!=n;i++){
         cout<<movie_list[i].name<<"\t";
         cout<<movie_list[i].genre<<"\t";
         cout<<movie_list[i].source<<"\t";
         cout<<movie_list[i].production<<"\t";
         cout<<movie_list[i].gross<<"\t";
-        cout<<movie_list[i].rating<<"\t";
-        cout<<movie_list[i].Priority[0]<<"\t";
-        cout<<movie_list[i].Priority[1]<<endl;
+        cout<<movie_list[i].rating<<endl;
+        // cout<<movie_list[i].Priority[0]<<"\t";
+        // cout<<movie_list[i].Priority[1]<<endl;
     }
 
 }
@@ -81,11 +81,11 @@ void print_pivoted_whole(int n, int c_info,int i_info,string func){
     cout<<"Name\t"<<"Genre\t"<<"Source\t"<<"Production\t"<<"Gross\t"<<"Rating\t"<<"Priority1\t"<<"Priority2"<<endl;
     for(int i=0; i!=n;i++){
         cout<<pivot_table2[i].name<<"\t";
-        cout<<pivot_table2[i].genre<<"\t";
-        cout<<pivot_table2[i].source<<"\t";
-        cout<<pivot_table2[i].production<<"\t";
-        cout<<pivot_table2[i].gross<<"\t";
-        cout<<pivot_table2[i].rating<<"\t";
+        cout<<pivot_table2[i].Sval[0]<<"\t";
+        cout<<pivot_table2[i].Sval[1]<<"\t";
+        cout<<pivot_table2[i].Dval[0]<<"\t";
+        cout<<pivot_table2[i].Dval[1]<<"\t";
+        cout<<pivot_table2[i].Dval[2]<<"\t";
         cout<<pivot_table2[i].Priority[0]<<"\t";
         cout<<pivot_table2[i].Priority[1]<<endl;
     }
@@ -105,9 +105,9 @@ void print_pivottable(int n, int c_info,int i_info,string func){
             break;
     }
     switch(i_info){
-        case 0: cout<<"Production\t"; break;
-        case 1: cout<<"Gross\t"; break;
-        case 2: cout<<"Ratring\t"; break;
+        case 0: cout<<"Production"; break;
+        case 1: cout<<"Gross"; break;
+        case 2: cout<<"Rating"; break;
     }
     cout<<endl;
 
@@ -127,6 +127,62 @@ void print_pivottable(int n, int c_info,int i_info,string func){
 
         if(func!="cnt"){
             switch(i_info){
+            case 0: cout<<pivot_table2[i].Dval[0]; break;
+            case 1: cout<<pivot_table2[i].Dval[1]; break;
+            case 2: cout<<pivot_table2[i].Dval[2]; break;
+            }
+            cout<<endl;
+        }
+        else{
+            cout<<pivot_table2[i].cnt;
+            cout<<endl;
+        }
+    }
+}
+
+void print_pivotchart1(int n, int c_index,int i_index,string func){
+    cout.precision(2);
+        cout<<fixed;
+
+    //find max,min
+    double max;
+    double min;
+    max = pivot_table2[0].Dval[i_index];
+    min = pivot_table2[0].Dval[i_index];
+    for(int i=1; i!=n;i++){
+        max=max>pivot_table2[i].Dval[i_index]?max:pivot_table2[i].Dval[i_index];
+        min=min<pivot_table2[i].Dval[i_index]?min:pivot_table2[i].Dval[i_index];
+    }
+
+    for(int i=0; i!=n;i++){
+        int code;
+        int length;
+        code=65+i;
+        int j=1;
+        while(j){
+            if(pivot_table2[i].Dval[i_index]==min){
+                length=0;
+                break;
+            }
+            else if(pivot_table2[i].Dval[i_index]==max){length=20;
+                break;
+            }
+            else{
+                if(((min+j*(max-min)/20)>=pivot_table2[i].Dval[i_index])&&(pivot_table2[i].Dval[i_index]>min+(j-1)*(max-min)/20)){
+                    length=j;
+                    break;
+                }
+                j++;
+            }
+        }
+
+        cout<<(char)code<<"|";
+        for(int i=0; i!=length;i++){
+            cout<<"=";
+        }
+
+        if(func!="cnt"){
+            switch(i_index){
             case 0: cout<<pivot_table2[i].Dval[0]<<"\t"; break;
             case 1: cout<<pivot_table2[i].Dval[1]<<"\t"; break;
             case 2: cout<<pivot_table2[i].Dval[2]<<"\t"; break;
@@ -138,19 +194,154 @@ void print_pivottable(int n, int c_info,int i_info,string func){
             cout<<endl;
         }
     }
+    for(int i=0; i!=25;i++){
+        cout<<'-';
+    }
+    cout<<endl;
+    for(int i=0; i!=n; i++){
+        int code = 65+i;
+            cout<<(char)code<<":"<<" ";
+            cout<<pivot_table2[i].Sval[0];
+        cout<<endl;
+    }
 }
 
 
 
- void make_pivot1(int cat_index, int info_index,string func,string command){
+
+void print_pivotchart2(int n, int c_index,int i_index,string func){
+    cout.precision(2);
+        cout<<fixed;
+
+    //find max,min
+    double max;
+    double min;
+    max = pivot_table2[0].Dval[i_index];
+    min = pivot_table2[0].Dval[i_index];
+    for(int i=1; i!=n;i++){
+        max=max>pivot_table2[i].Dval[i_index]?max:pivot_table2[i].Dval[i_index];
+        min=min<pivot_table2[i].Dval[i_index]?min:pivot_table2[i].Dval[i_index];
+    }
+
+    for(int i=0; i!=n;i++){
+        int code;
+        int length;
+        code=65;
+        int j=1;
+        while(j){
+            if(pivot_table2[i].Dval[i_index]==min){
+                length=0;
+                break;
+            }
+            else if(pivot_table2[i].Dval[i_index]==max){length=20;
+                break;
+            }
+            else{
+                if(((min+j*(max-min)/20)>=pivot_table2[i].Dval[i_index])&&(pivot_table2[i].Dval[i_index]>min+(j-1)*(max-min)/20)){
+                    length=j;
+                    break;
+                }
+                j++;
+            }
+        }
+        if(cat==0){
+            cout<<(char)(code+pivot_table2[i].Priority[0])<<(1+pivot_table2[i].Priority[1])<<"|";
+            for(int i=0; i!=length;i++){
+            cout<<"=";
+            }
+            if(func!="cnt"){
+                switch(i_index){
+                case 0: cout<<pivot_table2[i].Dval[0]<<"\t"; break;
+                case 1: cout<<pivot_table2[i].Dval[1]<<"\t"; break;
+                case 2: cout<<pivot_table2[i].Dval[2]<<"\t"; break;
+                }
+                cout<<endl;
+            }
+            else{
+                cout<<pivot_table2[i].cnt<<"\t";
+                cout<<endl;
+            }
+            if(i<n-1){
+                    if(pivot_table2[i].Priority[1]<currPriority1){
+                        if(pivot_table2[i+1].Priority[0]==pivot_table2[i].Priority[0]&&pivot_table2[i+1].Priority[1]==pivot_table2[i].Priority[1]+1){
+                        }
+                        else{
+                            cout<<"  "<<"|"<<endl;
+
+                        }
+                    }
+                }
+
+        }
+        else{
+            cout<<(1+pivot_table2[i].Priority[1])<<(char)(code+pivot_table2[i].Priority[0])<<"|";
+            for(int i=0; i!=length;i++){
+                cout<<"=";
+                }
+                if(func!="cnt"){
+                    switch(i_index){
+                    case 0: cout<<pivot_table2[i].Dval[0]<<"\t"; break;
+                    case 1: cout<<pivot_table2[i].Dval[1]<<"\t"; break;
+                    case 2: cout<<pivot_table2[i].Dval[2]<<"\t"; break;
+                    }
+                    cout<<endl;
+                }
+                else{
+                    cout<<pivot_table2[i].cnt<<"\t";
+                    cout<<endl;
+                }
+
+                if(i<n-1){
+                    if(pivot_table2[i].Priority[0]<currPriority1){
+                        if(pivot_table2[i+1].Priority[1]==pivot_table2[i].Priority[1]&&pivot_table2[i+1].Priority[0]==pivot_table2[i].Priority[0]+1){
+                        }
+                        else{
+                            cout<<"  "<<"|"<<endl;
+
+                        }
+                    }
+                }
+        }
+
+     }
+    for(int i=0; i!=25;i++){
+        cout<<'-';
+    }
+    cout<<endl;
+
+    for(int i=0; i!=currPriority1){
+
+
+    }
+    for(int i=0; i!=currPriority1){
+
+
+    }
+
+    for(int i=0; i!=n; i++){
+        int code = 65+i;
+        if(cat==0){
+        cout<<(char)code<<"1"<<":"<<" ";
+        cout<<pivot_table2[i].Sval[0]<<"\t"<<pivot_table2[i].Sval[1]<<"\t";break;
+        }
+        else{
+            cout<<pivot_table2[i].Sval[1]<<"\t"<<pivot_table2[i].Sval[0]<<"\t";
+            break;
+        }
+
+        cout<<endl;
+    }
+}
+
+ void make_pivot1(int c_index, int i_index,string func,string command){
     int inputPriority=0;
     pivot_table1.clear();
     pivot_table1 = movie_list;
     pivot_table2.clear();
-    cat=cat_index;
+    cat=c_index;
     if(command=="pivot2"){
-        if(cat_index==1) cat_index--;
-        else cat_index++;
+        if(c_index==1) c_index--;
+        else c_index++;
     }
     stable_sort(pivot_table1.begin(),pivot_table1.end(),greater<Movie>());
 
@@ -159,9 +350,9 @@ void print_pivottable(int n, int c_info,int i_info,string func){
     if(func=="max"){
         pivot_table2.push_back(pivot_table1[0]);
         for(int i=1; i!=pivot_table1.size();i++){
-            if(pivot_table2.back().Priority[cat_index]==pivot_table1[i].Priority[cat_index]&&pivot_table2.back().Priority[cat]==pivot_table1[i].Priority[cat]){
+            if(pivot_table2.back().Priority[c_index]==pivot_table1[i].Priority[c_index]&&pivot_table2.back().Priority[cat]==pivot_table1[i].Priority[cat]){
 
-                if(pivot_table2.back().Dval[info_index]<pivot_table1[i].Dval[info_index]){
+                if(pivot_table2.back().Dval[i_index]<pivot_table1[i].Dval[i_index]){
                     pivot_table2.pop_back();
                     pivot_table2.push_back(pivot_table1[i]);
                 }
@@ -174,9 +365,9 @@ void print_pivottable(int n, int c_info,int i_info,string func){
     else if(func=="min"){
         pivot_table2.push_back(pivot_table1[0]);
         for(int i=1; i!=pivot_table1.size();i++){
-            if(pivot_table2.back().Priority[cat_index]==pivot_table1[i].Priority[cat_index]&&pivot_table2.back().Priority[cat]==pivot_table1[i].Priority[cat]){
+            if(pivot_table2.back().Priority[c_index]==pivot_table1[i].Priority[c_index]&&pivot_table2.back().Priority[cat]==pivot_table1[i].Priority[cat]){
 
-                if(pivot_table2.back().Dval[info_index]>pivot_table1[i].Dval[info_index]){
+                if(pivot_table2.back().Dval[i_index]>pivot_table1[i].Dval[i_index]){
                     pivot_table2.pop_back();
                     pivot_table2.push_back(pivot_table1[i]);
                 }
@@ -190,18 +381,18 @@ void print_pivottable(int n, int c_info,int i_info,string func){
         int cnt=0;
         pivot_table2.push_back(pivot_table1[0]);
         for(int i=1; i!=pivot_table1.size();i++){
-            if(pivot_table2.back().Priority[cat_index]==pivot_table1[i].Priority[cat_index]&&pivot_table2.back().Priority[cat]==pivot_table1[i].Priority[cat]){
+            if(pivot_table2.back().Priority[c_index]==pivot_table1[i].Priority[c_index]&&pivot_table2.back().Priority[cat]==pivot_table1[i].Priority[cat]){
 
-                pivot_table2.back().Dval[info_index]+=pivot_table1[i].Dval[info_index];
+                pivot_table2.back().Dval[i_index]+=pivot_table1[i].Dval[i_index];
                 cnt++;
             }
             else{
-                pivot_table2.back().Dval[info_index]/=cnt+1;
+                pivot_table2.back().Dval[i_index]/=cnt+1;
                 pivot_table2.push_back(pivot_table1[i]);
                 cnt=0;
             }
         }
-        pivot_table2.back().Dval[info_index]/=cnt+1;
+        pivot_table2.back().Dval[i_index]/=cnt+1;
         cnt=0;
 
     }
@@ -209,9 +400,9 @@ void print_pivottable(int n, int c_info,int i_info,string func){
          int cnt=0;
         pivot_table2.push_back(pivot_table1[0]);
         for(int i=1; i!=pivot_table1.size();i++){
-            if(pivot_table2.back().Priority[cat_index]==pivot_table1[i].Priority[cat_index]&&pivot_table2.back().Priority[cat]==pivot_table1[i].Priority[cat]){
+            if(pivot_table2.back().Priority[c_index]==pivot_table1[i].Priority[c_index]&&pivot_table2.back().Priority[cat]==pivot_table1[i].Priority[cat]){
 
-                pivot_table2.back().Dval[info_index]+=pivot_table1[i].Dval[info_index];
+                pivot_table2.back().Dval[i_index]+=pivot_table1[i].Dval[i_index];
             }
             else{
                 pivot_table2.push_back(pivot_table1[i]);
@@ -223,7 +414,7 @@ void print_pivottable(int n, int c_info,int i_info,string func){
         int cnt;
         pivot_table2.push_back(pivot_table1[0]);
         for(int i=1; i!=pivot_table1.size();i++){
-            if(pivot_table2.back().Priority[cat_index]==pivot_table1[i].Priority[cat_index]&&pivot_table2.back().Priority[cat]==pivot_table1[i].Priority[cat]){
+            if(pivot_table2.back().Priority[c_index]==pivot_table1[i].Priority[c_index]&&pivot_table2.back().Priority[cat]==pivot_table1[i].Priority[cat]){
                 cnt++;
             }
             else{
@@ -302,8 +493,6 @@ int main(){
     while(cin>>command){
         if(command=="originaltable"){
             print_originaltable(numOfMovie);
-
-            cout<<"\n\n"<<endl;
         }
         else if(command=="pivot1"){
             cin>>category;
@@ -317,6 +506,8 @@ int main(){
             else if(info=="Gross") i_info=1;
             else i_info=2;
             make_pivot1(c_info,i_info,op,command);
+            lastCommand =command;
+
 
             // print_sortedtable(pivot_table1.size());
             // print_pivoted_whole(pivot_table2.size(),c_info,i_info,op);
@@ -337,13 +528,27 @@ int main(){
             else if(info=="Gross") i_info=1;
             else i_info=2;
             make_pivot1(c_info,i_info,op,command);
+                        print_pivoted_whole(pivot_table2.size(),c_info,i_info,op);
+
 
             lastCommand =command;
         }else if(command=="pivottable"){
             if(lastCommand=="pivot2"){
                 c_info=3;
             }
+
             print_pivottable(pivot_table2.size(),c_info,i_info,op);
+
+        }else if(command=="pivotchart"){
+            if(lastCommand=="pivot2"){
+                print_pivotchart2(pivot_table2.size(),c_info,i_info,op);
+            }
+            else{
+                print_pivotchart1(pivot_table2.size(),c_info,i_info,op);
+            }
+
+        }else{
+            return 0;
         }
 
     }

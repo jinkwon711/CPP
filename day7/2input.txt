@@ -17,6 +17,8 @@ The_Reader Drama Books 330 1061 7.7
 The_Town Drama Books 370 331 8.7
 pivot1 Genre Rating max
 pivottable
+pivotchart
 pivot2 Genre Source Production min
 pivottable
+pivotchart
 close

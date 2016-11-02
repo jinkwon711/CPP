@@ -10,7 +10,10 @@ Shrek_2 Adventure Books 700 9198 7.5
 originaltable
 pivot1 Genre Rating ave
 pivottable
+pivotchart
 pivot2 Genre Source Rating ave
 pivottable
+pivotchart
 pivot2 Source Genre Rating ave
 pivottable
+pivotchart
