@@ -261,7 +261,7 @@ void print_pivotchart2(int n, int c_index,int i_index,string func){
             for(int i=0; i!=length;i++){
                 cout<<"=";
             }
-                    cout<<pivot_table2[i].Dval[i_index]<<"\t";
+                    cout<<pivot_table2[i].Dval[i_index];
                     cout<<endl;
 
                 if(i<n-1){
@@ -281,29 +281,38 @@ void print_pivotchart2(int n, int c_index,int i_index,string func){
         cout<<'-';
     }
     cout<<endl;
-
-    for(int i=0; i!=currPriority1;i++){
-
-
+    if(cat==0){
+        for(int i=0; i!=currPriority1;i++){
+            auto it=find_if(movie_list.begin(),movie_list.end(),[i] (const Movie& m) { return m.Priority[0] == i; });
+            cout<<(char)(65+i)<<": "<<it->Sval[0]<<endl;
+        }
     }
     for(int i=0; i!=currPriority2;i++){
+        auto it=find_if(movie_list.begin(),movie_list.end(),[i] (const Movie& m) { return m.Priority[1] == i; });
+        cout<<i+1<<": "<<it->Sval[1]<<endl;
 
+    }
+    if(cat==1){
+        for(int i=0; i!=currPriority1;i++){
+            auto it=find_if(movie_list.begin(),movie_list.end(),[i] (const Movie& m) { return m.Priority[0] == i; });
+            cout<<(char)(65+i)<<": "<<it->Sval[0]<<endl;
+        }
 
     }
 
-    for(int i=0; i!=n; i++){
-        int code = 65+i;
-        if(cat==0){
-        cout<<(char)code<<"1"<<":"<<" ";
-        cout<<pivot_table2[i].Sval[0]<<"\t"<<pivot_table2[i].Sval[1]<<"\t";break;
-        }
-        else{
-            cout<<pivot_table2[i].Sval[1]<<"\t"<<pivot_table2[i].Sval[0]<<"\t";
-            break;
-        }
+    // for(int i=0; i!=n; i++){
+    //     int code = 65+i;
+    //     if(cat==0){
+    //     cout<<(char)code<<"1"<<":"<<" ";
+    //     cout<<pivot_table2[i].Sval[0]<<"\t"<<pivot_table2[i].Sval[1]<<"\t";break;
+    //     }
+    //     else{
+    //         cout<<pivot_table2[i].Sval[1]<<"\t"<<pivot_table2[i].Sval[0]<<"\t";
+    //         break;
+    //     }
 
-        cout<<endl;
-    }
+    //     cout<<endl;
+    // }
 }
 
  void make_pivot1(int c_index, int i_index,string func,string command){
