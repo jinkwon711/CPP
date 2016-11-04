@@ -1,0 +1,6 @@
+2
+alice
+bob
+2
+send alice bob hello
+forward bob alice 1
