@@ -123,7 +123,6 @@ istream &operator >> (istream &is, player &p) {
 			}
 			else p.winning_rate = temp;
 	}
-	return is;
 }
 
 team operator*(team t1, team t2) {
@@ -260,7 +259,7 @@ void select_member(team &t, int n){
 			}
 		}
 		if(tempCode!="done"){
-				cout<<"No player exist!"<< '\n';
+				cout<<"No player exists!"<< '\n';
 				switch ( n )
       {
         case 1:

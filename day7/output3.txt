@@ -1,0 +1,135 @@
+A1|=====900.00
+  |
+B2|====================1860.00
+  |
+C1|600.00
+-------------------------
+A: Drama
+B: Action
+C: Comedy
+1: Books
+2: Comics
+Genre	Source	Production
+Drama	Books	900.00
+Action	Comics	1860.00
+Comedy	Books	600.00
+1A|=====900.00
+1C|600.00
+  |
+2B|====================1860.00
+-------------------------
+1: Books
+2: Comics
+A: Drama
+B: Action
+C: Comedy
+Source	Genre	Production
+Books	Drama	900.00
+Books	Comedy	600.00
+Comics	Action	1860.00
+1A|===728.91
+1C|370.50
+  |
+2B|====================3910.00
+-------------------------
+1: Books
+2: Comics
+A: Drama
+B: Action
+C: Comedy
+Source	Genre	Gross
+Books	Drama	728.91
+Books	Comedy	370.50
+Comics	Action	3910.00
+A1|===728.91
+  |
+B2|====================3910.00
+  |
+C1|370.50
+-------------------------
+A: Drama
+B: Action
+C: Comedy
+1: Books
+2: Comics
+Genre	Source	Gross
+Drama	Books	728.91
+Action	Comics	3910.00
+Comedy	Books	370.50
+1A|====================8.00
+1C|====================8.00
+  |
+2B|====================8.00
+-------------------------
+1: Books
+2: Comics
+A: Drama
+B: Action
+C: Comedy
+Source	Genre	Rating
+Books	Drama	8.00
+Books	Comedy	8.00
+Comics	Action	8.00
+A1|====================8.00
+  |
+B2|====================8.00
+  |
+C1|====================8.00
+-------------------------
+A: Drama
+B: Action
+C: Comedy
+1: Books
+2: Comics
+Genre	Source	Rating
+Drama	Books	8.00
+Action	Comics	8.00
+Comedy	Books	8.00
+1A|====================4611.00
+1C|780.00
+  |
+2B|============3010.00
+-------------------------
+1: Books
+2: Comics
+A: Drama
+B: Action
+C: Comedy
+Source	Genre	Production
+Books	Drama	4611.00
+Books	Comedy	780.00
+Comics	Action	3010.00
+1A|====================11.00
+1C|2.00
+  |
+2B|===3.00
+-------------------------
+1: Books
+2: Comics
+A: Drama
+B: Action
+C: Comedy
+A|=====900.00
+B|====================1860.00
+C|600.00
+-------------------------
+A: Drama
+B: Action
+C: Comedy
+1|====================8.00
+2|====================8.00
+-------------------------
+1: Books
+2: Comics
+1|====================8.00
+2|====================8.00
+-------------------------
+1: Books
+2: Comics
+A|=63.00
+B|====================1791.00
+C|58.00
+-------------------------
+A: Drama
+B: Action
+C: Comedy

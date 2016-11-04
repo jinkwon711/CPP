@@ -1,0 +1,48 @@
+16
+The_Town Drama Books 370 331 8
+JFK Drama Books 400 2054 8
+Iron_Man Action Comics 1860 5826 8
+Mary_Reilly Drama Books 470 63 8
+Trainspotting Drama Books 31 240 8
+Beloved Drama Books 530 228 8
+Batman Action Comics 350 4113 8
+Contact Drama Books 900 1659 8
+Daredevil Action Comics 800 1791 8
+Fight_Club Drama Books 650 1008 8
+Holes Drama Books 200 723 8
+K-PAX Drama Books 480 503 8
+Possession Drama Books 250 148 8
+Practical_Magic Comedy Books 600 683 8
+The_Reader Drama Books 330 1061 8
+Ed_Wood Comedy Books 180 58 8
+pivot2 Genre Source Production max
+pivotchart
+pivottable
+pivot2 Source Genre Production max
+pivotchart
+pivottable
+pivot2 Source Genre Gross ave
+pivotchart
+pivottable
+pivot2 Genre Source Gross ave
+pivotchart
+pivottable
+pivot2 Source Genre Rating min
+pivotchart
+pivottable
+pivot2 Genre Source Rating min
+pivotchart
+pivottable
+pivot2 Source Genre Production tot
+pivotchart
+pivottable
+pivot2 Source Genre Production cnt
+pivotchart
+pivot1 Genre Production max
+pivotchart
+pivot1 Source Rating max
+pivotchart
+pivot1 Source Rating min
+pivotchart
+pivot1 Genre Gross min
+pivotchart

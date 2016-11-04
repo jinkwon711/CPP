@@ -1,0 +1,32 @@
+1
+The_Town Drama Books 370 331 8.7
+originaltable
+pivot1 Genre Rating max
+pivotchart
+pivot1 Genre Rating min
+pivotchart
+pivot1 Source Rating tot
+pivotchart
+pivot2 Genre Source Production min
+pivotchart
+pivottable
+pivot2 Source Genre Production max
+pivotchart
+pivottable
+pivot2 Genre Source Production ave
+pivotchart
+pivottable
+pivot2 Source Genre Production tot
+pivotchart
+pivottable
+pivot2 Source Genre Production cnt
+pivotchart
+pivot1 Genre Production max
+pivotchart
+pivot1 Source Rating max
+pivotchart
+pivot1 Source Rating min
+pivotchart
+pivot1 Genre Gross min
+pivotchart
+

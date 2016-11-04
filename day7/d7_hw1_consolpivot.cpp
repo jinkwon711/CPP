@@ -18,7 +18,7 @@ public:
     double production;
     double gross;
     double rating;
-    int cnt;
+    double cnt;
     vector<int> Priority;
 
     bool operator > (const Movie& m) const
@@ -58,39 +58,10 @@ void print_originaltable(int n){
         cout<<movie_list[i].production<<"\t";
         cout<<movie_list[i].gross<<"\t";
         cout<<movie_list[i].rating<<endl;
-        // cout<<movie_list[i].Priority[0]<<"\t";
-        // cout<<movie_list[i].Priority[1]<<endl;
     }
 
 }
-void print_sortedtable(int n){
-    cout<<"Name\t"<<"Genre\t"<<"Source\t"<<"Production\t"<<"Gross\t"<<"Rating\t"<<"Priority1\t"<<"Priority2"<<endl;
-    for(int i=0; i!=n;i++){
-        cout<<pivot_table1[i].name<<"\t";
-        cout<<pivot_table1[i].genre<<"\t";
-        cout<<pivot_table1[i].source<<"\t";
-        cout<<pivot_table1[i].production<<"\t";
-        cout<<pivot_table1[i].gross<<"\t";
-        cout<<pivot_table1[i].rating<<"\t";
-        cout<<pivot_table1[i].Priority[0]<<"\t";
-        cout<<pivot_table1[i].Priority[1]<<endl;
-    }
 
-}
-void print_pivoted_whole(int n, int c_info,int i_info,string func){
-    cout<<"Name\t"<<"Genre\t"<<"Source\t"<<"Production\t"<<"Gross\t"<<"Rating\t"<<"Priority1\t"<<"Priority2"<<endl;
-    for(int i=0; i!=n;i++){
-        cout<<pivot_table2[i].name<<"\t";
-        cout<<pivot_table2[i].Sval[0]<<"\t";
-        cout<<pivot_table2[i].Sval[1]<<"\t";
-        cout<<pivot_table2[i].Dval[0]<<"\t";
-        cout<<pivot_table2[i].Dval[1]<<"\t";
-        cout<<pivot_table2[i].Dval[2]<<"\t";
-        cout<<pivot_table2[i].Priority[0]<<"\t";
-        cout<<pivot_table2[i].Priority[1]<<endl;
-    }
-
-}
 
 void print_pivottable(int n, int c_info,int i_info,string func){
         cout.precision(2);
@@ -113,28 +84,28 @@ void print_pivottable(int n, int c_info,int i_info,string func){
 
     for(int i=0; i!=n;i++){
         switch(c_info){
-        case 0: cout<<pivot_table2[i].Sval[0]<<"\t"; break;
-        case 1: cout<<pivot_table2[i].Sval[1]<<"\t"; break;
+        case 0: cout<<fixed<<pivot_table2[i].Sval[0]<<"\t"; break;
+        case 1: cout<<fixed<<pivot_table2[i].Sval[1]<<"\t"; break;
         case 3:
             if(cat==0){
-            cout<<pivot_table2[i].Sval[0]<<"\t"<<pivot_table2[i].Sval[1]<<"\t";break;
+            cout<<fixed<<pivot_table2[i].Sval[0]<<"\t"<<pivot_table2[i].Sval[1]<<"\t";break;
             }
             else{
-                cout<<pivot_table2[i].Sval[1]<<"\t"<<pivot_table2[i].Sval[0]<<"\t";
+                cout<<fixed<<pivot_table2[i].Sval[1]<<"\t"<<pivot_table2[i].Sval[0]<<"\t";
                 break;
             }
         }
 
         if(func!="cnt"){
             switch(i_info){
-            case 0: cout<<pivot_table2[i].Dval[0]; break;
-            case 1: cout<<pivot_table2[i].Dval[1]; break;
-            case 2: cout<<pivot_table2[i].Dval[2]; break;
+            case 0: cout<<fixed<<pivot_table2[i].Dval[0]; break;
+            case 1: cout<<fixed<<pivot_table2[i].Dval[1]; break;
+            case 2: cout<<fixed<<pivot_table2[i].Dval[2]; break;
             }
             cout<<endl;
         }
         else{
-            cout<<pivot_table2[i].cnt;
+            cout<<fixed<<pivot_table2[i].cnt;
             cout<<endl;
         }
     }
@@ -161,66 +132,9 @@ void print_pivotchart1(int n, int c_index,int i_index,string func){
         code=65+i;
         int j=1;
         while(j){
-            if(pivot_table2[i].Dval[i_index]==min){
-                length=0;
-                break;
-            }
-            else if(pivot_table2[i].Dval[i_index]==max){length=20;
-                break;
-            }
-            else{
-                if(((min+j*(max-min)/20)>=pivot_table2[i].Dval[i_index])&&(pivot_table2[i].Dval[i_index]>min+(j-1)*(max-min)/20)){
-                    length=j;
-                    break;
-                }
-                j++;
-            }
-        }
-
-        cout<<(char)code<<"|";
-        for(int i=0; i!=length;i++){
-            cout<<"=";
-        }
-        cout<<pivot_table2[i].Dval[i_index];
-        cout<<endl;
-    }
-    for(int i=0; i!=25;i++){
-        cout<<'-';
-    }
-    cout<<endl;
-    for(int i=0; i!=n; i++){
-        int code = 65+i;
-            cout<<(char)code<<":"<<" ";
-            cout<<pivot_table2[i].Sval[0];
-        cout<<endl;
-    }
-}
-
-
-
-
-void print_pivotchart2(int n, int c_index,int i_index,string func){
-    cout.precision(2);
-        cout<<fixed;
-
-    //find max,min
-    double max;
-    double min;
-    if(func=="cnt")i_index=3;
-    max = pivot_table2[0].Dval[i_index];
-    min = pivot_table2[0].Dval[i_index];
-    for(int i=1; i!=n;i++){
-        max=max>pivot_table2[i].Dval[i_index]?max:pivot_table2[i].Dval[i_index];
-        min=min<pivot_table2[i].Dval[i_index]?min:pivot_table2[i].Dval[i_index];
-    }
-    for(int i=0; i!=n;i++){
-        int code;
-        int length;
-        code=65;
-        int j=1;
-        while(j){
             if(max==min){
-                length=20;
+                length = 20;
+                break;
             }
             else if(pivot_table2[i].Dval[i_index]==min){
                 length=0;
@@ -237,49 +151,128 @@ void print_pivotchart2(int n, int c_index,int i_index,string func){
                 j++;
             }
         }
+    if(cat==0){
+        cout<<(char)code<<"|";
+    }
+    else
+    {
+        cout<<code-64<<"|";
+    }
+        for(int i=0; i!=length;i++){
+            cout<<"=";
+        }
+        cout<<fixed<<pivot_table2[i].Dval[i_index];
+        cout<<endl;
+    }
+    for(int i=0; i!=25;i++){
+        cout<<'-';
+    }
+    cout<<endl;
+
+    if(cat==0){
+        for(int i=0; i!=n; i++){
+            int code = 65+i;
+                cout<<(char)code<<":"<<" ";
+                cout<<pivot_table2[i].Sval[0];
+            cout<<endl;
+        }
+
+    }
+    else{
+        for(int i=0; i!=n; i++){
+            int code = 1+i;
+            cout<<code<<":"<<" ";
+            cout<<pivot_table2[i].Sval[1];
+            cout<<endl;
+        }
+    }
+
+}
+
+
+void print_pivotchart2(int n, int c_index,int i_index,string func){
+    cout.precision(2);
+        cout<<fixed;
+    //find max,min
+    double max;
+    double min;
+    if(func=="cnt")i_index=3;
+    max = pivot_table2[0].Dval[i_index];
+    min = pivot_table2[0].Dval[i_index];
+    for(int i=1; i!=n;i++){
+        max=max>pivot_table2[i].Dval[i_index]?max:pivot_table2[i].Dval[i_index];
+        min=min<pivot_table2[i].Dval[i_index]?min:pivot_table2[i].Dval[i_index];
+    }
+
+    for(int i=0; i!=n;i++){
+        int code;
+        int length;
+        code=65;
+        int j=1;
+        while(j){
+            if(max==min){
+                length=20;
+                break;
+            }
+            else if(pivot_table2[i].Dval[i_index]==min){
+                length=0;
+                break;
+            }
+            else if(pivot_table2[i].Dval[i_index]==max){length=20;
+                break;
+            }
+            else{
+                if(((min+j*(max-min)/20)>=pivot_table2[i].Dval[i_index])&&(pivot_table2[i].Dval[i_index]>min+(j-1)*(max-min)/20)){
+                    length=j;
+                    break;
+                }
+                j++;
+            }
+        }
+
         if(cat==0){
             cout<<(char)(code+pivot_table2[i].Priority[0])<<(1+pivot_table2[i].Priority[1])<<"|";
             for(int i=0; i!=length;i++){
             cout<<"=";
             }
-            cout<<pivot_table2[i].Dval[i_index];
+            cout<<fixed<<pivot_table2[i].Dval[i_index];
             cout<<endl;
             if(i<n-1){
-                    if(pivot_table2[i].Priority[1]<currPriority1){
-                        if(pivot_table2[i+1].Priority[0]==pivot_table2[i].Priority[0]&&pivot_table2[i+1].Priority[1]==pivot_table2[i].Priority[1]+1){
-                        }
-                        else{
-                            cout<<"  "<<"|"<<endl;
+                if(pivot_table2[i].Priority[1]<currPriority1){
+                    if(pivot_table2[i+1].Priority[0]==pivot_table2[i].Priority[0]){
+                    }
+                    else{
+                        cout<<"  "<<"|"<<endl;
 
-                        }
                     }
                 }
-
+            }
         }
         else{
             cout<<(1+pivot_table2[i].Priority[1])<<(char)(code+pivot_table2[i].Priority[0])<<"|";
             for(int i=0; i!=length;i++){
                 cout<<"=";
             }
-                    cout<<pivot_table2[i].Dval[i_index];
-                    cout<<endl;
+            cout<<fixed<<pivot_table2[i].Dval[i_index];
+            cout<<endl;
 
-                if(i<n-1){
-                    if(pivot_table2[i].Priority[0]<currPriority1){
-                        if(pivot_table2[i+1].Priority[1]==pivot_table2[i].Priority[1]&&pivot_table2[i+1].Priority[0]==pivot_table2[i].Priority[0]+1){
-                        }
-                        else{
-                            cout<<"  "<<"|"<<endl;
+            if(i<n-1){
+                if(pivot_table2[i].Priority[0]<currPriority1){
+                    if(pivot_table2[i+1].Priority[1]==pivot_table2[i].Priority[1]){
+                    }
+                    else{
+                        cout<<"  "<<"|"<<endl;
 
-                        }
                     }
                 }
+            }
         }
+    }
 
-     }
     for(int i=0; i!=25;i++){
         cout<<'-';
     }
+
     cout<<endl;
     if(cat==0){
         for(int i=0; i!=currPriority1;i++){
@@ -297,22 +290,7 @@ void print_pivotchart2(int n, int c_index,int i_index,string func){
             auto it=find_if(movie_list.begin(),movie_list.end(),[i] (const Movie& m) { return m.Priority[0] == i; });
             cout<<(char)(65+i)<<": "<<it->Sval[0]<<endl;
         }
-
     }
-
-    // for(int i=0; i!=n; i++){
-    //     int code = 65+i;
-    //     if(cat==0){
-    //     cout<<(char)code<<"1"<<":"<<" ";
-    //     cout<<pivot_table2[i].Sval[0]<<"\t"<<pivot_table2[i].Sval[1]<<"\t";break;
-    //     }
-    //     else{
-    //         cout<<pivot_table2[i].Sval[1]<<"\t"<<pivot_table2[i].Sval[0]<<"\t";
-    //         break;
-    //     }
-
-    //     cout<<endl;
-    // }
 }
 
  void make_pivot1(int c_index, int i_index,string func,string command){
@@ -326,8 +304,6 @@ void print_pivotchart2(int n, int c_index,int i_index,string func){
         else c_index++;
     }
     stable_sort(pivot_table1.begin(),pivot_table1.end(),greater<Movie>());
-
-
     reverse(pivot_table1.begin(),pivot_table1.end());
     if(func=="max"){
         pivot_table2.push_back(pivot_table1[0]);
@@ -358,6 +334,7 @@ void print_pivotchart2(int n, int c_index,int i_index,string func){
                 pivot_table2.push_back(pivot_table1[i]);
             }
         }
+
     }
     else if(func=="ave"){
         int cnt=0;
@@ -393,7 +370,7 @@ void print_pivotchart2(int n, int c_index,int i_index,string func){
 
     }
     else if(func=="cnt"){
-        int cnt;
+        int cnt=0;
         pivot_table2.push_back(pivot_table1[0]);
         for(int i=1; i!=pivot_table1.size();i++){
             if(pivot_table2.back().Priority[c_index]==pivot_table1[i].Priority[c_index]&&pivot_table2.back().Priority[cat]==pivot_table1[i].Priority[cat]){
@@ -447,7 +424,6 @@ int main(){
                 }
             }
         }
-
         //source
         cin>>m.source;
         auto it2 =find(source_list.begin(),source_list.end(),m.source);
@@ -462,7 +438,6 @@ int main(){
                 }
             }
         }
-
         m.Sval.push_back(m.genre);
         m.Sval.push_back(m.source);
         cin>>m.production;
@@ -471,7 +446,6 @@ int main(){
         m.Dval.push_back(m.production);
         m.Dval.push_back(m.gross);
         m.Dval.push_back(m.rating);
-
         movie_list.push_back(m);
     }
 
@@ -492,12 +466,6 @@ int main(){
             else i_info=2;
             make_pivot1(c_info,i_info,op,command);
             lastCommand =command;
-
-
-            // print_sortedtable(pivot_table1.size());
-            // print_pivoted_whole(pivot_table2.size(),c_info,i_info,op);
-
-            // print_pivottable(pivot_table2.size(),c_info,i_info,op);
         }
         else if(command=="pivot2"){
             cin>>category;
@@ -513,9 +481,6 @@ int main(){
             else if(info=="Gross") i_info=1;
             else i_info=2;
             make_pivot1(c_info,i_info,op,command);
-                        // print_pivoted_whole(pivot_table2.size(),c_info,i_info,op);
-
-
             lastCommand =command;
         }else if(command=="pivottable"){
             if(lastCommand=="pivot2"){
@@ -531,13 +496,9 @@ int main(){
             else{
                 print_pivotchart1(pivot_table2.size(),c_info,i_info,op);
             }
-
         }else{
             return 0;
         }
-
     }
-
-
     return 0;
 }
