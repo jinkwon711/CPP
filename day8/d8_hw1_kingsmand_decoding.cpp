@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <map>
 #include <assert.h>
+#include <sstream>
 using namespace std;
 //global variable
 int failure=0;
@@ -23,79 +24,143 @@ bool check_duplicate(string w1,string w2){
   }
   return false;
 }
-void update_lookupTable(unordered_map<char,char> &m,unordered_map<char,char> &t){
+void update_lookupTable(unordered_map<char,char> &m,unordered_map<char,char> &t,unordered_map<char,char> &t2){
+
+  // for(auto &tm:t){
+  //           cout<<"t값"<<tm.first<<"-"<<tm.second<<endl;
+  //         }
   int exist =0;
   pair<char,char> temp;
   if(m.empty()){
     m=t;
     return;
   }
-
-
-  for(auto &it:m){
-    for(auto &it2:t){
+  for(auto &it:t){//temp
+    for(auto &it2:m){//original
       if(it.first==it2.first){//if the alphabet is same;
         exist = 1;
-        if(it.second!=it2.second) failure = 1;//failed to decode cryptogram;
+              // cout<<it2.first<<endl;
+              // cout<<"exist="<<exist<<endl;
+
+        if(it.second!=it2.second) {
+          failure = 1;
+          return;
+        }//failed to decode cryptogram;
+        break;//because we already checked if there is duplicate in tempMap; once we find the right match, we don't have to search more.
+
+        }
       }
-      temp=it2;
-    }
+    // cout<<"exist="<<exist<<endl;
+    // cout<<temp.first<<":"<<temp.second<<endl;
     if(exist==0){
-      m.insert(temp);//update a lookupTable with new pair;
+      t2.insert(it);//update a lookupTable with new pair;
     }
     exist=0;
   }
+
+// for(auto &tm:t2){
+//             cout<<"t2값"<<tm.first<<"-"<<tm.second<<endl;
+//           }
+  for(auto &it:t2){
+    m.insert(it);
+
+  }
+      t2.clear();
+
 
 
 }
 int main(){
   int numOfWords;
+  string sentence;
   string word;
   vector<string> dictionary;
   vector<string> secret;
+  // vector<string> word_list;
+  string answer="";
   unordered_map<char,char> lookupTable;
   unordered_map<char,char> tempMap;
-
+  unordered_map<char,char> tempMap2;
   cin>>numOfWords;
   //for dictionary creation
   for(int i=0; i!=numOfWords; i++){
     cin>>word;
+    cin.ignore(256, '\n');
+
     dictionary.push_back(word);
   }
-  while(cin>>word){
-    secret.push_back(word);
-  }
+
+  getline(cin,sentence);
+  istringstream ss(sentence);
+    while(ss>>word){
+      secret.push_back(word);
+    }
+
+    stable_sort(secret.begin(),secret.end(),[](const string &m,const string &n){return m.length()<n.length();});
+
+    for(auto &it:secret){
+      cout<<it<<endl;
+    }
 
 
 
   for(auto &secretWord:secret){
     for(auto&dictWord:dictionary){
       if(secretWord.length()==dictWord.length()){
+        //from here to next quote - > check the duplicate match. if ,fail, if not, go on.
         for(int i=0; i!=(signed)dictWord.length(); i++){
           tempMap.insert({secretWord[i],dictWord[i]});
-          if(tempMap.size()!=secretWord.length()){
-
-            if(check_duplicate(secretWord,dictWord)){ //check if there is a word that have more than 2 values
-              cout<<"mission failure..."<<endl;
-              return 0;
-            }
-
-
+        }//create tempMap to compare the size
+        if(tempMap.size()!=secretWord.length()){//if it is not same there exist duplicate
+          if(check_duplicate(secretWord,dictWord)){
+          //check if there is a word that have more than 2 values
+            cout<<"mission failure..."<<endl;
+            return 0;
           }
-          //if there is duplicate char in the secret word with same mapping value->failure
-                    //creatring temporary map to compare with original table;
         }
-        for(int i=0; i!=(signed)dictWord.length();i++){
+          // for(auto &tm:tempMap){
+          //   cout<<tm.first<<"-"<<tm.second<<endl;
+          // }
+        // temporary map compareed with original table;
           //call map element duplication check
-            update_lookupTable(lookupTable,tempMap);
+          update_lookupTable(lookupTable,tempMap,tempMap2);
+          if(failure==1){
+            cout<<"mission failure..."<<endl;
+            return 0;
           }
+          tempMap.clear();
         }
+      }
+      //update the answer line before decoding process with space
+      // word_list.push_back(dictWord);
+      answer += secretWord+" ";
+    }
+
+//print all values in map;
+
+    // for(auto &it:lookupTable){
+    //   cout<<it.first<<":"<<it.second<<endl;
+    // }
 
 
-        //call map append function
+// both update and print the answer;
+    cout<<answer<<endl;
 
+  try{
+    for(int i=0; i!=answer.length()-1;i++){
+      if(answer[i]!=' '){//if it is not space
+        answer[i] = lookupTable.at(answer[i]);
       }
     }
+  }catch(out_of_range){
+    cout<<"mission failure..."<<endl;
+    return 0;
+  }
+
+    cout<<answer<<endl;
+
+
+
   //
 // char tempo,tempo2;
 // for(int i=0; i!=3;i++){
@@ -108,13 +173,13 @@ int main(){
 
 
 //print sample test
-  for(auto &it:dictionary){
-    cout<<it<<endl;
-  }
+  // for(auto &it:dictionary){
+  //   cout<<it<<endl;
+  // }
 
-  for(auto &it:secret){
-    cout<<it<<endl;
-  }
+  // for(auto &it:secret){
+  //   cout<<it<<endl;
+  // }
 
 
   return 0;

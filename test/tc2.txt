@@ -1,0 +1,200 @@
+17
+Batman Action Comics 350.3 4113 7.6
+2Beloved 2Krama 2Cooks 530 228.3 5.3
+Fight_Club Drama Aooks 650.8 1008 8.8
+Holes Drama Books 200 723 7.1
+Ed_Wood zomedy Books 180.323 58 8.111
+JFK Drama Books 400 2054 8
+Mary_Reilly Drama Books 470 63 5.5
+Trainspotting Drama Books 31.3 240 8.2
+Practical_Magic Comedy Books 600 683 5.5
+The_Reader Drama Books 330.6 1061 7.7
+Iron_Man Action Comics 1860.9 5826 7.9
+cBeloved cKrama cCooks 530 228.3 5.3
+Contact Drama Books 900 1659 7.3
+Daredevil Action Comics 800.2 1791 5.5
+K-PAX Drama Books 480 503.0 7.3
+Possession Drama Books 250.34 148 6.4
+The_Town Drama Books 370 331 8.7
+originaltable
+pivot1 Genre Rating max
+pivotchart
+pivottable
+pivot1 Genre Rating min
+pivotchart
+pivottable
+pivot1 Genre Rating tot
+pivotchart
+pivottable
+pivot1 Genre Rating ave
+pivotchart
+pivottable
+pivot1 Genre Rating cnt
+pivotchart
+pivottable
+pivot1 Genre Production max
+pivotchart
+pivottable
+pivot1 Genre Production min
+pivotchart
+pivottable
+pivot1 Genre Production tot
+pivotchart
+pivottable
+pivot1 Genre Production ave
+pivotchart
+pivottable
+pivot1 Genre Production cnt
+pivotchart
+pivottable
+pivot1 Genre Gross max
+pivotchart
+pivottable
+pivot1 Genre Gross min
+pivotchart
+pivottable
+pivot1 Genre Gross tot
+pivotchart
+pivottable
+pivot1 Genre Gross ave
+pivotchart
+pivottable
+pivot1 Genre Gross cnt
+pivotchart
+pivottable
+pivot1 Source Rating max
+pivotchart
+pivottable
+pivot1 Source Rating min
+pivotchart
+pivottable
+pivot1 Source Rating tot
+pivotchart
+pivottable
+pivot1 Source Rating ave
+pivotchart
+pivottable
+pivot1 Source Rating cnt
+pivotchart
+pivottable
+pivot1 Source Production max
+pivotchart
+pivottable
+pivot1 Source Production min
+pivotchart
+pivottable
+pivot1 Source Production tot
+pivotchart
+pivottable
+pivot1 Source Production ave
+pivotchart
+pivottable
+pivot1 Source Production cnt
+pivotchart
+pivottable
+pivot1 Source Gross max
+pivotchart
+pivottable
+pivot1 Source Gross min
+pivotchart
+pivottable
+pivot1 Source Gross tot
+pivotchart
+pivottable
+pivot1 Source Gross ave
+pivotchart
+pivottable
+pivot1 Source Gross cnt
+pivotchart
+pivottable
+pivot2 Source Genre Production min
+pivotchart
+pivottable
+pivot2 Source Genre Production max
+pivotchart
+pivottable
+pivot2 Source Genre Production ave
+pivotchart
+pivottable
+pivot2 Source Genre Production tot
+pivotchart
+pivottable
+pivot2 Source Genre Production cnt
+pivotchart
+pivottable
+pivot2 Source Genre Gross min
+pivotchart
+pivottable
+pivot2 Source Genre Gross max
+pivotchart
+pivottable
+pivot2 Source Genre Gross ave
+pivotchart
+pivottable
+pivot2 Source Genre Gross tot
+pivotchart
+pivottable
+pivot2 Source Genre Gross cnt
+pivotchart
+pivottable
+pivot2 Source Genre Rating min
+pivotchart
+pivottable
+pivot2 Source Genre Rating max
+pivotchart
+pivottable
+pivot2 Source Genre Rating ave
+pivotchart
+pivottable
+pivot2 Source Genre Rating tot
+pivotchart
+pivottable
+pivot2 Source Genre Rating cnt
+pivotchart
+pivottable
+pivot2 Genre Source Rating min
+pivotchart
+pivottable
+pivot2 Genre Source Rating max
+pivotchart
+pivottable
+pivot2 Genre Source Rating ave
+pivotchart
+pivottable
+pivot2 Genre Source Rating tot
+pivotchart
+pivottable
+pivot2 Genre Source Rating cnt
+pivotchart
+pivottable
+pivot2 Genre Source Production min
+pivotchart
+pivottable
+pivot2 Genre Source Production max
+pivotchart
+pivottable
+pivot2 Genre Source Production ave
+pivotchart
+pivottable
+pivot2 Genre Source Production tot
+pivotchart
+pivottable
+pivot2 Genre Source Production cnt
+pivotchart
+pivottable
+pivot2 Genre Source Gross min
+pivotchart
+pivottable
+pivot2 Genre Source Gross max
+pivotchart
+pivottable
+pivot2 Genre Source Gross ave
+pivotchart
+pivottable
+pivot2 Genre Source Gross tot
+pivotchart
+pivottable
+pivot2 Genre Source Gross cnt
+pivotchart
+pivottable
+originaltable

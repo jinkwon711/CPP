@@ -1,0 +1,1277 @@
+Name	Genre	Source	Production	Gross	Rating
+Batman	Action	Comics	350.3	4113	7.6
+Ed_Wood	zomedy	Books	180.3	58	8.1
+JFK	Drama	Books	400	2054	8
+Mary_Reilly	Drama	Books	470	63	5.5
+Trainspotting	Drama	Books	31.3	240	8.2
+Beloved	Krama	Cooks	530	228.3	5.3
+Contact	Drama	Books	900	1659	7.3
+Daredevil	Action	Comics	800.2	1791	5.5
+Fight_Club	Drama	Aooks	650.8	1008	8.8
+Holes	Drama	Books	200	723	7.1
+Iron_Man	Action	Comics	1860.9	5826	7.9
+K-PAX	Drama	Books	480	503	7.3
+Possession	Drama	Books	250.34	148	6.4
+Practical_Magic	Comedy	Books	600	683	5.5
+The_Reader	Drama	Books	330.6	1061	7.7
+The_Town	Drama	Books	370	331	8.7
+A|===============7.90
+B|================8.10
+C|====================8.80
+D|5.30
+E|==5.50
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Genre	Rating
+Action	7.90
+zomedy	8.10
+Drama	8.80
+Krama	5.30
+Comedy	5.50
+A|==5.50
+B|====================8.10
+C|==5.50
+D|5.30
+E|==5.50
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Genre	Rating
+Action	5.50
+zomedy	8.10
+Drama	5.50
+Krama	5.30
+Comedy	5.50
+A|=====21.00
+B|=8.10
+C|====================75.00
+D|5.30
+E|=5.50
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Genre	Rating
+Action	21.00
+zomedy	8.10
+Drama	75.00
+Krama	5.30
+Comedy	5.50
+A|=============7.00
+B|====================8.10
+C|================7.50
+D|5.30
+E|==5.50
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Genre	Rating
+Action	7.00
+zomedy	8.10
+Drama	7.50
+Krama	5.30
+Comedy	5.50
+A|=====3.00
+B|1.00
+C|====================10.00
+D|1.00
+E|1.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Genre	Rating
+Action	3.00
+zomedy	1.00
+Drama	10.00
+Krama	1.00
+Comedy	1.00
+A|====================1860.90
+B|180.30
+C|=========900.00
+D|=====530.00
+E|=====600.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Genre	Production
+Action	1860.90
+zomedy	180.30
+Drama	900.00
+Krama	530.00
+Comedy	600.00
+A|============350.30
+B|======180.30
+C|31.30
+D|==================530.00
+E|====================600.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Genre	Production
+Action	350.30
+zomedy	180.30
+Drama	31.30
+Krama	530.00
+Comedy	600.00
+A|===============3011.40
+B|180.30
+C|====================4083.04
+D|==530.00
+E|===600.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Genre	Production
+Action	3011.40
+zomedy	180.30
+Drama	4083.04
+Krama	530.00
+Comedy	600.00
+A|====================1003.80
+B|180.30
+C|======408.30
+D|=========530.00
+E|===========600.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Genre	Production
+Action	1003.80
+zomedy	180.30
+Drama	408.30
+Krama	530.00
+Comedy	600.00
+A|=====3.00
+B|1.00
+C|====================10.00
+D|1.00
+E|1.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Genre	Production
+Action	3.00
+zomedy	1.00
+Drama	10.00
+Krama	1.00
+Comedy	1.00
+A|====================5826.00
+B|58.00
+C|=======2054.00
+D|=228.30
+E|===683.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Genre	Gross
+Action	5826.00
+zomedy	58.00
+Drama	2054.00
+Krama	228.30
+Comedy	683.00
+A|====================1791.00
+B|58.00
+C|=63.00
+D|==228.30
+E|========683.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Genre	Gross
+Action	1791.00
+zomedy	58.00
+Drama	63.00
+Krama	228.30
+Comedy	683.00
+A|====================11730.00
+B|58.00
+C|==============7790.00
+D|=228.30
+E|==683.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Genre	Gross
+Action	11730.00
+zomedy	58.00
+Drama	7790.00
+Krama	228.30
+Comedy	683.00
+A|====================3910.00
+B|58.00
+C|====779.00
+D|=228.30
+E|====683.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Genre	Gross
+Action	3910.00
+zomedy	58.00
+Drama	779.00
+Krama	228.30
+Comedy	683.00
+A|=====3.00
+B|1.00
+C|====================10.00
+D|1.00
+E|1.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Genre	Gross
+Action	3.00
+zomedy	1.00
+Drama	10.00
+Krama	1.00
+Comedy	1.00
+1|===============7.90
+2|====================8.70
+3|5.30
+4|====================8.80
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Source	Rating
+Comics	7.90
+Books	8.70
+Cooks	5.30
+Aooks	8.80
+1|==5.50
+2|==5.50
+3|5.30
+4|====================8.80
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Source	Rating
+Comics	5.50
+Books	5.50
+Cooks	5.30
+Aooks	8.80
+1|=====21.00
+2|====================79.80
+3|5.30
+4|=8.80
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Source	Rating
+Comics	21.00
+Books	79.80
+Cooks	5.30
+Aooks	8.80
+1|==========7.00
+2|============7.25
+3|5.30
+4|====================8.80
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Source	Rating
+Comics	7.00
+Books	7.25
+Cooks	5.30
+Aooks	8.80
+1|====3.00
+2|====================11.00
+3|1.00
+4|1.00
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Source	Rating
+Comics	3.00
+Books	11.00
+Cooks	1.00
+Aooks	1.00
+1|====================1860.90
+2|======900.00
+3|530.00
+4|==650.80
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Source	Production
+Comics	1860.90
+Books	900.00
+Cooks	530.00
+Aooks	650.80
+1|===========350.30
+2|31.30
+3|=================530.00
+4|====================650.80
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Source	Production
+Comics	350.30
+Books	31.30
+Cooks	530.00
+Aooks	650.80
+1|==============3011.40
+2|====================4212.54
+3|530.00
+4|=650.80
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Source	Production
+Comics	3011.40
+Books	4212.54
+Cooks	530.00
+Aooks	650.80
+1|====================1003.80
+2|382.96
+3|=====530.00
+4|=========650.80
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Source	Production
+Comics	1003.80
+Books	382.96
+Cooks	530.00
+Aooks	650.80
+1|====3.00
+2|====================11.00
+3|1.00
+4|1.00
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Source	Production
+Comics	3.00
+Books	11.00
+Cooks	1.00
+Aooks	1.00
+1|====================5826.00
+2|=======2054.00
+3|228.30
+4|===1008.00
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Source	Gross
+Comics	5826.00
+Books	2054.00
+Cooks	228.30
+Aooks	1008.00
+1|====================1791.00
+2|58.00
+3|==228.30
+4|===========1008.00
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Source	Gross
+Comics	1791.00
+Books	58.00
+Cooks	228.30
+Aooks	1008.00
+1|====================11730.00
+2|=============7523.00
+3|228.30
+4|==1008.00
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Source	Gross
+Comics	11730.00
+Books	7523.00
+Cooks	228.30
+Aooks	1008.00
+1|====================3910.00
+2|===683.91
+3|228.30
+4|=====1008.00
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Source	Gross
+Comics	3910.00
+Books	683.91
+Cooks	228.30
+Aooks	1008.00
+1|====3.00
+2|====================11.00
+3|1.00
+4|1.00
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Source	Gross
+Comics	3.00
+Books	11.00
+Cooks	1.00
+Aooks	1.00
+1A|===========350.30
+  |
+2B|=====180.30
+2C|31.30
+2E|===================600.00
+  |
+3D|=================530.00
+  |
+4C|====================650.80
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Source	Genre	Production
+Comics	Action	350.30
+Books	zomedy	180.30
+Books	Drama	31.30
+Books	Comedy	600.00
+Cooks	Krama	530.00
+Aooks	Drama	650.80
+1A|====================1860.90
+  |
+2B|180.30
+2C|=========900.00
+2E|=====600.00
+  |
+3D|=====530.00
+  |
+4C|======650.80
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Source	Genre	Production
+Comics	Action	1860.90
+Books	zomedy	180.30
+Books	Drama	900.00
+Books	Comedy	600.00
+Cooks	Krama	530.00
+Aooks	Drama	650.80
+1A|====================1003.80
+  |
+2B|180.30
+2C|=====381.36
+2E|===========600.00
+  |
+3D|=========530.00
+  |
+4C|============650.80
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Source	Genre	Production
+Comics	Action	1003.80
+Books	zomedy	180.30
+Books	Drama	381.36
+Books	Comedy	600.00
+Cooks	Krama	530.00
+Aooks	Drama	650.80
+1A|==================3011.40
+  |
+2B|180.30
+2C|====================3432.24
+2E|===600.00
+  |
+3D|===530.00
+  |
+4C|===650.80
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Source	Genre	Production
+Comics	Action	3011.40
+Books	zomedy	180.30
+Books	Drama	3432.24
+Books	Comedy	600.00
+Cooks	Krama	530.00
+Aooks	Drama	650.80
+1A|=====3.00
+  |
+2B|1.00
+2C|====================9.00
+2E|1.00
+  |
+3D|1.00
+  |
+4C|1.00
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Source	Genre	Production
+Comics	Action	3.00
+Books	zomedy	1.00
+Books	Drama	9.00
+Books	Comedy	1.00
+Cooks	Krama	1.00
+Aooks	Drama	1.00
+1A|====================1791.00
+  |
+2B|58.00
+2C|=63.00
+2E|========683.00
+  |
+3D|==228.30
+  |
+4C|===========1008.00
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Source	Genre	Gross
+Comics	Action	1791.00
+Books	zomedy	58.00
+Books	Drama	63.00
+Books	Comedy	683.00
+Cooks	Krama	228.30
+Aooks	Drama	1008.00
+1A|====================5826.00
+  |
+2B|58.00
+2C|=======2054.00
+2E|===683.00
+  |
+3D|=228.30
+  |
+4C|====1008.00
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Source	Genre	Gross
+Comics	Action	5826.00
+Books	zomedy	58.00
+Books	Drama	2054.00
+Books	Comedy	683.00
+Cooks	Krama	228.30
+Aooks	Drama	1008.00
+1A|====================3910.00
+  |
+2B|58.00
+2C|====753.56
+2E|====683.00
+  |
+3D|=228.30
+  |
+4C|=====1008.00
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Source	Genre	Gross
+Comics	Action	3910.00
+Books	zomedy	58.00
+Books	Drama	753.56
+Books	Comedy	683.00
+Cooks	Krama	228.30
+Aooks	Drama	1008.00
+1A|====================11730.00
+  |
+2B|58.00
+2C|============6782.00
+2E|==683.00
+  |
+3D|=228.30
+  |
+4C|==1008.00
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Source	Genre	Gross
+Comics	Action	11730.00
+Books	zomedy	58.00
+Books	Drama	6782.00
+Books	Comedy	683.00
+Cooks	Krama	228.30
+Aooks	Drama	1008.00
+1A|=====3.00
+  |
+2B|1.00
+2C|====================9.00
+2E|1.00
+  |
+3D|1.00
+  |
+4C|1.00
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Source	Genre	Gross
+Comics	Action	3.00
+Books	zomedy	1.00
+Books	Drama	9.00
+Books	Comedy	1.00
+Cooks	Krama	1.00
+Aooks	Drama	1.00
+1A|==5.50
+  |
+2B|================8.10
+2C|==5.50
+2E|==5.50
+  |
+3D|5.30
+  |
+4C|====================8.80
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Source	Genre	Rating
+Comics	Action	5.50
+Books	zomedy	8.10
+Books	Drama	5.50
+Books	Comedy	5.50
+Cooks	Krama	5.30
+Aooks	Drama	8.80
+1A|===============7.90
+  |
+2B|================8.10
+2C|====================8.70
+2E|==5.50
+  |
+3D|5.30
+  |
+4C|====================8.80
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Source	Genre	Rating
+Comics	Action	7.90
+Books	zomedy	8.10
+Books	Drama	8.70
+Books	Comedy	5.50
+Cooks	Krama	5.30
+Aooks	Drama	8.80
+1A|==========7.00
+  |
+2B|================8.10
+2C|============7.36
+2E|==5.50
+  |
+3D|5.30
+  |
+4C|====================8.80
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Source	Genre	Rating
+Comics	Action	7.00
+Books	zomedy	8.10
+Books	Drama	7.36
+Books	Comedy	5.50
+Cooks	Krama	5.30
+Aooks	Drama	8.80
+1A|======21.00
+  |
+2B|=8.10
+2C|====================66.20
+2E|=5.50
+  |
+3D|5.30
+  |
+4C|==8.80
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Source	Genre	Rating
+Comics	Action	21.00
+Books	zomedy	8.10
+Books	Drama	66.20
+Books	Comedy	5.50
+Cooks	Krama	5.30
+Aooks	Drama	8.80
+1A|=====3.00
+  |
+2B|1.00
+2C|====================9.00
+2E|1.00
+  |
+3D|1.00
+  |
+4C|1.00
+-------------------------
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+Source	Genre	Rating
+Comics	Action	3.00
+Books	zomedy	1.00
+Books	Drama	9.00
+Books	Comedy	1.00
+Cooks	Krama	1.00
+Aooks	Drama	1.00
+A1|==5.50
+  |
+B2|================8.10
+  |
+C2|==5.50
+C4|====================8.80
+  |
+D3|5.30
+  |
+E2|==5.50
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Genre	Source	Rating
+Action	Comics	5.50
+zomedy	Books	8.10
+Drama	Books	5.50
+Drama	Aooks	8.80
+Krama	Cooks	5.30
+Comedy	Books	5.50
+A1|===============7.90
+  |
+B2|================8.10
+  |
+C2|====================8.70
+C4|====================8.80
+  |
+D3|5.30
+  |
+E2|==5.50
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Genre	Source	Rating
+Action	Comics	7.90
+zomedy	Books	8.10
+Drama	Books	8.70
+Drama	Aooks	8.80
+Krama	Cooks	5.30
+Comedy	Books	5.50
+A1|==========7.00
+  |
+B2|================8.10
+  |
+C2|============7.36
+C4|====================8.80
+  |
+D3|5.30
+  |
+E2|==5.50
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Genre	Source	Rating
+Action	Comics	7.00
+zomedy	Books	8.10
+Drama	Books	7.36
+Drama	Aooks	8.80
+Krama	Cooks	5.30
+Comedy	Books	5.50
+A1|======21.00
+  |
+B2|=8.10
+  |
+C2|====================66.20
+C4|==8.80
+  |
+D3|5.30
+  |
+E2|=5.50
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Genre	Source	Rating
+Action	Comics	21.00
+zomedy	Books	8.10
+Drama	Books	66.20
+Drama	Aooks	8.80
+Krama	Cooks	5.30
+Comedy	Books	5.50
+A1|=====3.00
+  |
+B2|1.00
+  |
+C2|====================9.00
+C4|1.00
+  |
+D3|1.00
+  |
+E2|1.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Genre	Source	Rating
+Action	Comics	3.00
+zomedy	Books	1.00
+Drama	Books	9.00
+Drama	Aooks	1.00
+Krama	Cooks	1.00
+Comedy	Books	1.00
+A1|===========350.30
+  |
+B2|=====180.30
+  |
+C2|31.30
+C4|====================650.80
+  |
+D3|=================530.00
+  |
+E2|===================600.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Genre	Source	Production
+Action	Comics	350.30
+zomedy	Books	180.30
+Drama	Books	31.30
+Drama	Aooks	650.80
+Krama	Cooks	530.00
+Comedy	Books	600.00
+A1|====================1860.90
+  |
+B2|180.30
+  |
+C2|=========900.00
+C4|======650.80
+  |
+D3|=====530.00
+  |
+E2|=====600.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Genre	Source	Production
+Action	Comics	1860.90
+zomedy	Books	180.30
+Drama	Books	900.00
+Drama	Aooks	650.80
+Krama	Cooks	530.00
+Comedy	Books	600.00
+A1|====================1003.80
+  |
+B2|180.30
+  |
+C2|=====381.36
+C4|============650.80
+  |
+D3|=========530.00
+  |
+E2|===========600.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Genre	Source	Production
+Action	Comics	1003.80
+zomedy	Books	180.30
+Drama	Books	381.36
+Drama	Aooks	650.80
+Krama	Cooks	530.00
+Comedy	Books	600.00
+A1|==================3011.40
+  |
+B2|180.30
+  |
+C2|====================3432.24
+C4|===650.80
+  |
+D3|===530.00
+  |
+E2|===600.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Genre	Source	Production
+Action	Comics	3011.40
+zomedy	Books	180.30
+Drama	Books	3432.24
+Drama	Aooks	650.80
+Krama	Cooks	530.00
+Comedy	Books	600.00
+A1|=====3.00
+  |
+B2|1.00
+  |
+C2|====================9.00
+C4|1.00
+  |
+D3|1.00
+  |
+E2|1.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Genre	Source	Production
+Action	Comics	3.00
+zomedy	Books	1.00
+Drama	Books	9.00
+Drama	Aooks	1.00
+Krama	Cooks	1.00
+Comedy	Books	1.00
+A1|====================1791.00
+  |
+B2|58.00
+  |
+C2|=63.00
+C4|===========1008.00
+  |
+D3|==228.30
+  |
+E2|========683.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Genre	Source	Gross
+Action	Comics	1791.00
+zomedy	Books	58.00
+Drama	Books	63.00
+Drama	Aooks	1008.00
+Krama	Cooks	228.30
+Comedy	Books	683.00
+A1|====================5826.00
+  |
+B2|58.00
+  |
+C2|=======2054.00
+C4|====1008.00
+  |
+D3|=228.30
+  |
+E2|===683.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Genre	Source	Gross
+Action	Comics	5826.00
+zomedy	Books	58.00
+Drama	Books	2054.00
+Drama	Aooks	1008.00
+Krama	Cooks	228.30
+Comedy	Books	683.00
+A1|====================3910.00
+  |
+B2|58.00
+  |
+C2|====753.56
+C4|=====1008.00
+  |
+D3|=228.30
+  |
+E2|====683.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Genre	Source	Gross
+Action	Comics	3910.00
+zomedy	Books	58.00
+Drama	Books	753.56
+Drama	Aooks	1008.00
+Krama	Cooks	228.30
+Comedy	Books	683.00
+A1|====================11730.00
+  |
+B2|58.00
+  |
+C2|============6782.00
+C4|==1008.00
+  |
+D3|=228.30
+  |
+E2|==683.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Genre	Source	Gross
+Action	Comics	11730.00
+zomedy	Books	58.00
+Drama	Books	6782.00
+Drama	Aooks	1008.00
+Krama	Cooks	228.30
+Comedy	Books	683.00
+A1|=====3.00
+  |
+B2|1.00
+  |
+C2|====================9.00
+C4|1.00
+  |
+D3|1.00
+  |
+E2|1.00
+-------------------------
+A: Action
+B: zomedy
+C: Drama
+D: Krama
+E: Comedy
+1: Comics
+2: Books
+3: Cooks
+4: Aooks
+Genre	Source	Gross
+Action	Comics	3.00
+zomedy	Books	1.00
+Drama	Books	9.00
+Drama	Aooks	1.00
+Krama	Cooks	1.00
+Comedy	Books	1.00

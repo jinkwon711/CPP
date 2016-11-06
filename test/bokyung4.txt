@@ -1,0 +1,90 @@
+Name	Genre	Source	Production	Gross	Rating
+Batman	Action	Comics	350	4113	7.6
+Jumanji	Adventure	Books	650	2627	6.4
+Daredevil	Action	Comics	800	1791	5.5
+Inkheart	Adventure	Books	600	580	6.1
+Iron_Man	Action	Comics	1860	5826	7.9
+Shrek_3	Animation	None	799	283	1.32
+Casino_Royale	Action	Books	1020	5963	8
+Shrek	Adventure	Books	500	4843	8
+Shrek_2	Adventure	Books	700	9198	7.5
+A|====================7.25
+B|====================7.00
+C|1.32
+-------------------------
+A: Action
+B: Adventure
+C: Animation
+Genre	Rating
+Action	7.25
+Adventure	7.00
+Animation	1.32
+1|====================7.00
+2|====================7.20
+3|1.32
+-------------------------
+1: Comics
+2: Books
+3: None
+Source	Rating
+Comics	7.00
+Books	7.20
+None	1.32
+1|============21.00
+2|====================36.00
+3|1.32
+-------------------------
+1: Comics
+2: Books
+3: None
+Source	Rating
+Comics	21.00
+Books	36.00
+None	1.32
+A|====================4.00
+B|====================4.00
+C|1.00
+-------------------------
+A: Action
+B: Adventure
+C: Animation
+Genre	Rating
+Action	4.00
+Adventure	4.00
+Animation	1.00
+A1|==================7.00
+A2|====================8.00
+  |
+B2|==================7.00
+  |
+C3|1.32
+-------------------------
+A: Action
+B: Adventure
+C: Animation
+1: Comics
+2: Books
+3: None
+Genre	Source	Rating
+Action	Comics	7.00
+Action	Books	8.00
+Adventure	Books	7.00
+Animation	None	1.32
+1A|==================7.00
+  |
+2A|====================8.00
+2B|==================7.00
+  |
+3C|1.32
+-------------------------
+1: Comics
+2: Books
+3: None
+A: Action
+B: Adventure
+C: Animation
+Source	Genre	Rating
+Comics	Action	7.00
+Books	Action	8.00
+Books	Adventure	7.00
+None	Animation	1.32

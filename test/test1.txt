@@ -1,0 +1,29 @@
+9
+Batman Action Comics 350 4113 7.6
+Jumanji Adventure Books 650 2627 6.4
+Daredevil Action Comics 800 1791 5.5
+Inkheart Adventure Books 600 580 6.1
+Iron_Man Action Comics 1860 5826 7.9
+Shrek_3 Animation None 799 283 1.32
+Casino_Royale Action Books 1020 5963 8
+Shrek Adventure Books 500 4843 8
+Shrek_2 Adventure Books 700 9198 7.5
+originaltable
+pivot1 Genre Rating ave
+pivotchart
+pivottable
+pivot1 Source Rating ave
+pivotchart
+pivottable
+pivot1 Source Rating tot
+pivotchart
+pivottable
+pivot1 Genre Rating cnt
+pivotchart
+pivottable
+pivot2 Genre Source Rating ave
+pivotchart
+pivottable
+pivot2 Source Genre Rating ave
+pivotchart
+pivottable
