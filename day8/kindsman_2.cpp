@@ -10,6 +10,7 @@
 using namespace std;
 //global variable
 
+
 vector<string> temp1;
 vector<string> temp2;
 vector<string> combination;
@@ -24,7 +25,7 @@ void go(int offset, int k) { // k is size of the word vector temp.
             tempo+=it+' ';
           }
           combination.push_back(tempo);
-          cout<<tempo<<endl;
+          // cout<<tempo<<endl;
           tempo ="";
         } while ( next_permutation(temp2.begin(),temp2.end()));
         return;
@@ -177,6 +178,35 @@ int main(){
       cout<<it2<<endl;
     }
   }
+  cout<<endl;
+  cout<<endl;
+  string dict_words;
+  // for(int i=0; i!=vec1.size(); i++){
+  //   for(int j=0; j!=vec1[i].size();j++){
+
+  //   }
+  // }
+  // string result;
+  // string x;
+  // for (int i = 0; i < vec1.size(); i++) {
+  //   for(int j = 0; j < vec1[i].size(); j++) {
+  //       x = vec1[j][i];
+  //   }   
+  //   result += x;
+  // }
+  // cout<<result<<endl;
+int totalCombi=1;
+  for(int i=0; i!=vec1.size();i++){
+    totalCombi *=vec1[i].size(); 
+  }
+
+cout<<totalCombi<<endl;
+  // vector<string> wow;
+  //   for(auto &it:vec1){
+  //     for()
+
+
+
 
 
 
@@ -258,6 +288,7 @@ int main(){
   // for(auto &it:secret){
   //   cout<<it<<endl;
   // }
+
 
 
   return 0;
