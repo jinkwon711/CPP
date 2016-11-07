@@ -13,25 +13,21 @@ using namespace std;
 
 vector<string> temp1;
 vector<string> temp2;
-vector<string> temp3;
 vector<string> combination;
 int failure=0;
 //동일 캐릭터가 있으면 true반환.
 void go(int offset, int k) { // k is size of the word vector temp.
       if (k == 0) {
         string tempo="";
-        temp3 = temp2;
-        sort(temp3.begin(),temp3.end());
+        sort(temp2.begin(),temp2.end());
         do {
           for(auto & it:temp2){
-            // cout<<it<<endl;
             tempo+=it;
           }
           combination.push_back(tempo);
           // cout<<tempo<<endl;
           tempo ="";
-        } while ( next_permutation(temp3.begin(),temp3.end()));
-
+        } while ( next_permutation(temp2.begin(),temp2.end()));
         return;
       }
 
@@ -88,12 +84,6 @@ int main(){
   // for(auto &it:secret){
   //   cout<<it<<endl;
   // }// to find if sorting was done properly
-string tempstr;
-  for(auto &it:secret){
-    if(tempstr==it) it.erase();
-    tempstr = it;
-  }
-
 
   for(auto it:secret){
     arr1[it.length()]++;
@@ -110,7 +100,7 @@ string tempstr;
       // cout<<"temp1 size : "<<temp1.size()<<endl;
       if(temp1.size()!=1){
         if(temp1.size()==0){
-          cout<<"mission failure...";
+          cout<<"mission failure..."<<endl;
           return 0;
         }
         go(0,arr1[i]);// it stores from temp1 into temp2 and temp2 stores 
@@ -196,12 +186,10 @@ for(auto &pos_sentence: vec2){
   lookupTable.insert({' ',' '});
   for(int i=0; i!=secret_sentence.length();i++){
     temp = {secret_sentence[i],pos_sentence[i]};
-    // cout<<temp.first<< " : "<<temp.second<<endl;
     try{
       value = lookupTable.at(secret_sentence[i]);
     }catch(out_of_range){
       lookupTable.insert(temp);
-      continue;
     }
     if(value==pos_sentence[i]){
       failure = 0;
@@ -223,7 +211,7 @@ for(auto &pos_sentence: vec2){
   }
 }
 
-   cout<<"mission failure...";
+   cout<<"mission failure..."<<endl;
 
   return 0;
 }
