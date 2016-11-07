@@ -22,7 +22,7 @@ void go(int offset, int k) { // k is size of the word vector temp.
         sort(temp2.begin(),temp2.end());
         do {
           for(auto & it:temp2){
-            tempo+=it+' ';
+            tempo+=it;
           }
           combination.push_back(tempo);
           // cout<<tempo<<endl;
@@ -38,86 +38,22 @@ void go(int offset, int k) { // k is size of the word vector temp.
     }
   }
 
-
-
-bool check_duplicate(string w1,string w2){
-  for(int i=0; i!=w1.length(); i++){
-    for(int j=0; j!=w1.length();j++){
-      if(i!=j){
-        if(w1[i]==w1[j]){
-          if(w2[i]!=w2[j]) return true;
-        }
-      }
-    }
-  }
-  return false;
-}
-void update_lookupTable(unordered_map<char,char> &m,unordered_map<char,char> &t,unordered_map<char,char> &t2){
-
-  // for(auto &tm:t){
-  //           cout<<"t값"<<tm.first<<"-"<<tm.second<<endl;
-  //         }
-  int exist =0;
-  pair<char,char> temp;
-  if(m.empty()){
-    m=t;
-    return;
-  }
-  for(auto &it:t){//temp
-    for(auto &it2:m){//original
-      if(it.first==it2.first){//if the alphabet is same;
-        exist = 1;
-              // cout<<it2.first<<endl;
-              // cout<<"exist="<<exist<<endl;
-
-        if(it.second!=it2.second) {
-          failure = 1;
-          return;
-        }//failed to decode cryptogram;
-        break;//because we already checked if there is duplicate in tempMap; once we find the right match, we don't have to search more.
-
-        }
-      }
-    // cout<<"exist="<<exist<<endl;
-    // cout<<temp.first<<":"<<temp.second<<endl;
-    if(exist==0){
-      t2.insert(it);//update a lookupTable with new pair;
-    }
-    exist=0;
-  }
-
-// for(auto &tm:t2){
-//             cout<<"t2값"<<tm.first<<"-"<<tm.second<<endl;
-//           }
-  for(auto &it:t2){
-    m.insert(it);
-
-  }
-      t2.clear();
-
-
-
-}
 int main(){
   int numOfWords;
   string sentence;
   string word;
   vector<string> dictionary;
   vector<string> secret;
-  // vector<string> word_list;
   string answer="";
+  string original_secret_sentence="";
 
   vector<vector<string> > vec1;
   vector<string> vec2;
-
   
   int arr1[101];
-  int arr2[101];
 
 
   unordered_map<char,char> lookupTable;
-  unordered_map<char,char> tempMap;
-  unordered_map<char,char> tempMap2;
 
 
   for(auto &it:arr1){
@@ -138,6 +74,10 @@ int main(){
     secret.push_back(word);
   }
 
+  for(auto &it:secret){
+    original_secret_sentence+=it+" ";
+  }
+
   stable_sort(secret.begin(),secret.end(),[](const string &m,const string &n){return m.length()>n.length();});
   stable_sort(dictionary.begin(),dictionary.end(),[](const string &m,const string &n){return m.length()>n.length();});
 
@@ -149,7 +89,7 @@ int main(){
     arr1[it.length()]++;
   }//now arr1 contains numbers which matches the number of same length string in secret
 
-  for(int i=1; i!=101;i++){
+  for(int i=100; i!=0;i--){
     if(arr1[i]!=0){
       for(auto &it1:dictionary){
         if(it1.length() == i){
@@ -157,13 +97,18 @@ int main(){
           // cout<<it1<<endl;
         } 
       }
-
+      // cout<<"temp1 size : "<<temp1.size()<<endl;
       if(temp1.size()!=1){
+        if(temp1.size()==0){
+          cout<<"mission failure..."<<endl;
+          return 0;
+        }
         go(0,arr1[i]);// it stores from temp1 into temp2 and temp2 stores 
       }
       else{
         combination.push_back(temp1[0]);
       }
+
       temp2.clear();
       temp1.clear();
       vec1.push_back(combination);
@@ -173,123 +118,97 @@ int main(){
   }
 
 
-  for(auto &it1:vec1){
-    for(auto &it2:it1){
-      cout<<it2<<endl;
-    }
-  }
-  cout<<endl;
-  cout<<endl;
-  string dict_words;
-  // for(int i=0; i!=vec1.size(); i++){
-  //   for(int j=0; j!=vec1[i].size();j++){
 
+  // for(auto &it1:vec1){
+  //   for(auto &it2:it1){
+  //     cout<<it2<<endl;
   //   }
   // }
-  // string result;
-  // string x;
-  // for (int i = 0; i < vec1.size(); i++) {
-  //   for(int j = 0; j < vec1[i].size(); j++) {
-  //       x = vec1[j][i];
-  //   }   
-  //   result += x;
-  // }
-  // cout<<result<<endl;
+  // cout<<endl;
+  // cout<<endl;
+  string dict_words;
+
 int totalCombi=1;
   for(int i=0; i!=vec1.size();i++){
     totalCombi *=vec1[i].size(); 
   }
 
-cout<<totalCombi<<endl;
-  // vector<string> wow;
-  //   for(auto &it:vec1){
-  //     for()
 
+int k=0;
+int mul = 1;
+int first = 1;
+for(int i=0; i!=vec1.size();i++){
+  mul*=vec1[i].size();
+  for(int j=0; j!=totalCombi; j++){
 
+    if(j%(totalCombi/mul)==0) {
+      k++;
+      if(k==vec1[i].size()) k=0;
+    }
+    if(i==0){
+      vec2.push_back(vec1[i][k]);
+    }
+    else{
+      vec2[j] +=vec1[i][k];
 
+    }
+  }
 
+  k=0;
+}
 
-
-
-
-//   for(auto &secretWord:secret){
-//     for(auto&dictWord:dictionary){
-//       if(secretWord.length()==dictWord.length()){
-//         //from here to next quote - > check the duplicate match. if ,fail, if not, go on.
-//         for(int i=0; i!=(signed)dictWord.length(); i++){
-//           tempMap.insert({secretWord[i],dictWord[i]});
-//         }//create tempMap to compare the size
-//         if(tempMap.size()!=secretWord.length()){//if it is not same there exist duplicate
-//           if(check_duplicate(secretWord,dictWord)){
-//           //check if there is a word that have more than 2 values
-//             cout<<"mission failure..."<<endl;
-//             return 0;
-//           }
-//         }
-//           // for(auto &tm:tempMap){
-//           //   cout<<tm.first<<"-"<<tm.second<<endl;
-//           // }
-//         // temporary map compareed with original table;
-//           //call map element duplication check
-//           update_lookupTable(lookupTable,tempMap,tempMap2);
-//           if(failure==1){
-//             cout<<"mission failure..."<<endl;
-//             return 0;
-//           }
-//           tempMap.clear();
-//         }
-//       }
-//       //update the answer line before decoding process with space
-//       // word_list.push_back(dictWord);
-//       answer += secretWord+" ";
-//     }
-
-// //print all values in map;
-
-//     // for(auto &it:lookupTable){
-//     //   cout<<it.first<<":"<<it.second<<endl;
-//     // }
-
-
-// // both update and print the answer;
-//     cout<<answer<<endl;
-
-//   try{
-//     for(int i=0; i!=answer.length()-1;i++){
-//       if(answer[i]!=' '){//if it is not space
-//         answer[i] = lookupTable.at(answer[i]);
-//       }
-//     }
-//   }catch(out_of_range){
-//     cout<<"mission failure..."<<endl;
-//     return 0;
-//   }
-
-//     cout<<answer<<endl;
-
-
-
-  //
-// char tempo,tempo2;
-// for(int i=0; i!=3;i++){
-//   cin>>tempo>>tempo2;
-//   lookupTable.insert({tempo,tempo2});
+// k=0;
+// for(int i=0;i!=vec2.size();i++){
+//   if(vec2.size()%vec1.size()==0) k=0;
+  
+//   vec2[k%totalCombi]+=vec2[k];
+//   k++;
 // }
-//
-// cout<<lookupTable.size()<<endl;
-// cout<<lookupTable.at('a')+1<<endl;
 
+// for(auto&it:vec2){
+//   cout<<it<<endl;
+// }
+string secret_sentence="";
+for(auto &it:secret){
+  secret_sentence +=it;
+}
 
-//print sample test
-  // for(auto &it:dictionary){
-  //   cout<<it<<endl;
-  // }
+// cout<<secret_sentence<<endl;
 
-  // for(auto &it:secret){
-  //   cout<<it<<endl;
-  // }
+// cout<<secret_sentence.length()<<endl;
+// cout<<vec2[0].length()<<endl;
 
+char value;
+pair<char,char> temp;
+string finalAnswer="";
+for(auto &pos_sentence: vec2){
+  lookupTable.clear();
+  lookupTable.insert({' ',' '});
+  for(int i=0; i!=secret_sentence.length();i++){
+    temp = {secret_sentence[i],pos_sentence[i]};
+    try{
+      value = lookupTable.at(secret_sentence[i]);
+    }catch(out_of_range){
+      lookupTable.insert(temp);
+    }
+    if(value==pos_sentence[i]){
+      failure = 0;
+    }
+    else{
+      failure = 1;
+    }
+  }
+ 
+  if(failure==0){
+    for(int i=0; i!=original_secret_sentence.length(); i++ ){
+       finalAnswer+=lookupTable.at(original_secret_sentence[i]);
+    }
+    cout<<finalAnswer<<endl;
+    return 0;
+  }
+}
 
+   cout<<"mission failure..."<<endl;
 
   return 0;
 }

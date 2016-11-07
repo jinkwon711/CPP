@@ -18,5 +18,7 @@ void go(int offset, int k) { k 대신 단어수.즉 temp.size()
 
 int main(){
 
+  //원하는것이 스트링이 있는 벡터를 넣으면 벡터의 요소끼리
+
   return 0;
 }

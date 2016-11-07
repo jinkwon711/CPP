@@ -1,6 +1,7 @@
-5
+6
 an
 the
+open
 escape
 lighter
 umbrella
