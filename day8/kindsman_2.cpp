@@ -23,10 +23,15 @@ void go(int offset, int k) { // k is size of the word vector temp.
         temp3 = temp2;
         sort(temp3.begin(),temp3.end());
         do {
-          for(auto & it:temp2){
+          for(int i=0; i!=temp2.size();i++){
+            if(i==temp2.size()-1){
+              tempo+=temp2[i];
+            }
+            else{
             // cout<<it<<endl;
-            tempo+=it;
-          }
+            tempo+=temp2[i]+' ';
+             }
+           }
           combination.push_back(tempo);
           // cout<<tempo<<endl;
           tempo ="";
@@ -79,7 +84,7 @@ int main(){
   }
 
   for(auto &it:secret){
-    original_secret_sentence+=it+" ";
+    original_secret_sentence+=it+' ';
   }
 
   stable_sort(secret.begin(),secret.end(),[](const string &m,const string &n){return m.length()>n.length();});
@@ -88,12 +93,7 @@ int main(){
   // for(auto &it:secret){
   //   cout<<it<<endl;
   // }// to find if sorting was done properly
-string tempstr;
-  for(auto &it:secret){
-    if(tempstr==it) it.erase();
-    tempstr = it;
-  }
-
+  secret.erase( unique( secret.begin(), secret.end() ), secret.end() );
 
   for(auto it:secret){
     arr1[it.length()]++;
@@ -159,7 +159,7 @@ for(int i=0; i!=vec1.size();i++){
       vec2.push_back(vec1[i][k]);
     }
     else{
-      vec2[j] +=vec1[i][k];
+      vec2[j] +=' '+vec1[i][k];
 
     }
   }
@@ -176,14 +176,21 @@ for(int i=0; i!=vec1.size();i++){
 // }
 
 // for(auto&it:vec2){
-//   cout<<it<<endl;
+//   cout<<"pos_sentence : "<<it<<endl;
 // }
 string secret_sentence="";
 for(auto &it:secret){
-  secret_sentence +=it;
+  if(it==secret.back()){
+    secret_sentence+=it;
+    // cout<<"hi2"<<endl;
+  }
+  else{
+  secret_sentence +=it+' ';
+  // cout<<"hi1"<<endl;
+  }
 }
 
-// cout<<secret_sentence<<endl;
+// cout<<"secret_sentence : "<<secret_sentence<<endl;
 
 // cout<<secret_sentence.length()<<endl;
 // cout<<vec2[0].length()<<endl;
@@ -193,24 +200,31 @@ pair<char,char> temp;
 string finalAnswer="";
 for(auto &pos_sentence: vec2){
   lookupTable.clear();
+  failure = 0;
   lookupTable.insert({' ',' '});
   for(int i=0; i!=secret_sentence.length();i++){
     temp = {secret_sentence[i],pos_sentence[i]};
     // cout<<temp.first<< " : "<<temp.second<<endl;
+
     try{
       value = lookupTable.at(secret_sentence[i]);
+      // cout<<secret_sentence[i]<<" : "<< pos_sentence[i]<<endl;
+
     }catch(out_of_range){
       lookupTable.insert(temp);
+      // cout<<temp.first<<" - "<< temp.second<<endl;
       continue;
     }
-    if(value==pos_sentence[i]){
+    if(lookupTable.at(secret_sentence[i])==pos_sentence[i]){
       failure = 0;
     }
     else{
+      // cout<<lookupTable.at(secret_sentence[i])<<" : "<<pos_sentence[i]<<endl;
+
       failure = 1;
     }
   }
- 
+
   if(failure==0){
     for(int i=0; i!=original_secret_sentence.length(); i++ ){
        finalAnswer+=lookupTable.at(original_secret_sentence[i]);

@@ -1,8 +1,4 @@
-6
+1
 an
-the
-escape
-open
-lighter
-umbrella
-x xy xyzz
+me me
+EOM
