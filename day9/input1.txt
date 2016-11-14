@@ -1,0 +1,4 @@
+2
+Grid Name root_grid Cols 2 1 1 Rows 2 1 1 end
+Rectangle Name rect_blue Fill #000000 Parent root_grid Col 2 Row 1 end
+
