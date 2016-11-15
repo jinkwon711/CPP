@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <vector>
 #include <sstream>
+#include <assert.h>
 using namespace std;
 
 
@@ -39,9 +40,13 @@ public:
 } ;
 class Panel : public FrameworkElement{
 public:
-	void Add(FrameworkElement *child);
+	void Add(FrameworkElement *child){
+		Children.push_back(child);
+	}
 	FrameworkElement* Find(string name){
 		for(auto it:Children){
+			cout<<"inside Find"<<endl;
+			return dynamic_cast<Panel*>(it)->Find(name);
 			if(it->Name==name){
 				return it;
 			}
@@ -168,6 +173,7 @@ int main(){
 			else{
 				Grid tempGrid = Grid(name,colVec,rowVec,pCol,pRow);
 				Grid *tempParent=dynamic_cast<Grid*>(rootGrid.Find(pName));
+				tempParent->Add(dynamic_cast<FrameworkElement*>(&tempGrid));;
 
 			}
 			rowVec.clear();
@@ -212,7 +218,6 @@ int main(){
 					}
 				}
 			}//second while
-
 				Grid *it = dynamic_cast<Grid*>(rootGrid.Find(pName));
 
 				if(!pName.compare("root_grid")){
@@ -220,6 +225,7 @@ int main(){
 					}
 
 					cout<<it->Name<<endl;
+assert(0);
 
 			Rectangle tempRect = Rectangle(name,color,pCol,pRow);
 
