@@ -159,7 +159,7 @@ int main(){
 						}
 						else if(!subCommand2.compare("Row")){
 								ss>>pRow;
-						}	
+						}
 						else if(!subCommand2.compare("end")){
 								break;
 						}
@@ -211,7 +211,7 @@ int main(){
 						}
 						else if(!subCommand2.compare("Row")){
 								ss>>pRow;
-						}	
+						}
 						else if(!subCommand2.compare("end")){
 								break;
 						}
@@ -232,7 +232,7 @@ assert(0);
 			int pcTot = it->Cols.size();
 			int prTot = it->Rows.size();
 
-			
+
 
 			double addLeft=0;
 			double addTop=0;
@@ -247,7 +247,7 @@ assert(0);
 				addTop+=(it->Cols[i]*it->Height)/prTot;
 			}
 			tempRect.OffsetLeft =it->OffsetLeft+addLeft;
-			tempRect.OffsetTop = it->OffsetTop+addTop; 
+			tempRect.OffsetTop = it->OffsetTop+addTop;
 
 
 			pCol = pRow = 1;
@@ -259,7 +259,7 @@ assert(0);
 		// cout<<subCommand2<<endl;
 			// if(subCommand2.compare("end")) break;
 
-}//for loop with input Number;	
+}//for loop with input Number;
 
 for(auto it:rect_vec){
 	cout<<it.Name<<" "<<it.Fill<<" "<<it.OffsetLeft<<" "<<it.OffsetTop<<" "<<it.Width<<" "<<it.Height<<endl;
@@ -268,4 +268,4 @@ for(auto it:rect_vec){
 
 	return 0;
 
-}		
+}
