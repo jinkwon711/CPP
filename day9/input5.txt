@@ -1,0 +1,9 @@
+8
+Grid Name root Cols 2 1 4 Rows 2 4 1 end
+Grid Name grid1 Rows 2 1 1 Parent root_grid end
+Rectangle Name red_rect Fill #FF0000 Parent root_grid Col 2 end
+Rectangle Name blue_rect Fill #0000AA Parent root_grid Row 2 end
+Grid Name grid2 Cols 2 4 1 Rows 2 1 1 Parent root_grid Col 2 Row 2 end
+Rectangle Name yellow_rect Fill #FAFA00 Parent grid2 Col 2 Row 2 end
+Grid Name grid3 Rows 2 1 1 Parent grid2 end
+Rectangle Name green_rect Fill #01234A Parent grid3 end

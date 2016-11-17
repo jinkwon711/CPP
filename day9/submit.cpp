@@ -166,6 +166,7 @@ int main(){
 	int cols1,cols2,pCol;
 	int rows1,rows2,pRow;
 	int N;
+	int isfirst =1;
 	cin>>N;//2<=N<=200
 	cin.ignore(256, '\n');
 
@@ -216,15 +217,16 @@ int main(){
 					}
 				}
 			}//second while
-			if(name=="root_grid"){
+			if(isfirst==1){
 				rootGrid = new Grid(name,colVec,rowVec);
+				isfirst=0;
 				// grid_vec.push_back(*rootGrid);
 			}
 			else{
 				Grid *tempGrid;
 				tempGrid = new Grid(name,colVec,rowVec,pCol,pRow);
 				Grid *tempParent=dynamic_cast<Grid*>(rootGrid->Find(pName));
-				if(pName=="root_grid"){
+				if(pName==rootGrid->Name){
 					tempParent=rootGrid;
 				}
 				GridArr[index]=tempGrid;
@@ -282,7 +284,7 @@ int main(){
 				// cout<<it<<endl;
 
 				// if(it==nullptr) continue;
-				if(!pName.compare("root_grid")){
+				if(!pName.compare(rootGrid->Name)){
 					it = rootGrid;
 				}
 
