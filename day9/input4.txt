@@ -1,7 +1,5 @@
-5
-Grid Name root_grid Cols 2 1 4 Rows 2 4 1 end
+3
+Grid Name root_grid  end
 Grid Name grid1 Rows 2 1 1 Parent root_grid end
-Rectangle Name red_rect Fill #FF0000 Parent root_grid Col 2 end
-Rectangle Name blue_rect Fill #0000AA Parent root_grid Row 2 end
-Grid Name grid2 Cols 2 4 1 Rows 2 1 1 Parent root_grid Col 2 Row 2 end
+Grid Name grid2 Cols 2 4 1 Rows 2 1 1 Parent grid1 Row 2 end
 

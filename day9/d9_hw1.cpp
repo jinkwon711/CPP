@@ -5,7 +5,6 @@
 #include <sstream>
 #include <assert.h>
 using namespace std;
-	string name;
 
 class UIElement{
 public:
@@ -24,24 +23,12 @@ public:
 	int GridRow = 1;
 	virtual void UpdateLayout(){}
 
-	// void setWitdh(double w){
-	// 	Width = w;
-	// }
-	// void setHeight(double h){
-	// 	Height = h;
-	// }
-	// void setOffsetLeft(double l){
-	// 	OffsetLeft = l;
-	// }
-	// void setOffsetTop(double t){
-	// 	OffsetTop = t;
-	// }
-
 } ;
 class Panel : public FrameworkElement{
 public:
 	void Add(FrameworkElement *child){
 		Children.push_back(child);
+		return ;
 	}
 
 	FrameworkElement* Find(string name){
@@ -50,7 +37,9 @@ public:
 				return it;
 			}
 			else{
-				return dynamic_cast<Panel*>(it)->Find(name);
+				if(nullptr!=dynamic_cast<Panel*>(it)->Find(name)){
+					return dynamic_cast<Panel*>(it)->Find(name);
+				}
 			}
 		}
 		return nullptr;
@@ -69,40 +58,57 @@ private:
 		}
 		return sum;
 	}
+	// void FreeMem(){
+	// 	for(auto &it:Children){
+	// 		delete this;
+	// 		it->UpdateLayout();
+	// 	}
+	// }
+
+
 public:
 	vector<int> Cols{1};
 	vector<int> Rows{1};
 
 	void UpdateLayout(){
-		cout<<"size of Children : "<<Children.size()<<endl;
+		for(int i=0; i!=Children.size();i++){
+			// cout<<Children[i]->Name<<endl;
+		}
+
+		// cout<<"부모이름 : "<<Name<<endl;
 		for(auto &it:Children){
+			// cout<<"자식이름 : "<<it->Name<<endl;
 
 			double top_ratio=0;
 			double left_ratio=0;
 			int pcTot = sum(Cols);
 			int prTot = sum(Rows);
-			int addTop = 0;
-			int addLeft = 0;
-			for(int i=0; i<GridCol-1;i++){
-				addLeft+=(Cols[i])/(double)pcTot*(Width);
+			// cout<<pcTot<< "  " <<prTot<<endl;
+
+			double addTop = 0;
+			double addLeft = 0;
+			for(int i=0; i<it->GridCol-1;i++){
+				addLeft+=(Cols[i])/(double)pcTot*(this->Width);
 			}
-			// cout<<addLeft<<endl;
-			for(int i=0; i<GridRow-1;i++){
-				addTop+=(Rows[i])*(Height)/(double)prTot;
+			
+			for(int i=0; i<it->GridRow-1;i++){
+
+				addTop+=(Rows[i])*(this->Height)/(double)prTot;
 			}
-			left_ratio = Cols[GridCol-1]/(double)pcTot;
-			cout<<Rows[GridRow-1]<<endl;
-			cout<<pcTot<<endl;
-			cout<<prTot<<endl;
+			left_ratio = Cols[it->GridCol-1]/(double)pcTot;
 
+			top_ratio = Rows[it->GridRow-1]/(double)prTot;
 
-			top_ratio = Rows[GridRow-1]/(double)prTot;
+			it->OffsetTop =this->OffsetTop+addTop;
+			it->OffsetLeft=this->OffsetLeft+addLeft;
+			it->Height = this->Height*(top_ratio);
+			it->Width = this->Width*(left_ratio);
+			// cout<<"OffsetLeft"<<it->OffsetLeft<<endl;
+			// cout<<"OffsetTop"<<it->OffsetTop<<endl;
+			// cout<<"Height"<<it->Height<<endl;
+			// cout<<"Width"<<it->Width<<endl;
 
-			it->OffsetTop =OffsetTop+addTop;
-			it->OffsetLeft=OffsetLeft+addLeft;
-			it->Height = Height*(top_ratio);
-			it->Width = Width*(left_ratio);
-
+			// dynamic_cast<Grid*>(it)->UpdateLayout();
 			it->UpdateLayout();
 		}
 		return;
@@ -143,11 +149,13 @@ public:
 };
 
 int main(){
-	Grid rootGrid;
+	Grid *rootGrid;
 	vector<Rectangle> rect_vec;
-	vector<Grid> grid_vec;
+	int index=0;
+	// vector<Grid> grid_vec;
+	Grid* GridArr[250];
 	string line;
-	// string name;
+	string name;
 	string command;
 	string subCommand2;
 	string subCommand3;
@@ -166,31 +174,26 @@ int main(){
 
 	for(int i=0; i!=N; i++){
 	getline(cin,line);
-
+	cols1 = cols2 = pCol = rows1=rows2=pRow=1;
 	istringstream ss(line);
 	ss>>command;
 		if(command=="Grid"){
 			ss>>command;//discard Name stirng;
 			ss>>name;//Name
-			cout<<"name : "<<name<<endl;
 
 				//subcommand is name, subcommand2 = Col or Rows or Parent;
 			while(ss>>subCommand2){
-				cout<<"subCommand2 : "<<subCommand2<<endl;
 				// switch(subCommand2){
 				if(!subCommand2.compare("Cols")){
-					cout<<"cols1 : "<<cols1<<endl;
 					ss>>cols1;
 					for(int i=0;i!=cols1;i++){
 						ss>>cols2;
 						colVec.push_back(cols2);
 					}
 					ss>>subCommand2;
-					cout<<"subcommand2-2 :"<<subCommand2<<endl;
 				}
 				if(!subCommand2.compare("Rows")){
 					ss>>rows1;
-					cout<<"rows1 : "<<rows1<<endl;
 
 					for(int i=0;i!=rows1;i++){
 						ss>>rows2;
@@ -200,7 +203,7 @@ int main(){
 				}
 				if(!subCommand2.compare("Parent")){
 					ss>>pName;
-					while(ss>>subCommand3){
+					while(ss>>subCommand2){
 						if(!subCommand2.compare("Col")){
 								ss>>pCol;
 						}
@@ -214,48 +217,46 @@ int main(){
 				}
 			}//second while
 			if(name=="root_grid"){
-				rootGrid = Grid(name,colVec,rowVec);
+				rootGrid = new Grid(name,colVec,rowVec);
+				// grid_vec.push_back(*rootGrid);
 			}
 			else{
-				
-				Grid tempGrid = Grid(name,colVec,rowVec,pCol,pRow);
-				Grid *tempParent=dynamic_cast<Grid*>(rootGrid.Find(pName));
+				Grid *tempGrid;
+				tempGrid = new Grid(name,colVec,rowVec,pCol,pRow);
+				Grid *tempParent=dynamic_cast<Grid*>(rootGrid->Find(pName));
 				if(pName=="root_grid"){
-					tempParent=&rootGrid;
+					tempParent=rootGrid;
 				}
-				grid_vec.push_back(tempGrid);
-				tempParent->Add(dynamic_cast<FrameworkElement*>(&grid_vec.back()));;
+				GridArr[index]=tempGrid;
+				// tempParent->Add(dynamic_cast<FrameworkElement*>(tempGrid));
+				tempParent->Add(dynamic_cast<FrameworkElement*>(GridArr[index]));
+				index++;
 
 			}
 
-			// cout<<"size of rootGrid childeren : "<<rootGrid.Children.size()<<endl;
 			rowVec.clear();
 			colVec.clear();
-			pCol = pRow = 1;
+			rootGrid->UpdateLayout();
+
+
+
 
 		}//if for Grid
 		else{
-
-
+			cols1 = cols2 = pCol = rows1=rows2=pRow=1;
 			ss>>command;//discard Name stirng;
 			ss>>name;//Name
-			
-			rootGrid.UpdateLayout();
 
-			cout<<"name : "<<name<<endl;
 				//subcommand is name, subcommand2 = Col or Rows or Parent;
 			while(ss>>subCommand2){
-				cout<<"subCommand2 : "<<subCommand2<<endl;
 				// switch(subCommand2){
 				if(!subCommand2.compare("Cols")){
-					cout<<"cols1 : "<<cols1<<endl;
 					ss>>cols1;
 					for(int i=0;i!=cols1;i++){
 						ss>>cols2;
 						colVec.push_back(cols2);
 					}
 					ss>>subCommand2;
-					cout<<"subcommand2-2 :"<<subCommand2<<endl;
 				}
 				if(!subCommand2.compare("Fill")){
 					ss>>color;
@@ -276,17 +277,17 @@ int main(){
 					}
 				}
 			}//second while
-
-				Grid *it = dynamic_cast<Grid*>(rootGrid.Find(pName));
-				// assert(v0);
+				// cout<<pName<<endl;
+				Grid *it = dynamic_cast<Grid*>(rootGrid->Find(pName));
+				// cout<<it<<endl;
 
 				// if(it==nullptr) continue;
 				if(!pName.compare("root_grid")){
-					it = &rootGrid;
+					it = rootGrid;
 				}
 
-					cout<<"pName : "<<pName<<endl;
-					cout<<"value of it : "<<it->Name<<endl;
+
+					// assert(name!="yellow_rect");
 			Rectangle tempRect = Rectangle(name,color,pCol,pRow);
 
 			int pcTot = 0;
@@ -301,17 +302,11 @@ int main(){
 
 			double addLeft=0;
 			double addTop=0;
-			cout<<pCol<<endl;
-			cout<<pRow<<endl;
-			cout<<it->Cols.size()<<endl;
-			cout<<it->Rows[0]<<endl;
 
 			double left_ratio = it->Cols[pCol-1]/(double)pcTot;
 			double top_ratio = it->Rows[pRow-1]/(double)prTot;
 
 
-			// cout<<pcTot<<it->Cols[0]<<endl;
-			// cout<<it->Width<<endl;
 			for(int i=0; i<pCol-1;i++){
 				addLeft+=(it->Cols[i])/(double)pcTot*(it->Width);
 			}
@@ -320,11 +315,6 @@ int main(){
 			for(int i=0; i<pRow-1;i++){
 				addTop+=(it->Rows[i])/(double)prTot*(it->Height);
 			}
-			cout<<it->GridCol<<endl;
-			cout<<"pc tot : "<<pcTot<<endl;
-			cout<<"pr tot : "<<prTot<<endl;
-			cout<<"left_ratio : "<<left_ratio<<endl;
-			cout<<"top_ratio : "<<top_ratio<<endl;
 			tempRect.OffsetLeft =it->OffsetLeft+addLeft;
 			tempRect.OffsetTop = it->OffsetTop+addTop;
 			tempRect.Width = it->Width*(left_ratio);
@@ -332,24 +322,32 @@ int main(){
 
 
 
-			pCol = pRow = 1;
 			rect_vec.push_back(tempRect);
 		}
 
 
 
-		// cout<<subCommand2<<endl;
 			// if(subCommand2.compare("end")) break;
 
 }//for loop with input Number;
+			// cout<<grid_vec[0].Children[0]->Name<<endl;
+
 
 for(auto it:rect_vec){
-	cout<<it.Name<<" "<<it.Fill<<" "<<it.OffsetLeft<<" "<<it.OffsetTop<<" "<<it.Width<<" "<<it.Height<<endl;
+	cout.precision(2);
+		cout<<fixed<<it.Name<<" "<<it.Fill<<" "<<it.OffsetLeft<<" "<<it.OffsetTop<<" "<<it.Width<<" "<<it.Height<<endl;
 }
-for(auto it:grid_vec){
-	cout<<it.Name<<" "<<it.OffsetLeft<<" "<<it.OffsetTop<<" "<<it.Width<<" "<<it.Height<<endl;
 
+
+for(int i=0; i!=index;i++){
+	cout<<GridArr[i]->Name<<endl;
 }
+
+for(int i=0; i!=index;i++){
+	delete GridArr[i];
+}
+
+
 
 
 	return 0;
