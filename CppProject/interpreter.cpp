@@ -84,9 +84,8 @@ public:
   void enter(int csvIdx,vector<CVS*> cvs_vec){
     sort(cvs_vec[csvIdx]->data.begin(),cvs_vec[csvIdx]->data.end(),
       [](vector<string>* left,vector<string> *right){return *left<*right;});
-    vector<SVG *> tempSvg;
-    tempSvg = selectedSvg;
-    selectedSvg.clear();
+    // vector<SVG *> tempSvg;
+    // tempSvg = selectedSvg;
     
     // for(auto &item:cvs_vec[csvIdx]->data){
     //   for(auto &it:*item){
@@ -97,14 +96,13 @@ public:
     int exist;
     for(auto &csvItem:cvs_vec[csvIdx]->data){
       exist = 0;
-      // cout<<"not hi"<<endl;
-      for(auto &selectedItem:tempSvg){
-        if((*csvItem)[0]==selectedItem->name)
+      for(auto &selectedItem:selectedSvg){
+        if((*csvItem)[0]==selectedItem->data[0]){
           exist =1;
           break;
+        }
       }
       if(exist==0){
-        // cout<<"hi"<<endl;
         append(lastQueryName,csvItem);
       }
     }
@@ -112,19 +110,23 @@ public:
   }
 
   void update(int csvIdx,vector<CVS*> cvs_vec){
-    sort(cvs_vec[csvIdx]->data.begin(),cvs_vec[csvIdx]->data.end(),
-      [](vector<string>* left,vector<string> *right){return *left<*right;});
+    // sort(cvs_vec[csvIdx]->data.begin(),cvs_vec[csvIdx]->data.end(),
+      // [](vector<string>* left,vector<string> *right){return *left<*right;});
     vector<SVG *> tempSvg;
     tempSvg = selectedSvg;
-    selectedSvg.clear();
-    for(auto &csvItem:cvs_vec[csvIdx]->data){
-      for(int i=0; i!=tempSvg.size();i++){
-        if((*csvItem)[0]==tempSvg[i]->data[0]){
-          tempSvg.erase(tempSvg.begin()+i);
-          append(lastQueryName,csvItem);
-          i--;
+    int exist;
+    for(int i=0; i!=selectedSvg.size();i++){
+      exist=0;
+      for(auto &csvItem:cvs_vec[csvIdx]->data){
+        if((*csvItem)[0]==selectedSvg[i]->data[0]){
+          selectedSvg[i]->data = (*csvItem);
+          exist = 1;
           break;
         }
+      }
+      if(exist==0){
+          selectedSvg.erase(selectedSvg.begin()+i);
+          i--;
       }
     }
   }
@@ -146,7 +148,14 @@ public:
 
   void cattr(string attrName, string attrValue){
     for(auto &svgItem:selectedSvg){
-      svgItem->cattr.
+
+      // Pair<string,string> tempPair = {attrName,attrValue};
+      svgItem->cattr.push_back({attrName,attrValue});
+    }
+  }
+  void tattr(string x_mul,string y_mul){
+    for(auto &svgItem:selectedSvg){
+      svgItem->tattr.push_back({x_mul,y_mul});
     }
   }
 };
@@ -216,9 +225,12 @@ int j=0;
   // }
   // cout<<"---------------cvs i/o check end-------------"<<endl;
 
-
+selection->append("head");
+cout<<selection->parentSvg.back()->name<<endl;
 selection->select("rect");
+cout<<selection->parentSvg.back()->name<<endl;
 selection->enter(0,cvs_vec);
+selection->enter(1,cvs_vec);
 cout<<"---------------------select & enter check-----------"<<endl;
 for(auto &it:selection->selectedSvg){
   for(auto& item:it->data){
@@ -237,19 +249,40 @@ for(auto &it:selection->selectedSvg){
 }
 cout<<"---------------------select & update check-----------"<<endl;
   
-selection->exit(1,cvs_vec); 
+// selection->exit(1,cvs_vec); 
 
-cout<<"---------------------select & exit check-----------"<<endl;
+// cout<<"---------------------select & exit check-----------"<<endl;
+// for(auto &it:selection->selectedSvg){
+//   for(auto& item:it->data){
+//         cout<<item<<"  ";
+//   }
+//   cout<<endl;
+// }
+// cout<<"---------------------select & exit check-----------"<<endl;
+
+selection->cattr("width","1000");
+selection->cattr("weight","500");
+selection->tattr("10","20");
+selection->end();
+selection->select("rect");
+cout<<"---------------------select & attr check-----------"<<endl;
+
 for(auto &it:selection->selectedSvg){
   for(auto& item:it->data){
         cout<<item<<"  ";
   }
+  cout<<"cAttr ";
+  for(auto& item2:it->cattr){
+        cout<<item2.first<<" : "<<item2.second<<" ";
+  }
+  cout<<"tAttr ";
+
+  for(auto& item3:it->tattr){
+        cout<<"x-"<<item3.first<<" : "<<"y-"<<item3.second<<" ";
+  }
   cout<<endl;
 }
-cout<<"---------------------select & exit check-----------"<<endl;
-
-
-
+cout<<"---------------------select & attr check-----------"<<endl;
 
 
   delete(root_svg);
