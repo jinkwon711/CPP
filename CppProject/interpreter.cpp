@@ -23,6 +23,12 @@ public:
   vector<string> changedData;
   vector<SVG *> children;
 
+  ~SVG(){
+    for(auto &it:children){
+      delete(it);
+    }
+  }
+
   SVG(string queryName):name(queryName){};
 
 };
@@ -66,9 +72,19 @@ public:
   }
 
   void remove(){
+    for(int i=0; i!=parentSvg.back()->children.size();i++){
+      for(auto &it:selectedSvg){
+        if(parentSvg.back()->children[i]->name==it->name){
+          parentSvg.back()->children.erase(parentSvg.back()->children.begin()+i);
+          i--;
+          break;
+        }
+      }
+    }
     for(auto &it:selectedSvg){
       delete(it);
     }
+
     end();
   }
 
@@ -110,8 +126,8 @@ public:
   }
 
   void update(int csvIdx,vector<CVS*> cvs_vec){
-    // sort(cvs_vec[csvIdx]->data.begin(),cvs_vec[csvIdx]->data.end(),
-      // [](vector<string>* left,vector<string> *right){return *left<*right;});
+    sort(cvs_vec[csvIdx]->data.begin(),cvs_vec[csvIdx]->data.end(),
+      [](vector<string>* left,vector<string> *right){return *left<*right;});
     vector<SVG *> tempSvg;
     tempSvg = selectedSvg;
     int exist;
@@ -158,6 +174,23 @@ public:
       svgItem->tattr.push_back({x_mul,y_mul});
     }
   }
+  // void dattr(string attrName,string,double mul=1.0,double add = 0.0){
+  //   int dataIdx;
+  //   for(int i=0;selectedSvg[0]->field.size();i++){
+  //     if(selectedSvg[0]->field)
+  //   }
+
+  //   for(auto &svgItem:selectedSvg){
+  //     int exist =0;
+  //     for(auto &dattrItem:svgItem->dattr){
+  //       if(dattrItem.first==attrName){
+  //         exist = 1;
+
+  //         break;
+  //       }
+  //     }
+  //   }
+  // }
 };
 
 int main(int argc,char **argv){
