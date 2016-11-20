@@ -19,7 +19,7 @@ public:
   vector<string> data;
   vector<pair<string,string> > cattr;
   // vector<pair<string,string> > dAttr; 
-  vector<pair<string,string> > tattr;
+  vector<pair<double,double> > tattr;
   vector<string> originalData;
   vector<string> changedData;
   vector<SVG *> children;
@@ -96,20 +96,20 @@ public:
   // void svgNotExist(){
   // }
 
-  void enter(int csvIdx,vector<CVS*> cvs_vec){
-    sort(cvs_vec[csvIdx]->data.begin(),cvs_vec[csvIdx]->data.end(),
+  void enter(int csvIdx,vector<CVS*> csv_vec){
+    sort(csv_vec[csvIdx]->data.begin(),csv_vec[csvIdx]->data.end(),
       [](vector<string>* left,vector<string> *right){return *left<*right;});
     // vector<SVG *> tempSvg;
     // tempSvg = selectedSvg;
     
-    // for(auto &item:cvs_vec[csvIdx]->data){
+    // for(auto &item:csv_vec[csvIdx]->data){
     //   for(auto &it:*item){
     //       cout<<it<<"  ";
     //   }
     //   cout<<endl;
     // } // sorting check;
     int exist;
-    for(auto &csvItem:cvs_vec[csvIdx]->data){
+    for(auto &csvItem:csv_vec[csvIdx]->data){
       exist = 0;
       for(auto &selectedItem:selectedSvg){
         if((*csvItem)[0]==selectedItem->data[0]){
@@ -124,15 +124,15 @@ public:
        
   }
 
-  void update(int csvIdx,vector<CVS*> cvs_vec){
-    sort(cvs_vec[csvIdx]->data.begin(),cvs_vec[csvIdx]->data.end(),
+  void update(int csvIdx,vector<CVS*> csv_vec){
+    sort(csv_vec[csvIdx]->data.begin(),csv_vec[csvIdx]->data.end(),
       [](vector<string>* left,vector<string> *right){return *left<*right;});
     vector<SVG *> tempSvg;
     tempSvg = selectedSvg;
     int exist;
     for(int i=0; i!=selectedSvg.size();i++){
       exist=0;
-      for(auto &csvItem:cvs_vec[csvIdx]->data){
+      for(auto &csvItem:csv_vec[csvIdx]->data){
         if((*csvItem)[0]==selectedSvg[i]->data[0]){
           selectedSvg[i]->data = (*csvItem);
           exist = 1;
@@ -145,8 +145,8 @@ public:
       }
     }
   }
-  void exit(int csvIdx,vector<CVS*> cvs_vec){
-    for(auto &csvItem:cvs_vec[csvIdx]->data){
+  void exit(int csvIdx,vector<CVS*> csv_vec){
+    for(auto &csvItem:csv_vec[csvIdx]->data){
       for(int i=0; i!=selectedSvg.size();i++){
         if((*csvItem)[0]==selectedSvg[i]->data[0]){
           selectedSvg.erase(selectedSvg.begin()+i);
@@ -155,7 +155,7 @@ public:
         }
       }
     }
-    sort(cvs_vec[csvIdx]->data.begin(),cvs_vec[csvIdx]->data.end(),
+    sort(csv_vec[csvIdx]->data.begin(),csv_vec[csvIdx]->data.end(),
       [](vector<string>* left,vector<string> *right){return *left<*right;});
   }
 
@@ -168,7 +168,7 @@ public:
       svgItem->cattr.push_back({attrName,attrValue});
     }
   }
-  void tattr(string x_mul,string y_mul){
+  void tattr(double x_mul,double y_mul){
     for(auto &svgItem:selectedSvg){
       svgItem->tattr.push_back({x_mul,y_mul});
     }
@@ -222,7 +222,7 @@ public:
 
 int main(int argc,char **argv){
 string line;
-vector<CVS*> cvs_vec;
+vector<CVS*> csv_vec;
 // vector<string> item;
 // vector<vector<string> > csvItem;
 // vector<vector<vector<string> > >totalCsvItem;
@@ -233,7 +233,7 @@ Selection* selection = new Selection(root_svg);
 //file stream to vector.
 int j=0;
   for(int i=1; i<argc;i++){
-  CVS *cvs = new CVS();
+  CVS *csv = new CVS();
     ifstream inFile(argv[i]);
     int isfirst=1;
     while(!inFile.eof()){
@@ -252,45 +252,45 @@ int j=0;
 
       if(isfirst==1){
 
-        cvs->field.push_back(item);
+        csv->field.push_back(item);
         isfirst++;
       }else if(isfirst==2){
         isfirst++;
-        cvs->type.push_back(item);
+        csv->type.push_back(item);
       }else{
-        cvs->data.push_back(item);        
+        csv->data.push_back(item);        
       }
     }
-    cvs_vec.push_back(cvs);
+    csv_vec.push_back(csv);
   }
 
-  // cout<<"---------------cvs io check----------------"<<endl;
+  // cout<<"---------------csv io check----------------"<<endl;
 
-  // for(auto &cvsObj:cvs_vec){
-  //   for(auto &it:*cvsObj->field[0]){
+  // for(auto &csvObj:csv_vec){
+  //   for(auto &it:*csvObj->field[0]){
   //     cout<<it<<"  ";
   //   }
   //   cout<<endl;
-  //   for(auto &it:*cvsObj->type[0]){
+  //   for(auto &it:*csvObj->type[0]){
   //     cout<<it<<"  ";
   //   }
   //   cout<<endl;
   
-  //   for(auto &item:cvsObj->data){
+  //   for(auto &item:csvObj->data){
   //     for(auto &it:*item){
   //         cout<<it<<"  ";
   //     }
   //     cout<<endl;
   //   }
   // }
-  // cout<<"---------------cvs i/o check end-------------"<<endl;
+  // cout<<"---------------csv i/o check end-------------"<<endl;
 
 // selection->append("head");
 // cout<<selection->parentSvg.back()->name<<endl;
 // selection->select("rect");
 // cout<<selection->parentSvg.back()->name<<endl;
-// selection->enter(0,cvs_vec);
-// selection->enter(1,cvs_vec);
+// selection->enter(0,csv_vec);
+// selection->enter(1,csv_vec);
 // cout<<"---------------------select & enter check-----------"<<endl;
 // for(auto &it:selection->selectedSvg){
 //   for(auto& item:it->data){
@@ -299,7 +299,7 @@ int j=0;
 //   cout<<endl;
 // }
 // cout<<"---------------------select & enter check-----------"<<endl;
-// selection->update(1,cvs_vec);
+// selection->update(1,csv_vec);
 // cout<<"---------------------select & update check-----------"<<endl;
 // for(auto &it:selection->selectedSvg){
 //   for(auto& item:it->data){
@@ -309,7 +309,7 @@ int j=0;
 // }
 // cout<<"---------------------select & update check-----------"<<endl;
   
-// // selection->exit(1,cvs_vec); 
+// // selection->exit(1,csv_vec); 
 
 // // cout<<"---------------------select & exit check-----------"<<endl;
 // // for(auto &it:selection->selectedSvg){
@@ -323,7 +323,7 @@ int j=0;
 // selection->cattr("width","1000");
 // selection->cattr("weight","500");
 // selection->tattr("10","20");
-// selection->dattr(cvs_vec,"name","name");
+// selection->dattr(csv_vec,"name","name");
 
 // selection->end();
 // selection->select("rect");
@@ -350,14 +350,66 @@ int j=0;
 //   delete(selection);
 
   cin.ignore(256,'\n');
-  string command, subcommand1;subcommand2,subcommand3;
-  vector<string> parameters;
+  string command, subcommand1,subcommand2;
+  double d_command1, d_command2;
+  int csvIndex;
+  vector<double> parameters;
   while(cin>>command){
     if(command=="append"){
-
-      selection->append()
+      cin>>subcommand1;
+      selection->append(subcommand1);
     }
-
+    else if(command=="select"||command=="selectAll"){
+      cin>>subcommand1;
+      selection->select(subcommand1);
+    }
+    else if(command=="remove"){
+      selection->remove();
+    }
+    else if(command=="end"){
+      selection->end();
+    }
+    else if(command=="enter"){
+      cin>>csvIndex;
+      selection->enter(csvIndex,csv_vec);
+    }
+    else if(command=="update"){
+      cin>>csvIndex;
+      selection->update(csvIndex,csv_vec);
+    }
+    else if(command=="exit"){
+      cin>>csvIndex;
+      selection->exit(csvIndex,csv_vec);
+    }
+    else if(command=="cattr"){
+      cin>>subcommand1>>subcommand2;
+      selection->cattr(subcommand1,subcommand2);
+    }
+    else if(command=="tattr"){
+      cin>>d_command1>>d_command2;
+      selection->tattr(d_command1,d_command2);
+    }
+    else if(command=="dattr"){
+      string line;
+      getline(cin,line);
+      istringstream ss(line);
+      ss>>subcommand1>>subcommand2;
+      while(ss>>d_command1){
+        parameters.push_back(d_command1);
+      }
+      if(parameters.size()==0){
+        selection->dattr(csv_vec,subcommand1,subcommand2);
+      }
+      else if(parameters.size()==1){
+        selection->dattr(csv_vec,subcommand1,subcommand2,parameters[0]);
+      }
+      else{
+        selection->dattr(csv_vec,subcommand1,subcommand2,parameters[0],parameters[1]);
+      }
+    }
+    else if(command=="print"){
+      selection->print();
+    }
 
   }
   return 0;
