@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <string>
 #include <fstream>
+#include <sstream>
 using namespace std;
 
 class CVS{
@@ -23,14 +24,12 @@ public:
   vector<string> changedData;
   vector<SVG *> children;
 
+  SVG(string queryName):name(queryName){};
   ~SVG(){
     for(auto &it:children){
       delete(it);
     }
   }
-
-  SVG(string queryName):name(queryName){};
-
 };
 
 class Selection{
@@ -174,23 +173,51 @@ public:
       svgItem->tattr.push_back({x_mul,y_mul});
     }
   }
-  // void dattr(string attrName,string,double mul=1.0,double add = 0.0){
-  //   int dataIdx;
-  //   for(int i=0;selectedSvg[0]->field.size();i++){
-  //     if(selectedSvg[0]->field)
-  //   }
+  void dattr(vector<CVS*> csv_vec,string attrName,string valueName,double mul=1.0,double add = 0.0){
+    int dataIdx;
+    int isString=0;
+    // cout<<csv_vec[0]->field[0]->size()<<endl;
+    for(int i=0;csv_vec[0]->field[0]->size();i++){
+      if((*(csv_vec[0]->field[0]))[i]==valueName){
+        dataIdx =i;
+        if((*(csv_vec[0]->type[0]))[i]=="string") isString=1;
+        break;
+      }
+    }
 
-  //   for(auto &svgItem:selectedSvg){
-  //     int exist =0;
-  //     for(auto &dattrItem:svgItem->dattr){
-  //       if(dattrItem.first==attrName){
-  //         exist = 1;
+    for(auto &svgItem:selectedSvg){
+      int exist =0;
+      for(auto &attrItem:svgItem->cattr){
+        if(attrItem.first==attrName){
+          if(isString){
+            attrItem.second = svgItem->data[dataIdx];
+          }
+          else{
+            ostringstream strs;
+            strs << stod(svgItem->data[dataIdx])*mul+add ;
+            string str = strs.str();
+            attrItem.second =str;
+          }
+          
+          exist = 1;
+          break;
+        }
+      }
+      if(exist==0){
+        if(isString){
+          svgItem->cattr.push_back({attrName,svgItem->data[dataIdx]});
+        }
+        else{
+          ostringstream strs;
+          strs << stod(svgItem->data[dataIdx])*mul+add ;
+          string str = strs.str();
+          svgItem->cattr.push_back({attrName,str});
+        }
 
-  //         break;
-  //       }
-  //     }
-  //   }
-  // }
+        // add new
+      }    
+    }
+  }
 };
 
 int main(int argc,char **argv){
@@ -258,67 +285,80 @@ int j=0;
   // }
   // cout<<"---------------cvs i/o check end-------------"<<endl;
 
-selection->append("head");
-cout<<selection->parentSvg.back()->name<<endl;
-selection->select("rect");
-cout<<selection->parentSvg.back()->name<<endl;
-selection->enter(0,cvs_vec);
-selection->enter(1,cvs_vec);
-cout<<"---------------------select & enter check-----------"<<endl;
-for(auto &it:selection->selectedSvg){
-  for(auto& item:it->data){
-        cout<<item<<"  ";
-  }
-  cout<<endl;
-}
-cout<<"---------------------select & enter check-----------"<<endl;
-selection->update(1,cvs_vec);
-cout<<"---------------------select & update check-----------"<<endl;
-for(auto &it:selection->selectedSvg){
-  for(auto& item:it->data){
-        cout<<item<<"  ";
-  }
-  cout<<endl;
-}
-cout<<"---------------------select & update check-----------"<<endl;
-  
-// selection->exit(1,cvs_vec); 
-
-// cout<<"---------------------select & exit check-----------"<<endl;
+// selection->append("head");
+// cout<<selection->parentSvg.back()->name<<endl;
+// selection->select("rect");
+// cout<<selection->parentSvg.back()->name<<endl;
+// selection->enter(0,cvs_vec);
+// selection->enter(1,cvs_vec);
+// cout<<"---------------------select & enter check-----------"<<endl;
 // for(auto &it:selection->selectedSvg){
 //   for(auto& item:it->data){
 //         cout<<item<<"  ";
 //   }
 //   cout<<endl;
 // }
-// cout<<"---------------------select & exit check-----------"<<endl;
+// cout<<"---------------------select & enter check-----------"<<endl;
+// selection->update(1,cvs_vec);
+// cout<<"---------------------select & update check-----------"<<endl;
+// for(auto &it:selection->selectedSvg){
+//   for(auto& item:it->data){
+//         cout<<item<<"  ";
+//   }
+//   cout<<endl;
+// }
+// cout<<"---------------------select & update check-----------"<<endl;
+  
+// // selection->exit(1,cvs_vec); 
 
-selection->cattr("width","1000");
-selection->cattr("weight","500");
-selection->tattr("10","20");
-selection->end();
-selection->select("rect");
-cout<<"---------------------select & attr check-----------"<<endl;
+// // cout<<"---------------------select & exit check-----------"<<endl;
+// // for(auto &it:selection->selectedSvg){
+// //   for(auto& item:it->data){
+// //         cout<<item<<"  ";
+// //   }
+// //   cout<<endl;
+// // }
+// // cout<<"---------------------select & exit check-----------"<<endl;
 
-for(auto &it:selection->selectedSvg){
-  for(auto& item:it->data){
-        cout<<item<<"  ";
+// selection->cattr("width","1000");
+// selection->cattr("weight","500");
+// selection->tattr("10","20");
+// selection->dattr(cvs_vec,"name","name");
+
+// selection->end();
+// selection->select("rect");
+// cout<<"---------------------select & attr check-----------"<<endl;
+
+// for(auto &it:selection->selectedSvg){
+//   for(auto& item:it->data){
+//         cout<<item<<"  ";
+//   }
+//   cout<<"cAttr ";
+//   for(auto& item2:it->cattr){
+//         cout<<item2.first<<" : "<<item2.second<<" ";
+//   }
+//   cout<<"tAttr ";
+
+//   for(auto& item3:it->tattr){
+//         cout<<"x-"<<item3.first<<" : "<<"y-"<<item3.second<<" ";
+//   }
+//   cout<<endl;
+// }
+// cout<<"---------------------select & attr check-----------"<<endl;
+
+//   delete(root_svg);
+//   delete(selection);
+
+  cin.ignore(256,'\n');
+  string command, subcommand1;subcommand2,subcommand3;
+  vector<string> parameters;
+  while(cin>>command){
+    if(command=="append"){
+
+      selection->append()
+    }
+
+
   }
-  cout<<"cAttr ";
-  for(auto& item2:it->cattr){
-        cout<<item2.first<<" : "<<item2.second<<" ";
-  }
-  cout<<"tAttr ";
-
-  for(auto& item3:it->tattr){
-        cout<<"x-"<<item3.first<<" : "<<"y-"<<item3.second<<" ";
-  }
-  cout<<endl;
-}
-cout<<"---------------------select & attr check-----------"<<endl;
-
-
-  delete(root_svg);
-  delete(selection);
   return 0;
 }
