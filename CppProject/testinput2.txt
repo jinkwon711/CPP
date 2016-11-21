@@ -1,0 +1,27 @@
+append svg
+cattr width 500
+cattr height 500
+selectAll circle
+enter 1
+cattr r 3
+dattr name name
+dattr cx length 50
+dattr cy width 50
+print a.html
+end
+selectAll circle
+update 2
+cattr fill steelblue
+dattr name name
+print b.html
+dattr cx length 50
+dattr cy width 50
+print c.html
+end
+selectAll circle
+exit 2
+remove
+end
+print d.html
+end
+end
