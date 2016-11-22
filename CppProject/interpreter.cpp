@@ -18,7 +18,7 @@ public:
   string name;
   vector<string> data;
   vector<pair<string,string> > cattr;
-  // vector<pair<string,string> > dAttr; 
+  // vector<pair<string,string> > dAttr;
   vector<pair<double,double> > tattr;
   vector<string> originalData;
   vector<string> changedData;
@@ -73,9 +73,11 @@ public:
   void remove(){
     for(auto &it:selectedSvg){
       for(int i=0; i!=parentSvg.back()->children.size();i++){
-        if(parentSvg.back()->children[i]->name==it->name){
+        if(parentSvg.back()->children[i]->data[0]==it->data[0]){
+          cout<<"selected_name"<<it->name<<endl;
+          cout<<"child_name"<<parentSvg.back()->children[i]->data[0]<<endl;
+
           parentSvg.back()->children.erase(parentSvg.back()->children.begin()+i);
-          cout<<parentSvg.back()->children[i]->data[0]<<endl;
 
           i--;
           break;
@@ -104,7 +106,7 @@ public:
       [](vector<string>* left,vector<string> *right){return *left<*right;});
     // vector<SVG *> tempSvg;
     // tempSvg = selectedSvg;
-    
+
     // for(auto &item:csv_vec[csvIdx]->data){
     //   for(auto &it:*item){
     //       cout<<it<<"  ";
@@ -124,7 +126,7 @@ public:
         append(lastQueryName,csvItem);
       }
     }
-       
+
   }
 
   void update(int csvIdx,vector<CVS*> csv_vec){
@@ -165,22 +167,41 @@ public:
 
 
   void cattr(string attrName, string attrValue){
+    int exist;
     for(auto &svgItem:selectedSvg){
-
-      // Pair<string,string> tempPair = {attrName,attrValue};
-      svgItem->cattr.push_back({attrName,attrValue});
+      exist=0;
+      for(auto& attr:svgItem->cattr){
+        if(attr.first==attrName){
+          attr={attrName,attrValue};
+          exist =1;
+          break;
+        }
+      }
+      if(!exist){
+        // Pair<string,string> tempPair = {attrName,attrValue};
+        svgItem->cattr.push_back({attrName,attrValue});
+      }
     }
+
+
   }
   void tattr(double x_mul,double y_mul){
-    int idx=1;
+    int exist=0;
+    int idx=0;
     for(auto &svgItem:selectedSvg){
       // for(int i=1; i<=selectedSvg.size();i++)
       //   if(selectedSvg[i]->name==svgItem->name){
       //     idx=i;
       //   }
+      if(!svgItem->tattr.size()){
         svgItem->tattr.push_back({x_mul*idx,y_mul*idx});
         idx++;
       }
+      else{
+        svgItem->tattr[0]={x_mul*idx,y_mul*idx};
+        idx++;
+      }
+    }
   }
   void dattr(vector<CVS*> csv_vec,string attrName,string valueName,double mul=1.0,double add = 0.0){
     // cout<<attrName<<":"<<valueName<<":"<<mul<<":"<<add<<endl;
@@ -210,7 +231,7 @@ public:
             string str = strs.str();
             attrItem.second =str;
           }
-          
+
           exist = 1;
           break;
         }
@@ -225,7 +246,7 @@ public:
           string str = strs.str();
           svgItem->cattr.push_back({attrName,str});
         }
-      }    
+      }
     }
   }
   void print(SVG* svgRoot,ofstream& outFile){
@@ -284,7 +305,7 @@ int j=0;
         isfirst++;
         csv->type.push_back(item);
       }else{
-        csv->data.push_back(item);        
+        csv->data.push_back(item);
       }
     }
     csv_vec.push_back(csv);
@@ -301,7 +322,7 @@ int j=0;
   //     cout<<it<<"  ";
   //   }
   //   cout<<endl;
-  
+
   //   for(auto &item:csvObj->data){
   //     for(auto &it:*item){
   //         cout<<it<<"  ";
@@ -334,8 +355,8 @@ int j=0;
 //   cout<<endl;
 // }
 // cout<<"---------------------select & update check-----------"<<endl;
-  
-// // selection->exit(1,csv_vec); 
+
+// // selection->exit(1,csv_vec);
 
 // // cout<<"---------------------select & exit check-----------"<<endl;
 // // for(auto &it:selection->selectedSvg){

@@ -24,4 +24,3 @@ remove
 end
 print d.html
 end
-end
