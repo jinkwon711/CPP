@@ -94,9 +94,10 @@ public:
     int exist;
     for(auto &csvItem:csv_vec[csvIdx]->data){
       exist = 0;
-      for(auto &selectedItem:selectedSvg){
-        if((*csvItem)[0]==selectedItem->data[0]){
+      for(int i=0; i!=selectedSvg.size(); i++){
+        if((*csvItem)[0]==selectedSvg[i]->data[0]){
           exist =1;
+          selectedSvg.erase(selectedSvg.begin()+i);
           break;
         }
       }

@@ -1,0 +1,35 @@
+append svg
+cattr width 500
+cattr height 500
+print 1.html
+selectAll rect
+enter 1
+dattr name name
+dattr width value 1
+cattr height 10
+tattr 5 15
+print 2.html
+end
+selectAll rect
+update 2
+dattr width value 1 5
+cattr fill steelblue
+print 3.html
+end
+selectAll rect
+exit 3
+dattr width value 0.5
+print 4.html
+remove
+print 5.html
+selectAll rect
+enter 3
+dattr name name
+dattr width value 1
+cattr height 20
+end
+selectAll rect
+tattr 0 15
+print 6.html
+end
+end
