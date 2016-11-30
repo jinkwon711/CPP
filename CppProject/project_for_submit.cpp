@@ -7,7 +7,7 @@
 #include <sstream>
 using namespace std;
 
-class CVS{
+class CSV{
 public:
   vector<vector<string>* > field;
   vector<vector<string>* > type;
@@ -16,7 +16,7 @@ public:
 class SVG{
 public:
   string name;
-  vector<string> data;
+  vector<string> data{""};
   vector<pair<string,string> > cattr;
   vector<pair<double,double> > tattr;
   vector<string> originalData;
@@ -55,7 +55,7 @@ public:
   }
 
 
-  void select(string queryName){
+  void select(string queryName,string command){
     parentSvg.push_back(selectedSvg[0]);
     selectedSvg.clear();
     for(auto &it:parentSvg.back()->children){
@@ -63,53 +63,87 @@ public:
         selectedSvg.push_back(it);
     }
     lastQueryName = queryName;
+    // if(command=="selectAll" && selectedSvg.size()!=0){
+    //   end();
+    // }
+
   }
 
   void remove(){
-    for(auto &it:selectedSvg){
-      for(int i=0; i!=parentSvg.back()->children.size();i++){
-        if(parentSvg.back()->children[i]->data[0]==it->data[0]){
-          parentSvg.back()->children.erase(parentSvg.back()->children.begin()+i);
-          i--;
-          break;
+      for(auto &it:selectedSvg){
+        for(int i=0; i!=parentSvg.back()->children.size();i++){
+          if(parentSvg.back()->children[i]==it){
+            parentSvg.back()->children.erase(parentSvg.back()->children.begin()+i);
+            i--;
+            break;
+          }
         }
       }
-    }
-    for(auto &it:selectedSvg){
-      delete(it);
+      for(auto &it:selectedSvg){
+        delete(it);
     }
     end();
   }
 
   void end(){//main안에서 root가 셀렉된경우 함수 종료시키자.
+
     selectedSvg.clear();
     selectedSvg.push_back(parentSvg.back());
     parentSvg.pop_back();
   }
 
-  void enter(int csvIdx,vector<CVS*> csv_vec){
-    sort(csv_vec[csvIdx]->data.begin(),csv_vec[csvIdx]->data.end(),
-      [](vector<string>* left,vector<string> *right){return *left<*right;});
+  void enter(int csvIdx,vector<CSV*> csv_vec){
+    if((*(csv_vec[csvIdx]->type[0]))[0]=="string"){
+      sort(csv_vec[csvIdx]->data.begin(),csv_vec[csvIdx]->data.end(),
+        [](vector<string>* left,vector<string> *right){return (*left)[0]<(*right)[0];});
+    }
+    else if((*(csv_vec[csvIdx]->type[0]))[0]=="float"){
+      sort(csv_vec[csvIdx]->data.begin(),csv_vec[csvIdx]->data.end(),
+        [](vector<string>* left,vector<string> *right){return stof((*left)[0])<stof((*right)[0]);});
+
+    }
+    else if((*(csv_vec[csvIdx]->type[0]))[0]=="int"){
+      sort(csv_vec[csvIdx]->data.begin(),csv_vec[csvIdx]->data.end(),
+        [](vector<string>* left,vector<string> *right){return stoi((*left)[0])<stoi((*right)[0]);});
+    }
 
     int exist;
+  vector<vector<string>* >  temp1;
     for(auto &csvItem:csv_vec[csvIdx]->data){
       exist = 0;
       for(int i=0; i!=selectedSvg.size(); i++){
         if((*csvItem)[0]==selectedSvg[i]->data[0]){
           exist =1;
-          selectedSvg.erase(selectedSvg.begin()+i);
           break;
         }
       }
       if(exist==0){
-        append(lastQueryName,csvItem);
+        temp1.push_back(csvItem);
+        
       }
     }
+    selectedSvg.clear();
+    for(auto &it:temp1){
+      append(lastQueryName,it);
+    }
+
   }
 
-  void update(int csvIdx,vector<CVS*> csv_vec){
-    sort(csv_vec[csvIdx]->data.begin(),csv_vec[csvIdx]->data.end(),
-      [](vector<string>* left,vector<string> *right){return *left<*right;});
+  void update(int csvIdx,vector<CSV*> csv_vec){
+    if((*(csv_vec[csvIdx]->type[0]))[0]=="string"){
+      sort(csv_vec[csvIdx]->data.begin(),csv_vec[csvIdx]->data.end(),
+        [](vector<string>* left,vector<string> *right){return (*left)[0]<(*right)[0];});
+    }
+    else if((*(csv_vec[csvIdx]->type[0]))[0]=="float"){
+      sort(csv_vec[csvIdx]->data.begin(),csv_vec[csvIdx]->data.end(),
+        [](vector<string>* left,vector<string> *right){return stof((*left)[0])<stof((*right)[0]);});
+
+    }
+    else if((*(csv_vec[csvIdx]->type[0]))[0]=="int"){
+      sort(csv_vec[csvIdx]->data.begin(),csv_vec[csvIdx]->data.end(),
+        [](vector<string>* left,vector<string> *right){return stoi((*left)[0])<stoi((*right)[0]);});
+
+    }
     vector<SVG *> tempSvg;
     tempSvg = selectedSvg;
     int exist;
@@ -117,7 +151,7 @@ public:
       exist=0;
       for(auto &csvItem:csv_vec[csvIdx]->data){
         if((*csvItem)[0]==selectedSvg[i]->data[0]){
-          selectedSvg[i]->data = (*csvItem);
+          selectedSvg[i]->data= (*csvItem);
           exist = 1;
           break;
         }
@@ -128,7 +162,7 @@ public:
       }
     }
   }
-  void exit(int csvIdx,vector<CVS*> csv_vec){
+  void exit(int csvIdx,vector<CSV*> csv_vec){
     for(auto &csvItem:csv_vec[csvIdx]->data){
       for(int i=0; i!=selectedSvg.size();i++){
         if((*csvItem)[0]==selectedSvg[i]->data[0]){
@@ -172,7 +206,7 @@ public:
       }
     }
   }
-  void dattr(vector<CVS*> csv_vec,string attrName,string valueName,double mul=1.0,double add = 0.0){
+  void dattr(vector<CSV*> csv_vec,string attrName,string valueName,double mul=1.0,double add = 0.0){
     int dataIdx;
     int isString=0;
     for(int i=0;csv_vec[0]->field[0]->size();i++){
@@ -232,7 +266,7 @@ public:
 
 int main(int argc,char **argv){
 string line;
-vector<CVS*> csv_vec;
+vector<CSV*> csv_vec;
 SVG* root_svg = new SVG("html");
 Selection* selection = new Selection(root_svg);
 
@@ -240,7 +274,7 @@ Selection* selection = new Selection(root_svg);
 //file stream to vector.
 int j=0;
   for(int i=1; i<argc;i++){
-  CVS *csv = new CVS();
+  CSV *csv = new CSV();
     ifstream inFile(argv[i]);
     int isfirst=1;
     while(!inFile.eof()){
@@ -280,7 +314,7 @@ int j=0;
     }
     else if(command=="select"||command=="selectAll"){
       cin>>subcommand1;
-      selection->select(subcommand1);
+      selection->select(subcommand1,command);
 
     }
     else if(command=="remove"){
@@ -337,6 +371,15 @@ int j=0;
       selection->print(root_svg,outFile);
       outFile.close();
     }
+    string temp;
+    if(selection->parentSvg.size()==0){
+      temp = "hi";
+    }
+    else {
+      temp = selection->parentSvg.back()->name;
+    }
+    cout<<"명령어: " <<command<<subcommand1<<endl;
+    cout<<"부모: "<< temp<<endl;
   }
   delete(root_svg);
   for(auto &it:csv_vec){

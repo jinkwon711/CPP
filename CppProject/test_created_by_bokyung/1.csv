@@ -1,0 +1,9 @@
+name,price,weight
+string,int,float
+tomato,2000,10.7
+watermelon,2000,15.5
+apple,1500,20.0
+orange,3000,50
+grape,4000,20.2
+peach,2000,22.1
+berry,1800,30.5

@@ -11,7 +11,10 @@ tattr 5 15
 print 2.html
 end
 selectAll rect
-update 2
+enter 2
+cattr height 50
+cattr width 50
+cattr opacity 0.3 
 dattr width value 1 5
 cattr fill steelblue
 print 3.html
@@ -31,5 +34,6 @@ end
 selectAll rect
 tattr 0 15
 print 6.html
+end
 end
 end

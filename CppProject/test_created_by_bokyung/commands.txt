@@ -1,0 +1,48 @@
+append svg
+cattr width 1000
+cattr height 1000
+tattr 7 20
+tattr 30 50
+print 1.html
+selectAll circle
+enter 1
+dattr name name
+dattr cx weight 0.5 1
+cattr cy 10
+cattr fill yellow
+cattr r 10
+dattr cy price 0.001
+tattr 30 50
+print 2.html
+end
+append svg
+cattr width 300
+cattr height 700
+selectAll rect
+enter 2
+dattr name name
+dattr width price 0.1
+dattr height weight 0.5 0.1
+cattr fill steelblue
+dattr opacity weight 0.02 0.05
+tattr 50 70
+print 3.html
+update 3
+dattr name name
+cattr fill red
+dattr width price 0.01
+dattr height weight 1 0.5
+dattr opacity weight 0.01
+print 4.html
+exit 1
+remove
+selectAll rect
+tattr 80 80
+print 5.html
+end
+end
+selectAll circle
+remove
+print 6.html
+end
+end

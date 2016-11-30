@@ -1,0 +1,7 @@
+name,price,weight
+string,int,float
+tomato,1400,10.5
+orange,3200,15.9
+grape,3800,20.2
+kiwi,1500,12.6
+banana,5000,25
