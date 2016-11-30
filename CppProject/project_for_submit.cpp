@@ -378,8 +378,8 @@ int j=0;
     else {
       temp = selection->parentSvg.back()->name;
     }
-    cout<<"명령어: " <<command<<subcommand1<<endl;
-    cout<<"부모: "<< temp<<endl;
+    // cout<<"명령어: " <<command<<subcommand1<<endl;
+    // cout<<"부모: "<< temp<<endl;
   }
   delete(root_svg);
   for(auto &it:csv_vec){
